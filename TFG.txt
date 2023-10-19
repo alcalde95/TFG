@@ -1,0 +1,4 @@
+
+TÍTULO DO TFG : "Gestión web de un gimnasio"
+
+Resumo: El proyecto se basará en la creación de una aplicación web orientada a la gestión de clases en el gimnasio, en el cual el gestor del mismo pueda gestionar diferentes clases de su gimnasio. Tendrán foto, descripción, nombre, horario y aforo maximo. A su vez estén disponibles, los clientes podrán entrar en la página, iniciar sesión, y inscribirse a diferentes clases, además de ver las diferentes clases a las que están inscritos. Permitirá además a los monitores, controlar la asistencia de los inscritos, de forma que se puedan establecer penalizaciones para aquellos que hayan reservado plaza y finalmente no acudan. Se prestará especial cuidado al funcionamiento en móviles, sacando el máximo partido a éstos, aún manteniendo su tipología de aplicación web.

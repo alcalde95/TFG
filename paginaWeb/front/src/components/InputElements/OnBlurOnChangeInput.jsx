@@ -1,4 +1,4 @@
-const DefaultInput = ({ type,value,placeholder,name, action }) => {
+const DefaultInput = ({ type,value,placeholder,name, action,onBlur }) => {
     return (
 
 
@@ -10,6 +10,7 @@ const DefaultInput = ({ type,value,placeholder,name, action }) => {
             name={name}
             autoComplete='off'
             onChange={(e) => action(e.target.value)}
+            onBlur={() =>onBlur()}
         />
     )
 }

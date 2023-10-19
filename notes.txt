@@ -1,0 +1,1 @@
+ver si se le podría pasar el width a un componente de forma dinámica, es decir, q le diga yo que su width es de x

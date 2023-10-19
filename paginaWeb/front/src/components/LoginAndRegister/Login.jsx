@@ -1,19 +1,17 @@
-import { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import LinkButton from '../Buttons/LinkButton'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import DefaultInput from '../InputElements/DefaultInput'
-
+import DefaultErrorIOutput from '../ErrorCoponents/DefaultErrorOutput'
 import PersonalInfoHeader from '../Headers/PersonalInfoHeader'
 
 const Login = () => {
     const navigate = useNavigate()
 
-    const [correo, setCorreo] = useState('')
-    const [contrasena, setContrasena] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [enterUse, setenterUse] = useState(0)
-    console.log({correo})
 
     useEffect(() => {
         enterUse == 1 ? navigate("/Menu") : null
@@ -29,41 +27,31 @@ const Login = () => {
         <div>
 
             <PersonalInfoHeader />
-            
-            <div className="flex flex-col justify-center items-center h-[96vh]">
 
-                <div className=' bg-neutral-600 p-8 rounded-lg flex flex-col justify-between gap-4 items-center w-[33vw]'>
-                    <p className='bg-neutral-500 p-2 rounded-lg w-full text-center text-neutral-50'>
-                    </p>
+            <div className="flex flex-col justify-center items-center h-[80vh] box-border sm:my-10 ">
 
-                    <hr className='border-b border-neutral-300 w-full' />
+                <div className=' bg-neutral-600 p-8 rounded-lg flex flex-col justify-between gap-4 items-center w:10/12 md:w-[33vw] '>
 
                     <p id='errorEmailoContrasena' style={{ display: 'none' }} className='text-red-700 bg-zinc-300	border-2 rounded-md'> Email o contraseña incorrectos</p>
 
-                    <DefaultInput value={correo} action={setCorreo}/>
+                    <DefaultInput type="text" value={email} placeholder={"Correo Electrónico"} name="correo" action={setEmail} />
 
-                    <p>correo: {correo}</p>                   
+                    <DefaultErrorIOutput id={"badLoginError"} errorContent={"Email o contraseña incorrectos"} />
 
-                    <input type="password"
-                        placeholder='Contraseña'
-                        className='bg-neutral-500 p-2 rounded-lg w-full text-center placeholder:text-neutral-50 text-neutral-50 outline-none'
-                        value={contrasena}
-                        name='correo'
-                        autoComplete='off'
-                        onChange={e => setContrasena(e.target.value)}
-                    />
+                    <DefaultInput type="password" value={password} placeholder={"Contraseña"} name={"password"} action={setPassword} />
+
 
 
                     <hr className='border-b border-neutral-300 w-full' />
 
-                    <button
-                        onClick={() => iniciarSesion()}
-                        className='bg-neutral-400 p-2 rounded-lg w-full text-center hover:bg-neutral-300 transition duration-200 ease-in-out'
-                    >
-                        Inicio sesión
-                    </button>
+                    <div>
 
-                    <div >
+                        <button
+                            onClick={() => iniciarSesion()}
+                            className='bg-neutral-400 p-2 rounded-lg w-40 text-center hover:bg-neutral-300 transition duration-200 ease-in-out'
+                        >
+                            Inicio sesión
+                        </button>
                         <LinkButton link='/Register' name="Register" />
                     </div>
                 </div>
