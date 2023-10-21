@@ -1,4 +1,4 @@
-const DefaultInput = ({ type,value,placeholder,name, action,onBlur }) => {
+const OnBlurOnChangeInput = ({ type,value,placeholder,name, action,onBlur }) => {
     return (
 
 
@@ -15,4 +15,4 @@ const DefaultInput = ({ type,value,placeholder,name, action,onBlur }) => {
     )
 }
 
-export default DefaultInput
+export default OnBlurOnChangeInput

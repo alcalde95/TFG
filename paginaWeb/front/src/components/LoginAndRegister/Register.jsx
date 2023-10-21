@@ -1,94 +1,86 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import OnBlurOnChangeInput from '../InputElements/OnBlurOnChangeInput'
+import SeparatorLine from '../VisualComponents/SeparatorLine'
+import PersonalInfoHeader from '../Headers/PersonalInfoHeader'
+import DefaultErrorOutput from '../ErrorCoponents/DefaultErrorOutput'
+import { verifyEmail, verifyPassword } from '../Validations/InputValidationes/registerValidationes'
+
+import { showHTMLelement } from '../Validations/InputValidationes/registerValidationes'
+import { hideHTMLelement } from '../Validations/InputValidationes/registerValidationes'
+
 const Registro = () => {
 
     const [correo, setCorreo] = useState('')
-    const [contrasena, setContrasena] = useState('')
-    const [contrasenaRepetida, setContrasenaRepetida] = useState('')
+    const [password, setpassword] = useState('')
+    const [duplicatedPassword, setDuplicatedPassword] = useState('')
     const navigate = useNavigate()
 
-    const comprobacionesEmail = () => {
+    const emailVerification = () => {
 
-        !comprobarEmail(correo) ? mostrar('errorEmail', 'El email no cumple los parámetros mínimos') : ocultar('errorEmail')
+        !verifyEmail(correo) ? showHTMLelement('emailerror', 'El email no cumple los parámetros mínimos') : hideHTMLelement('emailerror')
 
-        return comprobarEmail(correo)
+        return verifyEmail(correo)
 
     }
 
-    const comprobacionesContrasena = () => {
+    const passwordVerification = () => {
 
-        contrasena.length < 8 ? mostrar('errorContrasena', 'La contraseña es demasiado corta. Mínimo 8 caracteres') :
-            !comprobarPassword(contrasena) ? mostrar('errorContrasena', 'La contraseña no cumple los parámetros mínimos') :
-                ocultar('errorContrasena')
-        return contrasena.length > 8 && comprobarPassword(contrasena)
+        password.length < 8 ? showHTMLelement('passwordError', 'La contraseña es demasiado corta. Mínimo 8 caracteres') :
+            !verifyPassword(password) ? showHTMLelement('passwordError', 'La contraseña no cumple los parámetros mínimos') :
+                hideHTMLelement('passwordError')
+        return password.length > 8 && verifyPassword(password)
     }
 
-    const contrasenaIguales = () => {
-        contrasena != contrasenaRepetida ? mostrar('errorContrasenasNoIguales', 'Las contraseñas no son iguales') : ocultar('errorContrasenasNoIguales')
-        return contrasena == contrasenaRepetida
+    const duplicatedPasswordVerification = () => {
+        password != duplicatedPassword ? showHTMLelement('notTheSamePasswordsError', 'Las contraseñas no son iguales') : hideHTMLelement('notTheSamePasswordsError')
+        return password == duplicatedPassword
     }
 
-    const comprobacionFinal = () => {
-        comprobacionesEmail() && comprobacionesContrasena() && contrasenaIguales() ? (alert('Registro completado'), navigate("/")) : mostrar('errorRegistro', 'Alguno de los parámetros introducidos no cumple los requisitos')
+    const finalVerification = () => {
+        emailVerification() && passwordVerification() && duplicatedPasswordVerification() ? (alert('Registro completado'), navigate("/Login")) : showHTMLelement('registerError', 'Alguno de los parámetros introducidos no cumple los requisitos')
     }
 
-    
-   
+
+
     return (
 
-        <div className="flex flex-col justify-center items-center h-[100vh] bg-black">
-            <div className='bg-neutral-600 p-8 rounded-lg flex flex-col justify-between gap-4 items-center w-[33vw]'>
+        <div>
+            <PersonalInfoHeader />
 
 
-                <hr className='border-b border-neutral-300 w-full' />
+            <div className="flex flex-col justify-center items-center h-[80vh] box-border sm:my-10">
+                <div className='bg-neutral-600 p-8 rounded-lg flex flex-col justify-between gap-4 items-center w-10/12 min-[400px]:w-auto min-[900px]:w-[33vw] '>
 
-                <input
-                    type="text"
-                    className='bg-neutral-500 p-2 rounded-lg w-full text-center placeholder:text-neutral-50 text-neutral-50 outline-none'
-                    value={correo}
-                    placeholder='Correo electrónico'
-                    name='correo'
-                    autoComplete='off'
-                    onChange={e => setCorreo(e.target.value)}
-                    onBlur={() => comprobacionesEmail()}
-                />
-                <p id='errorEmail' style={{ display: 'none' }} className='text-red-700 bg-zinc-300	border-2 rounded-md'></p>
 
-                <input type="password"
-                    placeholder='Contraseña'
-                    className='bg-neutral-500 p-2 rounded-lg w-full text-center placeholder:text-neutral-50 text-neutral-50 outline-none'
-                    value={contrasena}
-                    name='contrasena'
-                    autoComplete='off'
-                    onChange={e => setContrasena(e.target.value)}
-                    onBlur={() => comprobacionesContrasena('errorContrasena')}
-                />
-                <p id='errorContrasena' style={{ display: 'none' }} className='text-red-700 bg-zinc-300	border-2 rounded-md'></p>
+                    <SeparatorLine />
 
-                <input type="password"
-                    placeholder='Repita la contraseña'
-                    className='bg-neutral-500 p-2 rounded-lg w-full text-center placeholder:text-neutral-50 text-neutral-50 outline-none'
-                    value={contrasenaRepetida}
-                    name='contrasenaRepetida'
-                    autoComplete='off'
-                    onChange={e => setContrasenaRepetida(e.target.value)}
-                    onBlur={() => contrasenaIguales()}
-                />
+                    <OnBlurOnChangeInput type="text" value={correo} placeholder='Correo electrónico' name='email' action={setCorreo} onBlur={emailVerification} />
 
-                <p id='errorContrasenasNoIguales' style={{ display: 'none' }} className='text-red-700 bg-zinc-300	border-2 rounded-md'></p>
+                    <DefaultErrorOutput id={"emailerror"} errorContent={"Email incorrecto"} />
 
-                <hr className='border-b border-neutral-300 w-full' />
+                    <OnBlurOnChangeInput type="password" value={password} placeholder='Contraseña' name='password' action={setpassword} onBlur={passwordVerification} />
+
+                    <DefaultErrorOutput id={"passwordError"} errorContent={"Contraseña incorrecta"} />
+
+                    <OnBlurOnChangeInput type="password" value={duplicatedPassword} placeholder='Repita la contraseña' name='duplicatedPassword' action={setDuplicatedPassword} onBlur={duplicatedPasswordVerification} />
+
+                    <DefaultErrorOutput id={"notTheSamePasswordsError"} errorContent={"Las contraseñas no son iguales"} />
+
+                    <SeparatorLine />
 
 
 
-                <button
-                    className='bg-neutral-400 p-2 rounded-lg w-full text-center hover:bg-neutral-300 transition duration-200 ease-in-out'
-                    onClick={() => comprobacionFinal()}
-                >
-                    Registro
-                </button>
+                    <button
+                        className='bg-neutral-400 p-2 rounded-lg w-full text-center hover:bg-neutral-300 transition duration-200 ease-in-out'
+                        onClick={() => finalVerification()}
+                    >
+                        Registro
+                    </button>
 
-                <p id='errorRegistro' style={{ display: 'none' }} className='text-red-700 bg-zinc-300	border-2 rounded-md'></p>
+                    <DefaultErrorOutput id={"registerError"} errorContent={""} />
+
+                </div>
             </div>
         </div>
     )
