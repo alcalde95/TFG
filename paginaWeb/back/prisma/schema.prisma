@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  email    String @id
+  password String
+  role     String
+  client   Client?
+  instructor Instructor?
+
+}
+
+model Client {
+  email       String @unique
+  UUID_Client String @unique
+
+  user           User             @relation(fields: [email], references: [email])
+  session_client Session_Client[]
+  @@id([email, UUID_Client])
+
+}
+
+model Instructor {
+  email           String @unique
+  UUID_Instructor String  @unique
+  user            User    @relation(fields: [email], references: [email])
+  classes         Class[]
+  @@id([email, UUID_Instructor])
+
+}
+
+model Class {
+  UUID_Class   String     @id
+  Name         String
+  Photo        Bytes
+  Description  String
+  Max_Capacity Int
+  Duration     DateTime
+  instructorID String     @unique
+  instuctor    Instructor @relation(fields: [instructorID], references: [UUID_Instructor])
+  session      Session[]
+}
+
+model Session {
+  UUID_Session String   @id
+  DATA_TIME    DateTime
+  classId      String   @unique
+  class        Class    @relation(fields: [classId], references: [UUID_Class])
+
+  session_client Session_Client[]
+}
+
+model Session_Client {
+  UUID_Client  String
+  client       Client  @relation(fields: [UUID_Client], references: [UUID_Client])
+  UUID_Session String
+  session      Session @relation(fields: [UUID_Session], references: [UUID_Session])
+  Attend       Boolean
+  Justified    Boolean
+
+  @@id([UUID_Client, UUID_Session])
+}
