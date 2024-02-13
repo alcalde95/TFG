@@ -1,0 +1,5 @@
+GET http://localhost:1234/token
+
+### Response
+GET http://localhost:1234/private
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSmF2aUluVXNlIiwiZXhwIjoxNzA3ODE5NjYwMDc1LCJpYXQiOjE3MDc4MTk2MDB9.i3bsp-R6RvnnsqmwEAKQ1vTM9wmmm_VEnS6yVxr1hyo
