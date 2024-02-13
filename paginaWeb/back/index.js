@@ -1,8 +1,10 @@
-const express = require('express')
-const path = require('path')
-const jwt = require('jsonwebtoken')
+import express from 'express'
+import path from 'path'
+import jwt  from 'jsonwebtoken'
 
-const SECRET = process.env.SECRET ?? 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNzgxODYzMiwiaWF0IjoxNzA3ODE4NjMyfQ.UNs4JsOz4joWR-VYjo8HEmS0zYyTCEmGWU4-6WAMIWA'
+import {usersRouter} from './rest/routes/users.js'
+
+export const SECRET = process.env.SECRET ?? 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNzgxODYzMiwiaWF0IjoxNzA3ODE4NjMyfQ.UNs4JsOz4joWR-VYjo8HEmS0zYyTCEmGWU4-6WAMIWA'
 
 
 const PORT = process.env.PORT ?? 1234
@@ -10,6 +12,9 @@ const PORT = process.env.PORT ?? 1234
 const app = express()
 app.disable('x-powered-by')
 
+app.use(express.json())
+
+app.use('/users', usersRouter)
 
 app.get('/', (req, res) => {
   res.status(200).send('hola :D')
@@ -40,6 +45,7 @@ app.get('/private', (req, res) => {
     res.status(401).send(error.message)
   }
 })
+
 
 // la última a la que va a llegar
 app.use((req, res) => {
