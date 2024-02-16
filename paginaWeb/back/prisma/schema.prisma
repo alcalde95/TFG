@@ -10,29 +10,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   email    String @id
   password String
   role     String
-  client   Client?
-  instructor Instructor?
+  client   Clients?
+  instructor Instructors?
 
 }
 
-model Client {
+model Clients {
   email       String @unique
   UUID_Client String @unique
 
-  user           User             @relation(fields: [email], references: [email])
-  session_client Session_Client[]
+  user           Users             @relation(fields: [email], references: [email])
+  session_client Sessions_Client[]
   @@id([email, UUID_Client])
 
 }
 
-model Instructor {
+model Instructors {
   email           String @unique
   UUID_Instructor String  @unique
-  user            User    @relation(fields: [email], references: [email])
+  user            Users    @relation(fields: [email], references: [email])
   classes         Class[]
   @@id([email, UUID_Instructor])
 
@@ -46,24 +46,24 @@ model Class {
   Max_Capacity Int
   Duration     DateTime
   instructorID String     @unique
-  instuctor    Instructor @relation(fields: [instructorID], references: [UUID_Instructor])
-  session      Session[]
+  instuctor    Instructors @relation(fields: [instructorID], references: [UUID_Instructor])
+  session      Sessions[]
 }
 
-model Session {
+model Sessions {
   UUID_Session String   @id
   DATA_TIME    DateTime
   classId      String   @unique
   class        Class    @relation(fields: [classId], references: [UUID_Class])
 
-  session_client Session_Client[]
+  session_client Sessions_Client[]
 }
 
-model Session_Client {
+model Sessions_Client {
   UUID_Client  String
-  client       Client  @relation(fields: [UUID_Client], references: [UUID_Client])
+  client       Clients  @relation(fields: [UUID_Client], references: [UUID_Client])
   UUID_Session String
-  session      Session @relation(fields: [UUID_Session], references: [UUID_Session])
+  session      Sessions @relation(fields: [UUID_Session], references: [UUID_Session])
   Attend       Boolean
   Justified    Boolean
 

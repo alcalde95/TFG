@@ -1,35 +1,45 @@
 import { UserModel } from "../models/users.js"
-import jwt from 'jsonwebtoken'
-import { SECRET } from '../../index.js'
+import { authorized } from "../../utilFunctions.js"
 export class UserController {
 
     static getAll = async (req, res) => {
+
         try {
             const { authorization } = req.headers
             const token = authorization.split(' ')[1]
+            if (authorized({ token })) {
 
-            const decoded = jwt.verify(token, SECRET)
-
-            if (Date.now() > decoded.exp) {
-                throw new Error('Token expired')
+                const users = await UserModel.getAll()
+                res.json(users)
+            } else {
+                res.status(401).send('Unauthorized')
             }
-
-            const users = await UserModel.getAll()
-            res.status(200).send(users)
-
         } catch (error) {
-            res.status(401).send(error.message)
+            res.status(500).send(error.message)
         }
     }
+
     static findById = async (req, res) => {
-        const resp = await UserModel.findById(req)
-        res.status(200).send(resp)
+        const { id } = req.params
+        const resp = await UserModel.findById({ id })
+        res.send(resp)
+    }
+    //TODO revisar, funciona mal
+    static login = async (req, res) => {
+        const { email, password } = req.body
+        const {token,role} = await UserModel.login({ email, password })
+        res.status(200).json({token,role})
     }
 
-    static login = async (req, res) => {
-        console.log(req.body)
-        const { user, password } = req.body
-        console.log(user, password)
-        res.status(200).send('el login')
+
+    static register = async (req, res) => {
+                
+        //validar datos .....
+        
+
+        const { email, password, role } = req.body
+        const created = await UserModel.register({ email, password, role })
+        created ? res.status(201).send('Created') : res.status(400).send('Bad request')
     }
+
 }

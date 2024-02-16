@@ -3,6 +3,7 @@ import path from 'path'
 import jwt  from 'jsonwebtoken'
 
 import {usersRouter} from './rest/routes/users.js'
+import { corsMiddleware } from './rest/middlewares/cors.js'
 
 export const SECRET = process.env.SECRET ?? 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNzgxODYzMiwiaWF0IjoxNzA3ODE4NjMyfQ.UNs4JsOz4joWR-VYjo8HEmS0zYyTCEmGWU4-6WAMIWA'
 
@@ -13,6 +14,8 @@ const app = express()
 app.disable('x-powered-by')
 
 app.use(express.json())
+
+app.use(corsMiddleware())
 
 app.use('/users', usersRouter)
 

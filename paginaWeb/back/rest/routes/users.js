@@ -6,6 +6,6 @@ usersRouter.get('/', UserController.getAll)
 
 usersRouter.get('/login', UserController.login)
 
-usersRouter.post('/register', UserController.login)
+usersRouter.post('/register', UserController.register)
 
 usersRouter.get('/:id', UserController.findById)
