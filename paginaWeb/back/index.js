@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path'
 import jwt  from 'jsonwebtoken'
-
+import cors from 'cors'
 import {usersRouter} from './rest/routes/users.js'
 import { corsMiddleware } from './rest/middlewares/cors.js'
 
@@ -15,7 +15,7 @@ app.disable('x-powered-by')
 
 app.use(express.json())
 
-app.use(corsMiddleware())
+app.use(cors())
 
 app.use('/users', usersRouter)
 

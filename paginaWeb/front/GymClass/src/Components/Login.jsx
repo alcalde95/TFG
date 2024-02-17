@@ -1,14 +1,26 @@
 import { Link } from "react-router-dom"
 import { InputMovinTitle } from "./CustomTailwindElements"
+import { login } from "../Services/login"
 
 export const Login = () => {
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
         let form = event.target
         let data = new FormData(form)
         let user = data.get("Email")
         let password = data.get("Contraseña")
-        console.log(user,password)
+        try {
+            const res = await login({ email: user, password: password })
+            if (res) {
+                console.log("Login correcto")
+
+            } else {
+                console.log("Error en el login")
+            }
+
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     return (

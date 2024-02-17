@@ -3,6 +3,7 @@ import { LandingPage } from "./Components/LandingPage"
 import { RouterProvider } from "react-router-dom"
 import { Login } from "./Components/Login"
 import { Register } from "./Components/Register"
+import { UserContextProvider } from "./Contexts/UserContext"
 
 function App() {
 
@@ -23,7 +24,10 @@ function App() {
 
   return (
     <div className="box-content min-w-full  min-h-screen bg-slate-700 flex flex-col content-center items-center p-0 m-0 text-black font-mono">
-     <RouterProvider router={router}></RouterProvider>
+      <UserContextProvider>
+        <RouterProvider router={router} />
+      </UserContextProvider>
+
     </div>
   )
 }

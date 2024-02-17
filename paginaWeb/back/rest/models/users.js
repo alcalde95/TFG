@@ -12,7 +12,7 @@ const config = {
 const connection = await mysql.createConnection(config)
 export class UserModel {
     static getAll = async () => {
-        const [users] = await connection.query('SELECT * FROM users')
+        const [users] = await connection.query('SELECT * FROM users;')
         return users
     }
     static findById = async ({ id }) => {
@@ -20,31 +20,31 @@ export class UserModel {
         return id
     }
     static login = async ({ email, password }) => {
-        try{
+        try {
 
-            const res = await connection.query('SELECT role FROM users WHERE email = ? AND password = ?', [email, password])
-            console.log(res[0])
-            if(res[0].length === 0){
-                return false
+            const [role] = await connection.query('SELECT role FROM users u WHERE u.email = ? AND u.password = ?;', [email, password])
+
+            if (role.length === 0) {
+                return null
             }
-            const token = generateToken({ email:res[0].email , role:res[0].role })
-            const role = res[0].role 
-             return { token,role }
-        }catch(e){
+            const token = generateToken({ email: email, role: role })
+            const response = { token, role: role }
+            return [token, role[0]]
+        } catch (e) {
             console.log(e.message)
-            return false
+            return null
         }
     }
 
     static register = async ({ email, password, role }) => {
 
         //validar datos .....
-        try{
-            const x = await connection.query('insert into users (email, password, role) values (?,?,?)', [email, password, role])
-            return true
+        try {
+            const x = await connection.query('insert into users (email, password, role) values (?,?,?);', [email, password, role])
+            return 'created'
 
-        }catch(e){
-            return false
+        } catch (e) {
+            return e.message
         }
     }
 
