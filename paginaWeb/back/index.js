@@ -1,12 +1,11 @@
 import express from 'express'
 import path from 'path'
-import jwt  from 'jsonwebtoken'
+import jwt from 'jsonwebtoken'
 import cors from 'cors'
-import {usersRouter} from './rest/routes/users.js'
+import { usersRouter } from './rest/routes/users.js'
 import { corsMiddleware } from './rest/middlewares/cors.js'
 
 export const SECRET = process.env.SECRET ?? 'eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTcwNzgxODYzMiwiaWF0IjoxNzA3ODE4NjMyfQ.UNs4JsOz4joWR-VYjo8HEmS0zYyTCEmGWU4-6WAMIWA'
-
 
 const PORT = process.env.PORT ?? 1234
 
@@ -33,22 +32,20 @@ app.get('/token', (req, res) => {
 })
 
 app.get('/private', (req, res) => {
-
   try {
     const { authorization } = req.headers
     const token = authorization.split(' ')[1]
     const decoded = jwt.verify(token, SECRET)
 
-    if(Date.now() > decoded.exp){
+    if (Date.now() > decoded.exp) {
       throw new Error('Token expired')
     }
 
-    res.send(decoded.user = ('JaviInUse') ? 'Welcome' : 'Unauthorized')
+    res.send(decoded.user === ('JaviInUse') ? 'Welcome' : 'Unauthorized')
   } catch (error) {
     res.status(401).send(error.message)
   }
 })
-
 
 // la última a la que va a llegar
 app.use((req, res) => {
