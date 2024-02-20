@@ -1,46 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `client` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `instructor` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `session` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `session_client` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `user` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropForeignKey
-ALTER TABLE `class` DROP FOREIGN KEY `Class_instructorID_fkey`;
-
--- DropForeignKey
-ALTER TABLE `client` DROP FOREIGN KEY `Client_email_fkey`;
-
--- DropForeignKey
-ALTER TABLE `instructor` DROP FOREIGN KEY `Instructor_email_fkey`;
-
--- DropForeignKey
-ALTER TABLE `session` DROP FOREIGN KEY `Session_classId_fkey`;
-
--- DropForeignKey
-ALTER TABLE `session_client` DROP FOREIGN KEY `Session_Client_UUID_Client_fkey`;
-
--- DropForeignKey
-ALTER TABLE `session_client` DROP FOREIGN KEY `Session_Client_UUID_Session_fkey`;
-
--- DropTable
-DROP TABLE `client`;
-
--- DropTable
-DROP TABLE `instructor`;
-
--- DropTable
-DROP TABLE `session`;
-
--- DropTable
-DROP TABLE `session_client`;
-
--- DropTable
-DROP TABLE `user`;
-
 -- CreateTable
 CREATE TABLE `Users` (
     `email` VARCHAR(191) NOT NULL,
@@ -68,6 +25,20 @@ CREATE TABLE `Instructors` (
     UNIQUE INDEX `Instructors_email_key`(`email`),
     UNIQUE INDEX `Instructors_UUID_Instructor_key`(`UUID_Instructor`),
     PRIMARY KEY (`email`, `UUID_Instructor`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Class` (
+    `UUID_Class` VARCHAR(191) NOT NULL,
+    `Name` VARCHAR(191) NOT NULL,
+    `Photo` LONGBLOB NOT NULL,
+    `Description` VARCHAR(191) NOT NULL,
+    `Max_Capacity` INTEGER NOT NULL,
+    `Duration` DATETIME(3) NOT NULL,
+    `instructorID` VARCHAR(191) NOT NULL,
+
+    UNIQUE INDEX `Class_instructorID_key`(`instructorID`),
+    PRIMARY KEY (`UUID_Class`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable

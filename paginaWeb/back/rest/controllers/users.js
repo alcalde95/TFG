@@ -2,6 +2,7 @@ import { UserModel } from '../models/users.js'
 import { authorized } from '../../utilFunctions.js'
 import jwt from 'jsonwebtoken'
 import { SECRET } from '../../index.js'
+import { partialValidateUser, validateUser } from '../schemas/user.js'
 export class UserController {
   static getAll = async (req, res) => {
     try {
@@ -26,6 +27,10 @@ export class UserController {
   }
 
   static login = async (req, res) => {
+    const input = req.body
+    const result = partialValidateUser({ input })
+    if (result.error) return res.status(400).send(result.error.message)
+
     const { email, password } = req.body
     const resp = await UserModel.login({ email, password })
     if (resp === null) {
@@ -36,12 +41,13 @@ export class UserController {
   }
 
   static register = async (req, res) => {
-    // validar datos .....
-
-    // const { email, password, role } = req.body
-
     const input = req.body
+    const result = validateUser({ input })
+
+    if (result.error) return res.status(400).send(result.error.message)
+
     const created = await UserModel.register({ input })
+    console.log(created)
     created === 'created' ? res.status(201).send('Created') : res.status(400).send('Bad request: ' + created)
   }
 }

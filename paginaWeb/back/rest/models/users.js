@@ -47,11 +47,29 @@ export class UserModel {
     const { email, password, role } = input
     // validar datos .....
     try {
-      const x = await connection.query('insert into users (email, password, role) values (?,?,?);', [email, password, role])
-      console.log(x)
+      await connection.query('insert into users (email, password, role) values (?,?,?);', [email, password, role])
+
+      switch (role.toLowerCase()) {
+        case 'c': {
+          console.log('hola c')
+          const UUIDClient = crypto.randomUUID()
+          await connection.query('insert into Clients(email,UUID_Client) values (?,?);', [email, UUIDClient])
+          break
+        }
+        case 'i': {
+          console.log('hola c')
+          const UUIDInstructor = crypto.randomUUID()
+          await connection.query('insert into Instructors(email,UUID_Instructor) values (?,?);', [email, UUIDInstructor])
+          break
+        }
+        default:{
+          break
+        }
+      }
+
       return 'created'
     } catch (e) {
-      return e.message
+      return 'ERROR: user already exists'
     }
   }
 }

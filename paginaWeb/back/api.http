@@ -27,7 +27,7 @@ POST http://localhost:1234/users/register
 Content-Type: application/json
 
 {
-    "email": "a",
-    "password": "a",
-    "role": "A"
+    "email": "alcalde@alcalde.alcalde",
+    "password": "alcaldealcalde",
+    "role": "C"
 }
