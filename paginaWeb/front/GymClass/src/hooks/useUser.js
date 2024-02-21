@@ -7,7 +7,7 @@ import { registerService } from "../Services/registerService"
 import { emailValidation, passwordValidation } from "../Validations"
 
 const useUser = () => {
-    const { jwt, setJWT, setRole } = useContext(UserContext)
+    const { jwt, setJWT, setRole,setEmail } = useContext(UserContext)
     const [state, setState] = useState({ loading: false, error: false })
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
@@ -20,8 +20,10 @@ const useUser = () => {
                 setState({ loading: false, error: false })
                 setJWT(res.jwt)
                 setRole(res.role)
+                setEmail(email)
                 window.sessionStorage.setItem('jwt', res.jwt)
                 window.sessionStorage.setItem('role', res.role)
+                window.sessionStorage.setItem('email', email)
 
             }
 
@@ -29,14 +31,16 @@ const useUser = () => {
             setState({ loading: false, error: true })
         }
 
-    }, [setJWT, setRole])
+    }, [setJWT, setRole, setEmail])
 
     const logout = useCallback(() => {
         window.sessionStorage.removeItem('jwt')
         window.sessionStorage.removeItem('role')
+        window.sessionStorage.removeItem('email')
         setJWT(null)
         setRole(null)
-    }, [setJWT, setRole])
+        setEmail(null)
+    }, [setJWT, setRole, setEmail])
 
     const register = useCallback(async ({ email, password, role = 'C' }) => {
         try {
@@ -57,8 +61,6 @@ const useUser = () => {
             else{
                 setPasswordError(false)
             }
-            
-           
 
             if(!emailValidationResult){
                 console.log('error')

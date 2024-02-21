@@ -32,7 +32,7 @@ model Clients {
 model Instructors {
   email           String @unique
   UUID_Instructor String  @unique
-  user            Users    @relation(fields: [email], references: [email])
+  user            Users    @relation(fields: [email], references: [email],onDelete: Cascade)
   classes         Class[]
   @@id([email, UUID_Instructor])
 
@@ -46,7 +46,7 @@ model Class {
   Max_Capacity Int
   Duration     DateTime
   instructorID String     @unique
-  instuctor    Instructors @relation(fields: [instructorID], references: [UUID_Instructor])
+  instuctor    Instructors @relation(fields: [instructorID], references: [UUID_Instructor],onDelete: Cascade)
   session      Sessions[]
 }
 

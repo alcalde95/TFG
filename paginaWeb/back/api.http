@@ -9,7 +9,12 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSmF2aUluVX
 
 #### Get all users
 GET http://localhost:1234/users
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluIiwiZXhwIjoxNzA4OTc0NjA4OTEyLCJpYXQiOjE3MDgzNjk4MDh9.KaFj2peIxT20qT5ElE7UrRpGvHY7t0fHELcp_jnl6BU
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w
+
+### Get all users,clients and admins
+GET http://localhost:1234/users/all
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w
+
 #### Get user by id
 GET http://localhost:1234/users/1   
 
@@ -18,8 +23,8 @@ POST http://localhost:1234/users/login
 Content-Type: application/json
 
 {
-    "email": "admin",
-    "password": "admin"
+    "email": "admin@admin.admin",
+    "password": "admin123"
 }
 
 #### Register
@@ -27,7 +32,10 @@ POST http://localhost:1234/users/register
 Content-Type: application/json
 
 {
-    "email": "alcalde@alcalde.alcalde",
-    "password": "alcaldealcalde",
-    "role": "C"
+    "email": "admin@admin.admin",
+    "password": "admin123",
+    "role": "A"
 }
+### Delete user
+DELETE http://localhost:1234/users/a
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w

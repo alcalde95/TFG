@@ -11,17 +11,36 @@ const config = {
 
 const connection = await mysql.createConnection(config)
 export class UserModel {
-  static getAll = async ({ userEmail }) => {
-    const [role] = await connection.query('SELECT role FROM users u WHERE u.email = ?;', [userEmail])
+  static getUsers = async ({ userEmail }) => {
+    // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
+    const [role] = await connection.query('SELECT u.role FROM users u WHERE u.email = ?;', [userEmail])
 
     console.log()
-    if (role[0].role !== 'a') {
+    if (role[0].role.toLowerCase() !== 'a') {
       console.log('hola :D')
       return 'Unauthorized'
     }
 
-    const [users] = await connection.query('SELECT * FROM users;')
+    const [users] = await connection.query('SELECT u.* FROM users u;')
     return users
+  }
+
+  static getAllUsers = async ({ userEmail }) => {
+    // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
+    const [role] = await connection.query('SELECT role FROM users u WHERE u.email = ?;', [userEmail])
+
+    console.log()
+    if (role[0].role.toLowerCase() !== 'a') {
+      console.log('hola :D')
+      return 'Unauthorized'
+    }
+
+    const [admins] = await connection.query('SELECT u.* FROM users u where LOWER(u.role) = ?;', ['a'])
+
+    const [clients] = await connection.query('SELECT c.UUID_Client,u.email FROM users u, clients c WHERE u.email = c.email;')
+
+    const [instructors] = await connection.query('SELECT i.UUID_Instructor,u.email FROM users u, instructors i WHERE u.email = i.email;')
+    return { admins, clients, instructors }
   }
 
   static findById = async ({ id }) => {
@@ -30,7 +49,7 @@ export class UserModel {
 
   static login = async ({ email, password }) => {
     try {
-      const [role] = await connection.query('SELECT role FROM users u WHERE u.email = ? AND u.password = ?;', [email, password])
+      const [role] = await connection.query('SELECT u.role FROM users u WHERE u.email = ? AND u.password = ?;', [email, password])
 
       if (role.length === 0) {
         return null
@@ -62,7 +81,7 @@ export class UserModel {
           await connection.query('insert into Instructors(email,UUID_Instructor) values (?,?);', [email, UUIDInstructor])
           break
         }
-        default:{
+        default: {
           break
         }
       }
@@ -70,6 +89,15 @@ export class UserModel {
       return 'created'
     } catch (e) {
       return 'ERROR: user already exists'
+    }
+  }
+
+  static deleteUser = async ({ email }) => {
+    try {
+      await connection.query('delete from users where email = ?;', [email])
+      return 'deleted'
+    } catch (e) {
+      throw new Error(e.message)
     }
   }
 }

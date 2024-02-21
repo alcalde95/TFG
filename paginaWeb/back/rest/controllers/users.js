@@ -4,19 +4,31 @@ import jwt from 'jsonwebtoken'
 import { SECRET } from '../../index.js'
 import { partialValidateUser, validateUser } from '../schemas/user.js'
 export class UserController {
-  static getAll = async (req, res) => {
+  static getUsers = async (req, res) => {
     try {
       const { authorization } = req.headers
       const token = authorization.split(' ')[1]
       const userEmail = jwt.verify(token, SECRET).email
       if (authorized({ token })) {
-        const users = await UserModel.getAll({ userEmail })
+        const users = await UserModel.getUsers({ userEmail })
         res.json(users)
       } else {
         res.status(401).send('Unauthorized')
       }
     } catch (error) {
       res.status(500).send(error.message)
+    }
+  }
+
+  static getAllUsers = async (req, res) => {
+    const { authorization } = req.headers
+    const token = authorization.split(' ')[1]
+    const userEmail = jwt.verify(token, SECRET).email
+    if (authorized({ token })) {
+      const users = await UserModel.getAllUsers({ userEmail })
+      res.json(users)
+    } else {
+      res.status(401).send('Unauthorized')
     }
   }
 
@@ -49,5 +61,21 @@ export class UserController {
     const created = await UserModel.register({ input })
     console.log(created)
     created === 'created' ? res.status(201).send('Created') : res.status(400).send('Bad request: ' + created)
+  }
+
+  static deleteUser = async (req, res) => {
+    const { authorization } = req.headers
+    const token = authorization.split(' ')[1]
+    if (authorized({ token })) {
+      try {
+        const { email } = req.params
+        await UserModel.deleteUser({ email })
+        res.send()
+      } catch (e) {
+        res.status(400).send(e.message)
+      }
+    } else {
+      res.status(401).send('Unauthorized')
+    }
   }
 }
