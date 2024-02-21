@@ -11,7 +11,7 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSmF2aUluVX
 GET http://localhost:1234/users
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w
 
-### Get all users,clients and admins
+### Get all admins,clients and instructors 
 GET http://localhost:1234/users/all
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w
 
