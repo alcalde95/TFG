@@ -2,7 +2,7 @@ const ENDPOINT = ' http://localhost:1234'
 
 export const registerService = async ({ email, password,role }) => {
 
-    const res = await fetch(`${ENDPOINT}/users/register`,
+    const res = await fetch(`${ENDPOINT}/users/`,
         {
             method: 'POST',
             headers: {

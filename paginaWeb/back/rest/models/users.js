@@ -1,45 +1,70 @@
-import mysql from 'mysql2/promise'
+// import mysql from 'mysql2/promise'
 import { generateToken } from '../../utilFunctions.js'
+import bcrypt from 'bcrypt'
+import { PrismaClient } from '@prisma/client'
 
-const config = {
+/* const config = {
   host: 'localhost',
   user: 'alcalde',
   port: 3306,
   password: 'alcalde',
   database: 'gymclass'
 }
-
-const connection = await mysql.createConnection(config)
+*/
+const prisma = new PrismaClient()
 export class UserModel {
   static getUsers = async ({ userEmail }) => {
-    // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
-    const [role] = await connection.query('SELECT u.role FROM users u WHERE u.email = ?;', [userEmail])
+    try {
+      const role = await prisma.users.findUnique({
+        where: {
+          email: userEmail
+        },
+        select: {
+          role: true
+        }
+      })
 
-    console.log()
-    if (role[0].role.toLowerCase() !== 'a') {
-      console.log('hola :D')
-      return 'Unauthorized'
+      if (role.role.toLowerCase() !== 'a') {
+        throw new Error('Unauthorized')
+      }
+
+      const users = await prisma.users.findMany()
+      return users
+    } catch (e) {
+      throw new Error(e.message)
     }
-
-    const [users] = await connection.query('SELECT u.* FROM users u;')
-    return users
   }
 
   static getAllUsers = async ({ userEmail }) => {
     // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
-    const [role] = await connection.query('SELECT role FROM users u WHERE u.email = ?;', [userEmail])
+    const role = await prisma.users.findUnique({
+      where: {
+        email: userEmail
+      },
+      select: {
+        role: true
+      }
+    })
 
-    console.log()
-    if (role[0].role.toLowerCase() !== 'a') {
-      console.log('hola :D')
+    if (role.role.toLowerCase() !== 'a') {
       return 'Unauthorized'
     }
 
-    const [admins] = await connection.query('SELECT u.* FROM users u where LOWER(u.role) = ?;', ['a'])
-
-    const [clients] = await connection.query('SELECT c.UUID_Client,u.email FROM users u, clients c WHERE u.email = c.email;')
-
-    const [instructors] = await connection.query('SELECT i.UUID_Instructor,u.email FROM users u, instructors i WHERE u.email = i.email;')
+    const admins = await prisma.users.findMany({
+      where: {
+        role: { in: ['a', 'A'] }
+      }
+    })
+    const clients = await prisma.users.findMany({
+      where: {
+        role: { in: ['c', 'C'] }
+      }
+    })
+    const instructors = await prisma.users.findMany({
+      where: {
+        role: { in: ['I', 'i'] }
+      }
+    })
     return { admins, clients, instructors }
   }
 
@@ -47,18 +72,31 @@ export class UserModel {
     return id
   }
 
-  static login = async ({ email, password }) => {
+  static login = async ({ input }) => {
     try {
-      const [role] = await connection.query('SELECT u.role FROM users u WHERE u.email = ? AND u.password = ?;', [email, password])
+      const { email, password } = input
 
-      if (role.length === 0) {
-        return null
+      const resp = await prisma.users.findUnique({
+        where: {
+          email
+        },
+        select: {
+          role: true,
+          password: true
+        }
+      })
+      const response = await bcrypt.compare(password, resp.password)
+      if (!response) {
+        throw new Error('Unauthorized')
       }
-      const token = generateToken({ email, role })
-      return { jwt: token.token, role: role[0].role }
+
+      if (resp.length === 0) {
+        throw new Error('Unauthorized')
+      }
+      const token = generateToken({ email, resp })
+      return { jwt: token.token, role: resp.role }
     } catch (e) {
-      console.log(e.message)
-      return null
+      throw new Error(e.message)
     }
   }
 
@@ -66,36 +104,50 @@ export class UserModel {
     const { email, password, role } = input
     // validar datos .....
     try {
-      await connection.query('insert into users (email, password, role) values (?,?,?);', [email, password, role])
-
+      await prisma.users.create({
+        data: {
+          email,
+          password,
+          role
+        }
+      })
       switch (role.toLowerCase()) {
         case 'c': {
-          console.log('hola c')
-          const UUIDClient = crypto.randomUUID()
-          await connection.query('insert into Clients(email,UUID_Client) values (?,?);', [email, UUIDClient])
+          await prisma.clients.create({
+            data: {
+              email
+            }
+          })
           break
         }
         case 'i': {
-          console.log('hola c')
-          const UUIDInstructor = crypto.randomUUID()
-          await connection.query('insert into Instructors(email,UUID_Instructor) values (?,?);', [email, UUIDInstructor])
+          await prisma.instructors.create({
+            data: {
+              email
+            }
+          })
           break
         }
         default: {
           break
         }
       }
-
-      return 'created'
     } catch (e) {
-      return 'ERROR: user already exists'
+      throw new Error('User already exists')
     }
   }
 
+  // contraseña cifrada en la bbdd y con salt
+  // hasehar contraseñas con hash
+  // med5(hash) + salt
+
   static deleteUser = async ({ email }) => {
     try {
-      await connection.query('delete from users where email = ?;', [email])
-      return 'deleted'
+      await prisma.users.delete({
+        where: {
+          email
+        }
+      })
     } catch (e) {
       throw new Error(e.message)
     }

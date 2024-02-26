@@ -20,21 +20,16 @@ model Users {
 }
 
 model Clients {
-  email       String @unique
-  UUID_Client String @unique
+  email       String @id
 
   user           Users             @relation(fields: [email], references: [email])
   session_client Sessions_Client[]
-  @@id([email, UUID_Client])
-
 }
 
 model Instructors {
-  email           String @unique
-  UUID_Instructor String  @unique
+  email           String @id
   user            Users    @relation(fields: [email], references: [email],onDelete: Cascade)
   classes         Class[]
-  @@id([email, UUID_Instructor])
 
 }
 
@@ -45,27 +40,28 @@ model Class {
   Description  String
   Max_Capacity Int
   Duration     DateTime
-  instructorID String     @unique
-  instuctor    Instructors @relation(fields: [instructorID], references: [UUID_Instructor],onDelete: Cascade)
+  instructorEmail String     @unique
+  instuctor    Instructors @relation(fields: [instructorEmail], references: [email],onDelete: Cascade)
   session      Sessions[]
 }
 
 model Sessions {
-  UUID_Session String   @id
-  DATA_TIME    DateTime
-  classId      String   @unique
-  class        Class    @relation(fields: [classId], references: [UUID_Class])
-
+  data_time    DateTime @unique
+  UUID_Class      String   @unique
+  class        Class    @relation(fields: [UUID_Class], references: [UUID_Class])
   session_client Sessions_Client[]
+
+  @@id([data_time, UUID_Class])
 }
 
 model Sessions_Client {
-  UUID_Client  String
-  client       Clients  @relation(fields: [UUID_Client], references: [UUID_Client])
-  UUID_Session String
-  session      Sessions @relation(fields: [UUID_Session], references: [UUID_Session])
+  client_Email  String
+  client       Clients  @relation(fields: [client_Email], references: [email])
+  data_time DateTime @unique
+  UUID_Class     String @unique
+  session      Sessions @relation(fields: [data_time,UUID_Class], references: [data_time,UUID_Class])
   Attend       Boolean
   Justified    Boolean
 
-  @@id([UUID_Client, UUID_Session])
+  @@id([client_Email, data_time,UUID_Class])
 }

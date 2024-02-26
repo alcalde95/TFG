@@ -14,13 +14,11 @@ export const Login = () => {
     const navigate = useNavigate ()
 
     useEffect(() => {
-        console.log(isLogged)
         if (isLogged) {
            
             switch (role.toLowerCase()) {
                 case 'a':
-                    //navigate('/admin')
-                    navigate('/')
+                    navigate('/userManagement')
                     break;
                 case 'c':
                     //navigate('/client')

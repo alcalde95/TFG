@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom"
 import { Login } from "./Components/Login"
 import { Register } from "./Components/Register"
 import { UserContextProvider } from "./Contexts/UserContext"
+import { UserManagement } from "./Components/UserManagement"
 
 function App() {
 
@@ -19,6 +20,10 @@ function App() {
     {
       path: "/register",
       element: <Register />
+    },
+    {
+      path: "userManagement",
+      element:<UserManagement />
     }
   ])
 

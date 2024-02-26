@@ -1,8 +1,7 @@
-import { useContext } from "react"
+import { useContext,useState, useCallback } from "react"
+
 import { UserContext } from "../Contexts/UserContext"
-import { useCallback } from "react"
 import { loginService } from "../Services/loginService"
-import { useState } from "react"
 import { registerService } from "../Services/registerService"
 import { emailValidation, passwordValidation } from "../Validations"
 

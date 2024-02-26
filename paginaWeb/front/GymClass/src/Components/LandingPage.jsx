@@ -12,21 +12,21 @@ export const LandingPage = () => {
                     <Link to="/register"><button className="bg-teal-500 w-40 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500   ">Registrarse</button></Link>
                 </nav>
                 <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-2 w-auto">
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
-                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center shadow-lg bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
+                    <div className="w-60 h-60 border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">placehodlder de las clases que se verán</div>
 
                 </section>
 

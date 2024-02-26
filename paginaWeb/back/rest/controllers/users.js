@@ -2,6 +2,7 @@ import { UserModel } from '../models/users.js'
 import { authorized } from '../../utilFunctions.js'
 import jwt from 'jsonwebtoken'
 import { SECRET } from '../../index.js'
+import bcrypt from 'bcrypt'
 import { partialValidateUser, validateUser } from '../schemas/user.js'
 export class UserController {
   static getUsers = async (req, res) => {
@@ -43,12 +44,11 @@ export class UserController {
     const result = partialValidateUser({ input })
     if (result.error) return res.status(400).send(result.error.message)
 
-    const { email, password } = req.body
-    const resp = await UserModel.login({ email, password })
-    if (resp === null) {
-      res.status(401).send('Unauthorized')
-    } else {
+    try {
+      const resp = await UserModel.login({ input })
       res.json(resp)
+    } catch (e) {
+      res.status(401).send(e.message)
     }
   }
 
@@ -57,10 +57,13 @@ export class UserController {
     const result = validateUser({ input })
 
     if (result.error) return res.status(400).send(result.error.message)
-
-    const created = await UserModel.register({ input })
-    console.log(created)
-    created === 'created' ? res.status(201).send('Created') : res.status(400).send('Bad request: ' + created)
+    input.password = await bcrypt.hash(input.password, 10)
+    try {
+      await UserModel.register({ input })
+      res.status(201).send('Created')
+    } catch (e) {
+      res.status(400).send('Bad request: ' + e.message)
+    }
   }
 
   static deleteUser = async (req, res) => {
@@ -70,7 +73,7 @@ export class UserController {
       try {
         const { email } = req.params
         await UserModel.deleteUser({ email })
-        res.send()
+        res.send('Deleted')
       } catch (e) {
         res.status(400).send(e.message)
       }
