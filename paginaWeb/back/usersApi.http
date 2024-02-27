@@ -36,6 +36,17 @@ Content-Type: application/json
     "password": "instructor123",
     "role": "I"
 }
+
+### Update user
+PUT http://localhost:1234/users/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w
+Content-Type: application/json
+
+{
+    "email": "instructor@instructor.instructor",
+    "role": "i"
+}
+
 ### Delete user
 DELETE http://localhost:1234/users/instructor@instructor.instructor
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w

@@ -1,16 +1,7 @@
-// import mysql from 'mysql2/promise'
 import { generateToken } from '../../utilFunctions.js'
 import bcrypt from 'bcrypt'
 import { PrismaClient } from '@prisma/client'
 
-/* const config = {
-  host: 'localhost',
-  user: 'alcalde',
-  port: 3306,
-  password: 'alcalde',
-  database: 'gymclass'
-}
-*/
 const prisma = new PrismaClient()
 export class UserModel {
   static getUsers = async ({ userEmail }) => {
@@ -102,7 +93,6 @@ export class UserModel {
 
   static register = async ({ input }) => {
     const { email, password, role } = input
-    // validar datos .....
     try {
       await prisma.users.create({
         data: {
@@ -137,9 +127,77 @@ export class UserModel {
     }
   }
 
-  // contraseña cifrada en la bbdd y con salt
-  // hasehar contraseñas con hash
-  // med5(hash) + salt
+  static updateUser = async ({ input }) => {
+    const { email, password, role } = input
+    // se podría hacer con un trigger? Sí, pero me da todo el palo de hacerlo en SQL
+    try {
+      const prevRole = await prisma.users.findUnique({
+        where: {
+          email
+        },
+        select: {
+          role: true
+        }
+      })
+
+      await prisma.users.update({
+        where: {
+          email
+        },
+        data: {
+          password,
+          role
+        }
+      })
+      if (role !== undefined && role.toLowerCase() !== prevRole.role.toLocaleLowerCase()) {
+        switch (prevRole.role.toLowerCase()) {
+          case 'c': {
+            await prisma.clients.delete({
+              where: {
+                email
+              }
+            })
+            break
+          }
+          case 'i': {
+            await prisma.instructors.delete({
+              where: {
+                email
+              }
+            })
+            break
+          }
+          default: {
+            break
+          }
+        }
+
+        switch (role.toLowerCase()) {
+          case 'c': {
+            await prisma.clients.create({
+              data: {
+                email
+              }
+            })
+            break
+          }
+          case 'i': {
+            await prisma.instructors.create({
+              data: {
+                email
+              }
+            })
+            break
+          }
+          default: {
+            break
+          }
+        }
+      }
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
 
   static deleteUser = async ({ email }) => {
     try {

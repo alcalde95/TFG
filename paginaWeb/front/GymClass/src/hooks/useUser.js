@@ -3,6 +3,7 @@ import { useContext,useState, useCallback } from "react"
 import { UserContext } from "../Contexts/UserContext"
 import { loginService } from "../Services/loginService"
 import { registerService } from "../Services/registerService"
+
 import { emailValidation, passwordValidation } from "../Validations"
 
 const useUser = () => {
@@ -77,6 +78,7 @@ const useUser = () => {
         }
     }, [])
 
+   
     return {
         isLogged: Boolean(jwt),
         login,
@@ -84,7 +86,7 @@ const useUser = () => {
         register,
         state,
         emailError,
-        passwordError
+        passwordError,
     }
 }
 export default useUser

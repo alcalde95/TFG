@@ -66,6 +66,21 @@ export class UserController {
     }
   }
 
+  static updateUser = async (req, res) => {
+    try {
+      const { authorization } = req.headers
+      const token = authorization.split(' ')[1]
+      if (authorized({ token })) {
+        await UserModel.updateUser({ input: req.body })
+        res.send('Updated')
+      } else {
+        res.status(401).send('Unauthorized')
+      }
+    } catch (error) {
+      res.status(500).send(error.message)
+    }
+  }
+
   static deleteUser = async (req, res) => {
     const { authorization } = req.headers
     const token = authorization.split(' ')[1]

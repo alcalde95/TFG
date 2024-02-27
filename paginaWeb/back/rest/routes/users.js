@@ -9,4 +9,6 @@ usersRouter.get('/:id', UserController.findById)
 usersRouter.post('/login', UserController.login)
 usersRouter.post('/', UserController.register)
 
+usersRouter.put('/', UserController.updateUser)
+
 usersRouter.delete('/:email', UserController.deleteUser)
