@@ -9,6 +9,7 @@ export const useUserManagement = () => {
     const [clients, setClients] = useState([])
     const [instructors, setInstructors] = useState([])
     const [loading, setLoading] = useState(true)
+    const [view, setView] = useState(false)
     const { jwt } = useContext(UserContext)
 
     const navigate = useNavigate()
@@ -60,5 +61,7 @@ export const useUserManagement = () => {
         instructors,
         loading,
         deleteUser,
+        view,
+        setView
     }
 }

@@ -42,7 +42,8 @@ export class UserController {
   static login = async (req, res) => {
     const input = req.body
     const result = partialValidateUser({ input })
-    if (result.error) return res.status(400).send(result.error.message)
+
+    if (!result.success) return res.status(400).send(result.error.message)
 
     try {
       const resp = await UserModel.login({ input })
@@ -90,6 +91,7 @@ export class UserController {
         await UserModel.deleteUser({ email })
         res.send('Deleted')
       } catch (e) {
+        console.log(e)
         res.status(400).send(e.message)
       }
     } else {

@@ -11,57 +11,55 @@ datasource db {
 }
 
 model Users {
-  email    String @id
-  password String
-  role     String
-  client   Clients?
+  email      String       @id
+  password   String
+  role       String
+  client     Clients?
   instructor Instructors?
-
 }
 
 model Clients {
-  email       String @id
+  email String @id
 
-  user           Users             @relation(fields: [email], references: [email])
+  user           Users             @relation(fields: [email], references: [email], onDelete: Cascade)
   session_client Sessions_Client[]
 }
 
 model Instructors {
-  email           String @id
-  user            Users    @relation(fields: [email], references: [email],onDelete: Cascade)
-  classes         Class[]
-
+  email   String  @id
+  user    Users   @relation(fields: [email], references: [email], onDelete: Cascade)
+  classes Class[]
 }
 
 model Class {
-  UUID_Class   String     @id
-  Name         String
-  Photo        Bytes
-  Description  String
-  Max_Capacity Int
-  Duration     DateTime
-  instructorEmail String     @unique
-  instuctor    Instructors @relation(fields: [instructorEmail], references: [email],onDelete: Cascade)
-  session      Sessions[]
+  UUID_Class      String      @id
+  Name            String
+  Photo           Bytes
+  Description     String
+  Max_Capacity    Int
+  Duration        DateTime
+  instructorEmail String      @unique
+  instuctor       Instructors @relation(fields: [instructorEmail], references: [email], onDelete: Cascade)
+  session         Sessions[]
 }
 
 model Sessions {
-  data_time    DateTime @unique
-  UUID_Class      String   @unique
-  class        Class    @relation(fields: [UUID_Class], references: [UUID_Class])
+  data_time      DateTime          @unique
+  UUID_Class     String            @unique
+  class          Class             @relation(fields: [UUID_Class], references: [UUID_Class])
   session_client Sessions_Client[]
 
   @@id([data_time, UUID_Class])
 }
 
 model Sessions_Client {
-  client_Email  String
+  client_Email String
   client       Clients  @relation(fields: [client_Email], references: [email])
-  data_time DateTime @unique
-  UUID_Class     String @unique
-  session      Sessions @relation(fields: [data_time,UUID_Class], references: [data_time,UUID_Class])
+  data_time    DateTime @unique
+  UUID_Class   String   @unique
+  session      Sessions @relation(fields: [data_time, UUID_Class], references: [data_time, UUID_Class])
   Attend       Boolean
   Justified    Boolean
 
-  @@id([client_Email, data_time,UUID_Class])
+  @@id([client_Email, data_time, UUID_Class])
 }

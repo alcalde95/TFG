@@ -39,7 +39,7 @@ Content-Type: application/json
 
 ### Update user
 PUT http://localhost:1234/users/
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5OTIxNjczODYwLCJpYXQiOjE3MDkzMTY4NzN9.54oI7x7D9Lm2EXGixGX0t4rCYqmbS24U20IKewfHmJk
 Content-Type: application/json
 
 {
@@ -48,5 +48,5 @@ Content-Type: application/json
 }
 
 ### Delete user
-DELETE http://localhost:1234/users/instructor@instructor.instructor
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5MTQ1MzE5OTQwLCJpYXQiOjE3MDg1NDA1MTl9._7wLrvk8fXImEvxgX4y2e8qN5esvuHcoHbZulfZP52w
+DELETE http://localhost:1234/users/esUsuario@usuario.user
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5OTIxNjczODYwLCJpYXQiOjE3MDkzMTY4NzN9.54oI7x7D9Lm2EXGixGX0t4rCYqmbS24U20IKewfHmJk

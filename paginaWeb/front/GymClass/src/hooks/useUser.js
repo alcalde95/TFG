@@ -1,4 +1,4 @@
-import { useContext,useState, useCallback } from "react"
+import { useContext, useState, useCallback } from "react"
 
 import { UserContext } from "../Contexts/UserContext"
 import { loginService } from "../Services/loginService"
@@ -7,7 +7,7 @@ import { registerService } from "../Services/registerService"
 import { emailValidation, passwordValidation } from "../Validations"
 
 const useUser = () => {
-    const { jwt, setJWT, setRole,setEmail } = useContext(UserContext)
+    const { jwt, setJWT, setRole, setEmail } = useContext(UserContext)
     const [state, setState] = useState({ loading: false, error: false })
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
@@ -33,41 +33,33 @@ const useUser = () => {
 
     }, [setJWT, setRole, setEmail])
 
-    const logout = useCallback(() => {
-        window.sessionStorage.removeItem('jwt')
-        window.sessionStorage.removeItem('role')
-        window.sessionStorage.removeItem('email')
-        setJWT(null)
-        setRole(null)
-        setEmail(null)
-    }, [setJWT, setRole, setEmail])
 
     const register = useCallback(async ({ email, password, role = 'C' }) => {
         try {
-            
+
             const emailValidationResult = emailValidation({ email })
             const passwordValidationResult = passwordValidation({ password })
 
-           
+
             if (!emailValidationResult) {
                 setEmailError('Email no válido')
-            }else{
+            } else {
                 setEmailError(false)
             }
 
-            if(!passwordValidationResult){
+            if (!passwordValidationResult) {
                 setPasswordError('Contraseña no válida')
             }
-            else{
+            else {
                 setPasswordError(false)
             }
 
-            if(!emailValidationResult){
+            if (!emailValidationResult) {
                 console.log('error')
                 setState({ loading: false, error: true })
                 return false
             }
-            
+
             setState({ loading: true, error: false })
             await registerService({ email, password, role })
             return true;
@@ -78,7 +70,22 @@ const useUser = () => {
         }
     }, [])
 
-   
+
+    const logout = useCallback(() => {
+        window.sessionStorage.removeItem('jwt')
+        window.sessionStorage.removeItem('role')
+        window.sessionStorage.removeItem('email')
+        setJWT(null)
+        setRole(null)
+        setEmail(null)
+    }, [setJWT, setRole, setEmail])
+
+
+    const resetErrors = () => {
+        setEmailError(false)
+        setPasswordError(false)
+    }
+
     return {
         isLogged: Boolean(jwt),
         login,
@@ -87,6 +94,7 @@ const useUser = () => {
         state,
         emailError,
         passwordError,
+        resetErrors
     }
 }
 export default useUser

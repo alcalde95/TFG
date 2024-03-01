@@ -3,19 +3,19 @@ import { InputMovinTitle } from "./CustomTailwindElements"
 import useUser from "../hooks/useUser"
 import { useContext, useEffect } from "react"
 import { UserContext } from "../Contexts/UserContext"
-import { useNavigate   } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 export const Login = () => {
 
-    const { login, isLogged,state } = useUser()
-    
+    const { login, isLogged, state } = useUser()
+
     const { role } = useContext(UserContext)
 
-    const navigate = useNavigate ()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (isLogged) {
-           
+
             switch (role.toLowerCase()) {
                 case 'a':
                     navigate('/userManagement')
@@ -32,7 +32,7 @@ export const Login = () => {
                     navigate('/');
             }
 
-            
+
         }
     }, [isLogged, role, navigate])
 
@@ -44,9 +44,9 @@ export const Login = () => {
         let email = data.get("Email")
         let password = data.get("Contraseña")
         try {
-            
+
             login({ email, password })
-            
+
             //alert(res.role, res.jwt)
         } catch (error) {
             console.error(error)
@@ -59,7 +59,7 @@ export const Login = () => {
             <div className="max-w-6xl min-w-80 h-auto bg-gradient-to-tl from-teal-500 to-green-400 p-1 rounded-lg m-2">
                 <main className="w-auto h-auto flex flex-col bg-slate-300 text-center rounded-md ">
                     {
-                        state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br/>Email o la contraseña incorrectos</div>
+                        state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Email o la contraseña incorrectos</div>
                     }
                     <form className="flex flex-col w-auto m-2 gap-4" action="" method="post" onSubmit={handleSubmit}>
                         <InputMovinTitle name="Email" type="text" />

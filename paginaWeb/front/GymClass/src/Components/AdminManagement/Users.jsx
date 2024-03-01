@@ -1,4 +1,4 @@
-import { useUserManagement } from "../hooks/useUserManagement"
+import { useUserManagement } from "../../hooks/useUserManagement"
 
 const ListOfUsers = ({ users, role }) => {
     //preguntar a stephan o dani
