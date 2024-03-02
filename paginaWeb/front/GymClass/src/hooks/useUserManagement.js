@@ -15,16 +15,19 @@ export const useUserManagement = () => {
     const navigate = useNavigate()
 
     const getUsers = useCallback(async () => {
-        jwt == null
-            ? navigate('/login')
-            : null
-        const users = await allUsersService({ jwt })
-        setAdmins(users["admins"])
-        setClients(users["clients"])
-        setInstructors(users["instructors"])
-        setLoading(false)
+        if (jwt === null) {
+            navigate('/login')
 
+        }
+        else {
+            const users = await allUsersService({ jwt })
+            setAdmins(users["admins"])
+            setClients(users["clients"])
+            setInstructors(users["instructors"])
+            setLoading(false)
+        }
     }, [jwt, navigate])
+
 
     //preguntar a stephan si estaría bien xd
     useEffect(() => {
@@ -35,14 +38,14 @@ export const useUserManagement = () => {
         try {
             console.log(jwt)
             await deleteUserService({ email, jwt })
-            switch (role) {
-                case 'Administrador':
+            switch (role.toLowerCase()) {
+                case 'a':
                     setAdmins(admins.filter((admin) => admin.email !== email))
                     break
-                case 'Cliente':
+                case 'c':
                     setClients(clients.filter((client) => client.email !== email))
                     break
-                case 'Instructor':
+                case 'i':
                     setInstructors(instructors.filter((instructor) => instructor.email !== email))
                     break
                 default:

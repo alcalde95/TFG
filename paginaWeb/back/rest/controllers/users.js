@@ -23,6 +23,7 @@ export class UserController {
 
   static getAllUsers = async (req, res) => {
     const { authorization } = req.headers
+    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
     const token = authorization.split(' ')[1]
     const userEmail = jwt.verify(token, SECRET).email
     if (authorized({ token })) {
@@ -91,7 +92,6 @@ export class UserController {
         await UserModel.deleteUser({ email })
         res.send('Deleted')
       } catch (e) {
-        console.log(e)
         res.status(400).send(e.message)
       }
     } else {

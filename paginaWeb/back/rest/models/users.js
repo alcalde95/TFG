@@ -129,28 +129,36 @@ export class UserModel {
 
   static updateUser = async ({ input }) => {
     const { email, password, role } = input
+
+    let newPassword = password
     // se podría hacer con un trigger? Sí, pero me da todo el palo de hacerlo en SQL
     try {
-      const prevRole = await prisma.users.findUnique({
+      const oldUserData = await prisma.users.findUnique({
         where: {
           email
-        },
-        select: {
-          role: true
         }
       })
+
+      if (password !== undefined && password !== oldUserData.password) {
+        newPassword = await bcrypt.hash(password, 10)
+      }
+
+      if (email === oldUserData.email && role === oldUserData.role.toLowerCase() && newPassword === oldUserData.password) {
+        return
+      }
 
       await prisma.users.update({
         where: {
           email
         },
         data: {
-          password,
+          password: newPassword,
           role
         }
       })
-      if (role !== undefined && role.toLowerCase() !== prevRole.role.toLocaleLowerCase()) {
-        switch (prevRole.role.toLowerCase()) {
+
+      if (role !== undefined && role.toLowerCase() !== oldUserData.role.toLocaleLowerCase()) {
+        switch (oldUserData.role.toLowerCase()) {
           case 'c': {
             await prisma.clients.delete({
               where: {

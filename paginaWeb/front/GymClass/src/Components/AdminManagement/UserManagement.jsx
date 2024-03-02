@@ -34,13 +34,34 @@ export const UserManagement = () => {
           {
 
             view
-              ? <form onSubmit={handleAddSubmit} className="flex flex-col items-center md:grid md:grid-cols-3 w-80 md:w-full border-2 border-teal-500 bg-gray-400 m-2 rounded-md gap-4 p-2">
-                <input className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md  m-0" type="text" placeholder="Email" />
-                <input className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md  m-0" type="text" placeholder="Contraseña" />
-                <select className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md m-0">
-                  <option value="A">Administrador</option>
-                  <option value="C">Cliente</option>
-                  <option value="I">Instructor</option>
+              ? <form name="addUserForm"
+                onSubmit={handleAddSubmit}
+                className="flex flex-col items-center md:grid md:grid-cols-3 w-80 md:w-full border-2 border-teal-500 bg-gray-400 m-2 rounded-md gap-4 p-2 shadow-[2px_2px_5px_0px] shadow-gray-800"
+              >
+                <input name="email"
+                  className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md  m-0"
+                  type="text"
+                  placeholder="Email"
+                  autoComplete="email"
+                />
+                <input name="password"
+                  className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md  m-0"
+                  type="text"
+                  placeholder="Contraseña"
+                  autoComplete="new-password"
+                />
+                <select name="userType"
+                  className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md m-0"
+                >
+                  <option value="A">
+                    Administrador
+                  </option>
+                  <option value="C">
+                    Cliente
+                  </option>
+                  <option value="I">
+                    Instructor
+                  </option>
                 </select>
                 {
                   passwordError || emailError ? <p className="md:col-start-2 bg-red-600 text-white p-2 rounded-md m-2">Email o contraseña incorrectos</p> : null
@@ -56,13 +77,13 @@ export const UserManagement = () => {
               ? <p className="text-2xl ">Cargando...</p>
               : <>
                 <h2 className="text-2xl ">Administradores</h2>
-                <Users users={admins} role={'Administrador'} />
+                <Users users={admins} />
 
                 <h2 className="text-2xl ">Clientes</h2>
-                <Users users={clients} role={'Cliente'} />
+                <Users users={clients} />
 
                 <h2 className="text-2xl ">Instructores</h2>
-                <Users users={instructors} role={'Instructor'} />
+                <Users users={instructors} />
               </>
           }
 

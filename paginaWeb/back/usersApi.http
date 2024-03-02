@@ -49,4 +49,4 @@ Content-Type: application/json
 
 ### Delete user
 DELETE http://localhost:1234/users/esUsuario@usuario.user
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5OTIxNjczODYwLCJpYXQiOjE3MDkzMTY4NzN9.54oI7x7D9Lm2EXGixGX0t4rCYqmbS24U20IKewfHmJk
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5OTIxNjczODYwLCJpYXQiOjE3MDkzMTY4NzN9.54oI7x7D9Lm2EXGixGX0t4rCYqmbS24U20IKewfHmJk      
