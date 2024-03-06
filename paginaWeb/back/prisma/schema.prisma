@@ -37,11 +37,13 @@ model Class {
   Photo           Bytes
   Description     String
   Max_Capacity    Int
-  Duration        DateTime
-  instructorEmail String      @unique
+  Duration        Int
+  instructorEmail String
   instuctor       Instructors @relation(fields: [instructorEmail], references: [email], onDelete: Cascade)
   session         Sessions[]
 }
+//cambiar la duración de dataTime a un integer. Hablar de esto con dani
+//revisar la creación de los index, si no se quita el index aquí, peta
 
 model Sessions {
   data_time      DateTime          @unique
