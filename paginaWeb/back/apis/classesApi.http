@@ -1,0 +1,2 @@
+#Recuperación de todas las clases
+GET http://localhost:1234/classes
