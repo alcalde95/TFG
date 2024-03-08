@@ -4,7 +4,9 @@ import { RouterProvider } from "react-router-dom"
 import { Login } from "./Components/Login"
 import { Register } from "./Components/Register"
 import { UserContextProvider } from "./Contexts/UserContext"
-import { UserManagement } from "./Components/AdminManagement/UserManagement"
+import { UsersManagement } from "./Components/AdminManagement/UsersManagement"
+import { AdminPage } from "./Components/AdminManagement/AdminPage"
+import { ClassesManagement } from "./Components/AdminManagement/ClassesManagement"
 
 function App() {
 
@@ -22,8 +24,20 @@ function App() {
       element: <Register />
     },
     {
-      path: "userManagement",
-      element: <UserManagement />
+      path: "/admin",
+      element: <AdminPage />
+    },
+    {
+      path: "/usersManagement",
+      element: <UsersManagement />
+    },
+    {
+      path: "/classesManagement",
+      element: <ClassesManagement />
+    },
+    {
+      path: "*",
+      element: <h1 className="w-screen h-screen bg-slate-500 font-bold text-4xl flex items-center justify-center">🚧IN DEVELOPEMENT🚧</h1> //TODO
     }
   ])
 
