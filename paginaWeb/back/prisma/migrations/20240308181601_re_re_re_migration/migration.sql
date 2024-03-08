@@ -24,14 +24,13 @@ CREATE TABLE `Instructors` (
 -- CreateTable
 CREATE TABLE `Class` (
     `UUID_Class` VARCHAR(191) NOT NULL,
-    `Name` VARCHAR(191) NOT NULL,
-    `Photo` LONGBLOB NOT NULL,
-    `Description` VARCHAR(191) NOT NULL,
-    `Max_Capacity` INTEGER NOT NULL,
-    `Duration` DATETIME(3) NOT NULL,
+    `name` VARCHAR(191) NOT NULL,
+    `photo` LONGBLOB NOT NULL,
+    `description` VARCHAR(191) NOT NULL,
+    `max_Capacity` INTEGER NOT NULL,
+    `duration` INTEGER NOT NULL,
     `instructorEmail` VARCHAR(191) NOT NULL,
 
-    UNIQUE INDEX `Class_instructorEmail_key`(`instructorEmail`),
     PRIMARY KEY (`UUID_Class`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -50,8 +49,8 @@ CREATE TABLE `Sessions_Client` (
     `client_Email` VARCHAR(191) NOT NULL,
     `data_time` DATETIME(3) NOT NULL,
     `UUID_Class` VARCHAR(191) NOT NULL,
-    `Attend` BOOLEAN NOT NULL,
-    `Justified` BOOLEAN NOT NULL,
+    `attend` BOOLEAN NOT NULL,
+    `justified` BOOLEAN NOT NULL,
 
     UNIQUE INDEX `Sessions_Client_data_time_key`(`data_time`),
     UNIQUE INDEX `Sessions_Client_UUID_Class_key`(`UUID_Class`),
@@ -59,7 +58,7 @@ CREATE TABLE `Sessions_Client` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `Clients` ADD CONSTRAINT `Clients_email_fkey` FOREIGN KEY (`email`) REFERENCES `Users`(`email`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Clients` ADD CONSTRAINT `Clients_email_fkey` FOREIGN KEY (`email`) REFERENCES `Users`(`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Instructors` ADD CONSTRAINT `Instructors_email_fkey` FOREIGN KEY (`email`) REFERENCES `Users`(`email`) ON DELETE CASCADE ON UPDATE CASCADE;

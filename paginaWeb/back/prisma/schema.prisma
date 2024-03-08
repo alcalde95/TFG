@@ -32,17 +32,17 @@ model Instructors {
 }
 
 model Class {
-  UUID_Class      String      @id
-  Name            String
-  Photo           Bytes
-  Description     String
-  Max_Capacity    Int
-  Duration        Int
+  UUID_Class      String      @id @default(uuid())
+  name            String
+  photo           Bytes
+  description     String
+  max_Capacity    Int
+  duration        Int
   instructorEmail String
   instuctor       Instructors @relation(fields: [instructorEmail], references: [email], onDelete: Cascade)
   session         Sessions[]
 }
-//cambiar la duración de dataTime a un integer. Hablar de esto con dani
+
 //revisar la creación de los index, si no se quita el index aquí, peta
 
 model Sessions {
@@ -60,8 +60,8 @@ model Sessions_Client {
   data_time    DateTime @unique
   UUID_Class   String   @unique
   session      Sessions @relation(fields: [data_time, UUID_Class], references: [data_time, UUID_Class])
-  Attend       Boolean
-  Justified    Boolean
+  attend       Boolean
+  justified    Boolean
 
   @@id([client_Email, data_time, UUID_Class])
 }
