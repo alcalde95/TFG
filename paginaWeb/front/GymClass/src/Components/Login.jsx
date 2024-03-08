@@ -18,7 +18,7 @@ export const Login = () => {
 
             switch (role.toLowerCase()) {
                 case 'a':
-                    navigate('/userManagement')
+                    navigate('/admin')
                     break;
                 case 'c':
                     //navigate('/client')

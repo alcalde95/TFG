@@ -3,7 +3,7 @@ import { Users } from "./Users"
 import { useUserManagement } from "../../hooks/useUserManagement"
 import useUser from "../../hooks/useUser"
 
-export const UserManagement = () => {
+export const UsersManagement = () => {
 
   const { admins, clients, instructors, loading, view, setView, } = useUserManagement()
 
