@@ -1,0 +1,81 @@
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "instructor@instructor.instructor",
+    "password": "instructor123",
+    "role": "I"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "instructor2@instructor.instructor",
+    "password": "instructor123",
+    "role": "I"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "instructor3@instructor.instructor",
+    "password": "instructor123",
+    "role": "I"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "admin@admin.admin",
+    "password": "admin123",
+    "role": "A"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "admin2@admin.admin",
+    "password": "admin123",
+    "role": "A"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "admin3@admin.admin",
+    "password": "admin123",
+    "role": "A"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "client@client.client",
+    "password": "client123",
+    "role": "C"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "client2@client.client",
+    "password": "client123",
+    "role": "C"
+}
+#### Register
+POST http://localhost:1234/users/
+Content-Type: application/json
+
+{
+    "email": "client3@client.client",
+    "password": "client123",
+    "role": "C"
+}
