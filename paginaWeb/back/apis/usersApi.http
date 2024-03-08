@@ -44,7 +44,7 @@ Content-Type: application/json
 
 {
     "email": "instructor@instructor.instructor",
-    "role": "i"
+    "role": "I"
 }
 
 ### Delete user
