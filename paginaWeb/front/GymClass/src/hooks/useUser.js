@@ -4,8 +4,7 @@ import { UserContext } from "../Contexts/UserContext"
 import { loginService } from "../Services/loginService"
 import { registerService } from "../Services/registerService"
 
-import { emailValidation, passwordValidation, roleValidation } from "../Validations"
-import { updateUserService } from "../Services/adminService"
+import { emailValidation, passwordValidation} from "../Validations"
 
 const useUser = () => {
     const { jwt, setJWT, setRole, setEmail } = useContext(UserContext)
@@ -13,7 +12,6 @@ const useUser = () => {
     const [state, setState] = useState({ loading: false, error: false })
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
-    const [roleError, setRoleError] = useState(false)
 
     const login = useCallback(async ({ email, password }) => {
         try {
@@ -86,44 +84,7 @@ const useUser = () => {
     }, [setJWT, setRole, setEmail])
 
 
-    const editUser = async ({ email, password, role }) => {
-
-        const passwordValidationResult = passwordValidation({ password })
-        const roleValidationResult = roleValidation({ role: role.toLowerCase() })
-        console.log(roleValidationResult)
-        let error = false
-
-        if (!passwordValidationResult) {
-            setPasswordError(true)
-            console.log('No valid password')
-            error = true
-        }
-        else {
-            setPasswordError(false)
-        }
-        if (!roleValidationResult) {
-            setRoleError(true)
-            error = true
-        }
-        else {
-            setPasswordError(false)
-        }
-
-        if (error) {
-            setState({ loading: false, error: true })
-            return false
-        }
-
-
-        try {
-
-            await updateUserService({ email, password, role, jwt })
-            return true
-
-        } catch (error) {
-            setState({ loading: false, error: true })
-        }
-    }
+    
 
     const resetErrors = () => {
         setEmailError(false)
@@ -135,11 +96,9 @@ const useUser = () => {
         login,
         logout,
         register,
-        editUser,
         state,
         emailError,
         passwordError,
-        roleError,
         resetErrors,
     }
 }
