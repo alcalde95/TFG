@@ -16,7 +16,6 @@ export class ClassesModel {
     const { name, photo, description, maxCapacity, duration, instructorEmail } = input
     const UUIDClass = uuidv4()
     try {
-
       console.log(name, photo, description, maxCapacity, duration, instructorEmail, UUIDClass)
 
       await prisma.class.create({

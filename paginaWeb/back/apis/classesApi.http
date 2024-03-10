@@ -1,5 +1,5 @@
 ###Recuperación de todas las clases
-GET http://localhost:1234/classes
+GET http://localhost:1234/classes/
 
 ###Creación de una clase
 POST http://localhost:1234/classes
