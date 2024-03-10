@@ -7,6 +7,8 @@ import { UserContextProvider } from "./Contexts/UserContext"
 import { UsersManagement } from "./Components/AdminManagement/UsersManagement"
 import { AdminPage } from "./Components/AdminManagement/AdminPage"
 import { ClassesManagement } from "./Components/AdminManagement/ClassesManagement"
+import { AdminUsersContextProvider } from "./Contexts/AdminUsersContext"
+import { ClassesContextProvider } from "./Contexts/ClassesContext"
 
 function App() {
 
@@ -44,7 +46,11 @@ function App() {
   return (
     <div className="box-content min-w-full  min-h-screen bg-slate-700 flex flex-col content-center items-center p-0 m-0 text-black font-mono">
       <UserContextProvider>
-        <RouterProvider router={router} />
+        <ClassesContextProvider>
+          <AdminUsersContextProvider>
+            <RouterProvider router={router} />
+          </AdminUsersContextProvider>
+        </ClassesContextProvider>
       </UserContextProvider>
 
     </div>
