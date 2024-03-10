@@ -2,10 +2,19 @@ import { Header } from "../Header"
 import { Users } from "./Users"
 import { useUserManagement } from "../../hooks/useUserManagement"
 import useUser from "../../hooks/useUser"
+import { useContext, useEffect } from "react"
+import { AdminUsersContext } from "../../Contexts/AdminUsersContext"
 
 export const UsersManagement = () => {
 
-  const { admins, clients, instructors, loading, view, setView, } = useUserManagement()
+  const { loading, view, setView, getUsers } = useUserManagement()
+  const { admins, clients, instructors } = useContext(AdminUsersContext)
+
+  useEffect(() => {
+    //console.log(admins, clients, instructors)
+    getUsers()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
 
   const { register, emailError, passwordError, resetErrors } = useUser()

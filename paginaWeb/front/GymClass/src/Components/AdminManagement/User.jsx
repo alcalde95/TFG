@@ -1,13 +1,11 @@
 import { useState } from "react"
 import { useUserManagement } from "../../hooks/useUserManagement"
-import useUser from "../../hooks/useUser"
+
 
 export const User = ({ user }) => {
 
-    const { deleteUser } = useUserManagement()
-    const { editUser } = useUser()
+    const { deleteUser,editUser } = useUserManagement()
     const [showEdit, setShowEdit] = useState(false)
-
     const [userEditError, setUserEditError] = useState(false)
 
     const handleSubmit = async ({ e, email, defaultPassword, defaultRole }) => {
@@ -23,7 +21,6 @@ export const User = ({ user }) => {
         }
         try {
             const res = await editUser({ email, password, role })
-            console.log(res, 'res')
             if (res) {
                 setUserEditError(false)
                 setShowEdit(false)
