@@ -1,4 +1,4 @@
-const ENDPOINT = ' http://localhost:1234'
+import { ENDPOINT } from "./settings"
 
 export const loginService = async ({ email, password }) => {
 
