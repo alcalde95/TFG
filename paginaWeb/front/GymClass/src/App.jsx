@@ -9,6 +9,8 @@ import { AdminPage } from "./Components/AdminManagement/AdminPage"
 import { ClassesManagement } from "./Components/AdminManagement/ClassesManagement"
 import { AdminUsersContextProvider } from "./Contexts/AdminUsersContext"
 import { ClassesContextProvider } from "./Contexts/ClassesContext"
+import { ErrorPage } from "./Components/ErrorPage"
+import { SessionsManagement } from "./Components/AdminManagement/SessionsManagement"
 
 function App() {
 
@@ -30,16 +32,20 @@ function App() {
       element: <AdminPage />
     },
     {
-      path: "/usersManagement",
+      path: "/admin/usersManagement",
       element: <UsersManagement />
     },
     {
-      path: "/classesManagement",
+      path: "/admin/classesManagement",
       element: <ClassesManagement />
     },
     {
+      path: "/admin/classesManagement/:classId",
+      element: <SessionsManagement />
+    },
+    {
       path: "*",
-      element: <h1 className="w-screen h-screen bg-slate-500 font-bold text-4xl flex items-center justify-center">🚧IN DEVELOPEMENT🚧</h1> //TODO
+      element: <ErrorPage />
     }
   ])
 
