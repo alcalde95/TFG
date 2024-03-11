@@ -4,7 +4,6 @@ GET http://localhost:1234/classes/
 ###Creación de una clase
 POST http://localhost:1234/classes
 Content-Type: application/json
-
 {
   "name": "Clase 3",
   "photo": "lkjhgfdslkjhgfds",
@@ -14,3 +13,6 @@ Content-Type: application/json
   "instructorEmail": "instructor@instructor.instructor"
 }
 ###hablar con dani sobre si se debería poder crear clases teniendo mismo nombre y mismo instructor
+
+###Recuperación de una clase
+GET http://localhost:1234/classes/3e1b04a6-7eaa-43d0-aa17-59c1a6902358
