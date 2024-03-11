@@ -13,11 +13,11 @@ export const useClasses = () => {
             const classes = await classesService()
             setClasses(classes)
             setLoading(false)
-            console.log('classes:', classes)
         } catch (error) {
             console.log(error)
         }
-    },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return {
         loading,
