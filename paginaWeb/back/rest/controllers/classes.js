@@ -1,8 +1,5 @@
 import { ClassesModel } from '../models/classes.js'
 import { validateClass } from '../schemas/class.js'
-import { authorized } from '../../utilFunctions.js'
-import jwt from 'jsonwebtoken'
-import { SECRET } from '../../index.js'
 
 export class ClassesController {
   static getClasses = async (_, res) => {
@@ -11,6 +8,16 @@ export class ClassesController {
 
       const classes = await ClassesModel.getClasses()
       res.json(classes)
+    } catch (error) {
+      res.status(500).send(error.message)
+    }
+  }
+
+  static getClass = async (req, res) => {
+    const { classId } = req.params
+    try {
+      const classData = await ClassesModel.getClass({ classId })
+      res.json(classData)
     } catch (error) {
       res.status(500).send(error.message)
     }

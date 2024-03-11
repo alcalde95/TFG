@@ -12,6 +12,19 @@ export class ClassesModel {
     }
   }
 
+  static getClass = async ({ classId }) => {
+    try {
+      const classData = await prisma.class.findUnique({
+        where: {
+          UUID_Class: classId
+        }
+      })
+      return classData
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
   static create = async ({ input }) => {
     const { name, photo, description, maxCapacity, duration, instructorEmail } = input
     const UUIDClass = uuidv4()
