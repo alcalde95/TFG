@@ -16,13 +16,9 @@ export const useUserManagement = () => {
     //TODO: pedir x separado administradores,... y no todos juntos
     //TODO: GESTIONAR ERRORES
     const getUsers = useCallback(async () => {
-        // if (jwt === null) {
-        //     navigate('/login')
 
-        // }
-        if (firstRender.current === true) { console.log('firstRender') }
         if (JSON.stringify(previousData.current.admins) === JSON.stringify(admins) && previousData.current.clients === clients && previousData.current.instructors === instructors && !firstRender.current) {
-            
+
             return
         }
         setLoading(true)
@@ -35,7 +31,8 @@ export const useUserManagement = () => {
 
         if (firstRender.current === true) firstRender.current = false
 
-    }, [admins,clients,instructors])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [admins, clients, instructors])
 
 
     const editUser = async ({ email, password, role }) => {
