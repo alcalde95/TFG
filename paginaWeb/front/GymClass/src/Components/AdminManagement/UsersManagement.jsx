@@ -25,6 +25,7 @@ export const UsersManagement = () => {
     const password = e.target[1].value
     const role = e.target[2].value
     const res = await register({ email, password, role })
+    getUsers()
     if (res) {
       setView(false)
     }
