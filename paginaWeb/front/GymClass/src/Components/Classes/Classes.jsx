@@ -18,10 +18,10 @@ const NoClasses = () => {
 }
 
 export const Classes = ({ classes, editable }) => {
-    const hasUsers = classes?.length > 0
+    const hasClasses = classes?.length > 0
     return (
 
-        hasUsers
+        hasClasses
             ? <ListOfClasses classes={classes} editable={editable} />
             : <NoClasses  />
 
