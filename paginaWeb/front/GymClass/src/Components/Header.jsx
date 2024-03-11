@@ -12,6 +12,7 @@ export const Header = () => {
     useEffect(() => { 
         if(!isLogged && location.pathname !== '/') navigate('/login')
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [role, isLogged])
 
     return (
