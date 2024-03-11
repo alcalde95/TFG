@@ -43,11 +43,11 @@ model Class {
   session         Sessions[]
 }
 
-//revisar la creación de los index, si no se quita el index aquí, peta
 
+//REVISAR PQ ME CREA UN ÍNDICE EN UUID_Class HABLAR CON DANI
 model Sessions {
   data_time      DateTime          @unique
-  UUID_Class     String            @unique
+  UUID_Class     String            
   class          Class             @relation(fields: [UUID_Class], references: [UUID_Class])
   session_client Sessions_Client[]
 
