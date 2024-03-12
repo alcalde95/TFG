@@ -4,7 +4,7 @@ import { Session } from "./Session"
 const ListOfClasses = ({ sessions }) => {
     
     return (
-        <ul className="grid grid-cols-1 sm:grid-cols-2  gap-4 p-2 w-full justify-between ">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-4 p-2 w-full place-items-center">
             {
                 sessions.map((session) => (<Session key={session.data_time} session={session} />))
             }
