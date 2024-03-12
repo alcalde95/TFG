@@ -4,6 +4,7 @@ import { sessionsService } from "../../Services/sessionsService"
 import { Header } from "../Header"
 import { Sessions } from "../Sessions"
 import { classService } from "../../Services/classService"
+import { ClassHeaderInfo } from "../Classes/ClassHeaderInfo"
 
 export const SessionsManagement = () => {
   const [sessions, setSessions] = useState([])
@@ -42,20 +43,12 @@ export const SessionsManagement = () => {
       <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
 
         {
-          headerClass
-          && <div className="grid grid-cols-5 md:grid-cols-8 justify-between w-full flex-wrap gap-2">
-            <img src="https://cataas.com/cat/says/hello" className="aspect-square w-max rounded-lg  border-2 border-black row-span-3 md:row-span-2"></img>
-            <h1 className="col-span-2">{headerClass.name}</h1>
-            <p className="col-span-2">Duración:{headerClass.duration}</p>
-            <p className="col-span-2">Capacidad máxima:{headerClass.max_Capacity}</p>
-            <textarea defaultValue={headerClass.description} className="col-span-2"/>
-            <p className="col-span-2">{headerClass.instructorEmail}</p>
-          </div>
+          headerClass && <ClassHeaderInfo headerClass={headerClass}/> 
 
         }
       </section>
       <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
-        <h1 className="text-4xl m-2">Sessions</h1>
+        <h1 className="text-4xl m-2">Sesiones</h1>
 
         {
           sessions && <Sessions sessions={sessions} />
