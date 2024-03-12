@@ -19,7 +19,7 @@ export const Class = ({ c, editable }) => {
 
     return (
         <>
-            <div className="flex flex-col items-center border-2 border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 transition-all duration-300 ease-in-out hover:text-white">
+            <div className="flex flex-col items-center border-2 w-10/12 border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-200 ease-in-out ">
                 <h1 className="font-bold text-3xl m-2 underline active:text-black hover:text-teal-500 transition-all duration-300 ease-in-out"
                     onClick={handleClick}>{c.name}</h1>
                 <img src="https://cataas.com/cat/says/hello" className="aspect-square w-11/12 lg:w-96 rounded-lg rounded-b-none border-2 border-b-0"></img>
@@ -32,7 +32,7 @@ export const Class = ({ c, editable }) => {
                         data-tooltip-id={c.UUID_Class + c.instructorEmail}>
                         {c.instructorEmail}
                     </p>
-                    <div className="flex flex-row w-full justify-around">
+                    <div className="flex flex-col md:flex-row w-full justify-around">
                         <p>Duración:{c.duration}&apos;</p>
                         <p>Aforo máximo:{c.max_Capacity}</p>
                     </div>

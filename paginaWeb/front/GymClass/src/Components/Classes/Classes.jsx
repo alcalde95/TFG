@@ -3,7 +3,7 @@ import { Class } from "./Class"
 const ListOfClasses = ({ classes, editable }) => {
     
     return (
-        <ul className="grid grid-cols-1 sm:grid-cols-2  gap-4 p-2 w-full justify-between ">
+        <ul className="grid grid-cols-1 sm:grid-cols-2  gap-4 p-2 w-full place-items-center ">
             {
                 classes.map((c) => (<Class key={c.UUID_Class} c={c} editable={editable} />))
             }
