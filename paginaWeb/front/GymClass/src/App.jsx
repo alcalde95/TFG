@@ -11,6 +11,7 @@ import { AdminUsersContextProvider } from "./Contexts/AdminUsersContext"
 import { ClassesContextProvider } from "./Contexts/ClassesContext"
 import { ErrorPage } from "./Components/ErrorPage"
 import { SessionsManagement } from "./Components/AdminManagement/SessionsManagement"
+import { InstructorPage } from "./Components/InstructorPage"
 
 function App() {
 
@@ -42,6 +43,10 @@ function App() {
     {
       path: "/admin/classesManagement/:classId",
       element: <SessionsManagement />
+    },
+    {
+      path: "/instructor",
+      element: <InstructorPage />
     },
     {
       path: "*",
