@@ -1,9 +1,9 @@
-import { UserModel } from '../models/users.js'
-import { authorized } from '../../utilFunctions.js'
+import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { SECRET } from '../../index.js'
-import bcrypt from 'bcrypt'
+import { UserModel } from '../models/users.js'
 import { partialValidateUser, validateUser } from '../schemas/user.js'
+import { authorized } from '../../utilFunctions.js'
 export class UserController {
   static getUsers = async (req, res) => {
     try {
