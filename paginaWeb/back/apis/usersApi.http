@@ -23,8 +23,8 @@ POST http://localhost:1234/users/login
 Content-Type: application/json
 
 {
-    "email": "admin@admin.admin"    ,
-    "password": "admin123"
+    "email": "instructor@instructor.instructor"    ,
+    "password": "instructor123"
 }
 
 #### Register
