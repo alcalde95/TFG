@@ -26,7 +26,7 @@ export const Login = () => {
                     break;
                 case 'i':
                     //navigate('/instructor')
-                    navigate('/')
+                    navigate('/instructor')
                     break;
                 default:
                     navigate('/');
