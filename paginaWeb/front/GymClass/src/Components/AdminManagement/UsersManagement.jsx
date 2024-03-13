@@ -11,7 +11,6 @@ export const UsersManagement = () => {
   const { admins, clients, instructors } = useContext(AdminUsersContext)
 
   useEffect(() => {
-    //console.log(admins, clients, instructors)
     getUsers()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
