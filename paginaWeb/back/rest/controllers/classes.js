@@ -44,7 +44,7 @@ export class ClassesController {
     const input = req.body
     const validatedData = validateClass({ input })
 
-    if (validatedData.error) return res.status(400).send(validatedData.error.message)
+    if (validatedData.error) return res.status(400).send(validatedData.error)
 
     try {
       await ClassesModel.create({ input })

@@ -47,6 +47,9 @@ function App() {
     {
       path: "/instructor",
       element: <InstructorPage />
+    },{
+      path: "/instructor/:classId",
+      element: <SessionsManagement />
     },
     {
       path: "*",

@@ -8,7 +8,7 @@ GET http://localhost:1234/classes/3e1b04a6-7eaa-43d0-aa17-59c1a6902358
 GET http://localhost:1234/classes/instructor/
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEwOTE1NzA1NDM3LCJpYXQiOjE3MTAzMTA5MDV9.Xf7eLki6TVgGxBo9PZazdvWiRVzNiUrSodqp2mruSY8
 ###Creación de una clase
-POST http://localhost:1234/classes
+POST http://localhost:1234/classes/
 Content-Type: application/json
 
 {

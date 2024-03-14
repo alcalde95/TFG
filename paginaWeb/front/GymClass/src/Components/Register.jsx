@@ -27,7 +27,7 @@ export const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const form = event.target
+        const form = e.target
         const data = new FormData(form)
         const email = data.get("Email")
         const password = data.get("Contraseña")
