@@ -8,17 +8,53 @@ export const InstructorPage = () => {
   const [classes, setClasses] = useState([])
   const [ver, setVer] = useState(false)
   const { jwt, email } = useContext(UserContext)
-
   const getClasses = async () => {
-
     const res = await classesInstructorService({ jwt })
     setClasses(res)
   }
 
   useEffect(() => {
     getClasses()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // const convertFile = async ({photo}) => {
+  //   const preview = document.querySelector("img");
+  //   const file = document.querySelector("input[type=file]").files[0];
+  //   const reader = new FileReader();
+  //   console.log(file)
+  //   reader.addEventListener(
+  //     "load",
+  //     function () {
+  //       console.log(reader.result)
+  //       // convierte la imagen a una cadena en base64
+  //       preview.src = reader.result;
+  //     },
+  //     false,
+  //   );
+  //   //srcImage
+  //   if (file) {
+  //     await reader.readAsDataURL(file);
+  //     console.log(reader)
+  //   }
+  // }
+  const convertFile = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = function () {
+            resolve(reader.result);
+        };
+
+        reader.onerror = function (error) {
+            reject(error);
+        };
+
+        // Leer el archivo como una URL de datos (data URL) en base64
+        reader.readAsDataURL(file);
+    });
+};
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -26,7 +62,8 @@ export const InstructorPage = () => {
     const data = new FormData(form)
     const name = data.get("Nombre")
     const description = data.get("Descripcion")
-    const photo = btoa(data.get("Imagen"))
+    const inputPhoto = data.get("photo")
+    const photo = (await convertFile(inputPhoto)).split(",")[1]
     const duration = parseInt(data.get("Duración"))
     const maxCapacity = parseInt(data.get("Capacidad"))
     const res = await createClassService({ name, photo, description, maxCapacity, duration, instructorEmail: email })
@@ -45,7 +82,8 @@ export const InstructorPage = () => {
             ? <form className="w-full gap-2 flex flex-col" onSubmit={handleSubmit}>
               <InputMovinTitle name="Nombre" type="text" />
               <InputMovinTitle name="Descripcion" type="textarea" />
-              <InputMovinTitle name="Imagen" type="file" />
+              <input type="file" name="photo" accept="image/*" onChange={null} />
+              <img src="" height="200" alt="Image preview..." />
               <InputMovinTitle name="Duración" type="number" />
               <InputMovinTitle name="Capacidad" type="text" />
               <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">Crear</button>
