@@ -4,11 +4,12 @@ import { useUserManagement } from "../../hooks/useUserManagement"
 import useUser from "../../hooks/useUser"
 import { useContext, useEffect } from "react"
 import { AdminUsersContext } from "../../Contexts/AdminUsersContext"
+import { Link } from "react-router-dom"
 
 export const UsersManagement = () => {
 
   const { loading, view, setView, getUsers } = useUserManagement()
-  const { admins, clients, instructors } = useContext(AdminUsersContext)
+  const { admins, instructors } = useContext(AdminUsersContext)
 
   useEffect(() => {
     getUsers()
@@ -89,8 +90,8 @@ export const UsersManagement = () => {
                 <Users users={admins} />
 
                 <h2 className="text-2xl ">Clientes</h2>
-                <Users users={clients} />
 
+                <Link to="/admin/usersManagement/clients" className="bg-teal-500 m-1 max-w-96 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500 text-center" > Ir a la lista de clientes</Link>
                 <h2 className="text-2xl ">Instructores</h2>
                 <Users users={instructors} />
               </>
