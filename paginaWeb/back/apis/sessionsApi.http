@@ -1,2 +1,3 @@
 ###Get all sessions for a class
 GET http://localhost:1234/sessions/3e1b04a6-7eaa-43d0-aa17-59c1a6902358
+###meter logueo
