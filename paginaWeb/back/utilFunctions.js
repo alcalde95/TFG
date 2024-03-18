@@ -20,3 +20,17 @@ export const generateToken = ({ email }) => {
   }, SECRET)
   return { token }
 }
+
+export const convertClassesPhoto = ({ classes }) => {
+  return classes.map((classData) => {
+    let { photo } = classData
+    photo = 'data:image/jpeg;base64,' + Buffer.from(photo).toString('base64')
+    return { ...classData, photo }
+  })
+}
+
+export const convertSingleClassesPhoto = ({ c }) => {
+  let { photo } = c
+  photo = 'data:image/jpeg;base64,' + Buffer.from(photo).toString('base64')
+  return { ...c, photo }
+}
