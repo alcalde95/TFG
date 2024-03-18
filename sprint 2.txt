@@ -1,0 +1,31 @@
+clientes componente a parte en una tabla
+
+administrador no edita. Hace lo q el instructor no puede
+
+
+sólo el instructor que imparta la clase podrá justificar
+
+instructor -> coordinador crea las clases indicando quién lo crea y quien lo impoarte
+
+el administrador puede indicar quién coordina la clase
+
+sesiones -> 1 por cada día ordenadas por horas. Crear herramienta para duplicar semanas o días.
+Buscar componente calendario
+
+Quitar descripción de las tarjetas de clase
+
+Inscrito a la sesiones, no a las clases.
+
+Mostrar instructores is estás logueado
+
+Pensar en algo más cercano a la clientela real. Si verificar x el administrador. X ejemplo, un parámetro llamado confirmado q sea gestionado por el admin y si no estás confirmado no puedes inscribirte
+
+
+Imagen: guardar en la bbdd como asDataUrl <- esto función del front
+
+<img src="data:image/gif;base64,R0lGODlhyAAiALM...DfD0QAADs=" />
+
+FileReader.readAsDataURL()
+eso lo recupero dp y lo meto en el front-end
+
+devolver con "data:image;... para así poner el src
