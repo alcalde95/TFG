@@ -1,12 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 import { v4 as uuidv4 } from 'uuid'
+import { convertClassesPhoto, convertSingleClassesPhoto } from '../../utilFunctions.js'
 
 const prisma = new PrismaClient()
+
 export class ClassesModel {
   static getClasses = async () => {
     try {
       const classes = await prisma.class.findMany()
-      return classes
+      return convertClassesPhoto({ classes })
     } catch (e) {
       throw new Error(e.message)
     }
@@ -19,7 +21,7 @@ export class ClassesModel {
           UUID_Class: classId
         }
       })
-      return classData
+      return convertSingleClassesPhoto({ c: classData })
     } catch (e) {
       throw new Error(e.message)
     }
@@ -32,7 +34,7 @@ export class ClassesModel {
           instructorEmail
         }
       })
-      return classesData
+      return convertClassesPhoto({ classes: classesData })
     } catch (e) {
       throw new Error(e.message)
     }
@@ -42,8 +44,6 @@ export class ClassesModel {
     const { name, photo, description, maxCapacity, duration, instructorEmail } = input
     const UUIDClass = uuidv4()
     try {
-      console.log(name, photo, description, maxCapacity, duration, instructorEmail, UUIDClass)
-
       await prisma.class.create({
         data: {
           UUID_Class: UUIDClass,
@@ -56,7 +56,6 @@ export class ClassesModel {
         }
       })
     } catch (e) {
-      console.log(e.message)
       throw new Error(e.message)
     }
   }
