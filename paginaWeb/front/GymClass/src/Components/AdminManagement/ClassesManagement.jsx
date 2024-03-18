@@ -26,7 +26,7 @@ export const ClassesManagement = () => {
           {
             loading
               ? <p className="text-2xl ">Cargando...</p>
-              : <Classes classes={classes} editable={true} />
+              : <Classes classes={classes} editable={false} />
 
           }
         </div>
