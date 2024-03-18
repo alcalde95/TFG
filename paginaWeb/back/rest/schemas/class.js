@@ -2,7 +2,7 @@ import z from 'zod'
 
 const classSchema = z.object({
   name: z.string().min(3),
-  photo: z.any().optional(),
+  photo: z.string(),
   description: z.string().min(3),
   maxCapacity: z.number().int().positive(),
   duration: z.number().int().positive(),
