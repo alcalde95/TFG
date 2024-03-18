@@ -2,7 +2,7 @@
 GET http://localhost:1234/classes/
 
 ###Recuperación de una clase
-GET http://localhost:1234/classes/3e1b04a6-7eaa-43d0-aa17-59c1a6902358
+GET http://localhost:1234/classes/0d5e5cb7-6efc-4fce-af04-322255e80e13
 
 ###Recuperación de todas las clases de un instructor
 GET http://localhost:1234/classes/instructor/
