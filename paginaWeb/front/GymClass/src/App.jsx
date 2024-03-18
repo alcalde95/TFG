@@ -12,6 +12,7 @@ import { ClassesContextProvider } from "./Contexts/ClassesContext"
 import { ErrorPage } from "./Components/ErrorPage"
 import { SessionsManagement } from "./Components/AdminManagement/SessionsManagement"
 import { InstructorPage } from "./Components/InstructorPage"
+import { ClientsManagement } from "./Components/AdminManagement/ClientsManagement"
 
 function App() {
 
@@ -35,6 +36,10 @@ function App() {
     {
       path: "/admin/usersManagement",
       element: <UsersManagement />
+    },
+    {
+      path: "/admin/usersManagement/clients",
+      element: <ClientsManagement />
     },
     {
       path: "/admin/classesManagement",
