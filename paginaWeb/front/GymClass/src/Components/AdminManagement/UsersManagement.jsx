@@ -10,14 +10,13 @@ export const UsersManagement = () => {
 
   const { loading, view, setView, getUsers } = useUserManagement()
   const { admins, instructors } = useContext(AdminUsersContext)
+  const { register, emailError, passwordError, resetErrors } = useUser()
 
   useEffect(() => {
     getUsers()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-
-  const { register, emailError, passwordError, resetErrors } = useUser()
 
   const handleAddSubmit = async (e) => {
     e.preventDefault()
