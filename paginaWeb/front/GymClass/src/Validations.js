@@ -11,3 +11,45 @@ export const roleValidation = ({ role }) => {
     const regExp = /^[a|c|i]$/
     return regExp.test(role.toLowerCase())
 }
+
+export const classNameValidation = ({ name }) => {
+    
+    if (name.length < 3) {
+        return "El nombre debe tener al menos una longitud de 3 caracteres"
+    }
+
+    return ""
+}
+
+export const classDescriptionValidation = ({ description }) => {
+
+    if (description.length < 20) {
+        return "La descripción debe tener al menos una longitud de 20 caracteres"
+    }
+    return ""
+}
+
+export const classMaxCapacityValidation = ({ maxCapacity }) => {
+
+    if (maxCapacity <= 0) {
+        return "Al menos se debe aceptar a 1 usuario"
+    }
+
+    if (typeof maxCapacity !== "number") {
+        return "La capacidad debe ser un número"
+    }
+
+    return ""
+}
+
+export const classDurationValidation = ({ duration }) => {
+
+    if (duration <= 0) {
+        return "La duración debe ser mayor a 0"
+    }
+    if (typeof duration !== "number") {
+        return "La duración debe ser un número"
+    }
+
+    return ""
+}
