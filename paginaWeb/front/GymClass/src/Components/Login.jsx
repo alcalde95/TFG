@@ -49,8 +49,9 @@ export const Login = () => {
 
             //alert(res.role, res.jwt)
         } catch (error) {
-            console.error(error)
+            console.log(error)
         }
+        //TODO MEJORAR ESTO
     }
 
     return (
