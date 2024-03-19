@@ -59,10 +59,30 @@ export class UserModel {
     return { admins, clients, instructors }
   }
 
-  static findById = async ({ id }) => {
-    return id
+  static getAllInstructors = async ({ userEmail }) => {
+    // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
+    const role = await prisma.users.findUnique({
+      where: {
+        email: userEmail
+      },
+      select: {
+        role: true
+      }
+    })
+
+    if (!['a', 'i'].includes(role.role.toLowerCase())) {
+      throw new Error('Unauthorized')
+    }
+    const instructors = await prisma.users.findMany({
+      where: {
+        role: { in: ['I', 'i'] }
+      }
+    })
+    console.log(instructors)
+    return instructors
   }
 
+  ç
   static login = async ({ input }) => {
     try {
       const { email, password } = input
