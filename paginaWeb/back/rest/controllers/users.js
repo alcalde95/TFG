@@ -34,10 +34,21 @@ export class UserController {
     }
   }
 
-  static findById = async (req, res) => {
-    const { id } = req.params
-    const resp = await UserModel.findById({ id })
-    res.send(resp)
+  static getAllInstructors = async (req, res) => {
+    const { authorization } = req.headers
+    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
+    const token = authorization.split(' ')[1]
+    const userEmail = jwt.verify(token, SECRET).email
+    if (authorized({ token })) {
+      try {
+        const instructors = await UserModel.getAllInstructors({ userEmail })
+        res.json(instructors)
+      } catch (e) {
+        res.status(401).send(e.message)
+      }
+    } else {
+      res.status(401).send('Unauthorized')
+    }
   }
 
   static login = async (req, res) => {
