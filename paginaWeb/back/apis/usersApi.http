@@ -9,24 +9,19 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSmF2aUluVX
 
 #### Get all users
 GET http://localhost:1234/users
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzEwNjA0NjY2Njc2LCJpYXQiOjE3MDk5OTk4NjZ9.TeOzNkHCutp8Y0LDmPXZuiwAj8FGhCGatPFHYdc2YiY
-
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzExNDY5NzA5NDQxLCJpYXQiOjE3MTA4NjQ5MDl9.OMlFgRBnpVnEajDpLY41LK55JJWVJqlYXGA3e-n19BU
 ### Get all admins,clients and instructors 
 GET http://localhost:1234/users/all
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzEwNjA0NjY2Njc2LCJpYXQiOjE3MDk5OTk4NjZ9.TeOzNkHCutp8Y0LDmPXZuiwAj8FGhCGatPFHYdc2YiY
-
-#### Get user by id
-GET http://localhost:1234/users/1   
 
 #### Login
 POST http://localhost:1234/users/login
 Content-Type: application/json
 
 {
-    "email": "instructor@instructor.instructor"    ,
-    "password": "instructor123"
+    "email": "admin@admin.admin"    ,
+    "password": "admin123"
 }
-
 #### Register
 POST http://localhost:1234/users/
 Content-Type: application/json
@@ -50,3 +45,7 @@ Content-Type: application/json
 ### Delete user
 DELETE http://localhost:1234/users/esUsuario@usuario.user
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5OTIxNjczODYwLCJpYXQiOjE3MDkzMTY4NzN9.54oI7x7D9Lm2EXGixGX0t4rCYqmbS24U20IKewfHmJk      
+
+### Get all instructors
+GET http://localhost:1234/users/instructors/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzExNDY5NzA5NDQxLCJpYXQiOjE3MTA4NjQ5MDl9.OMlFgRBnpVnEajDpLY41LK55JJWVJqlYXGA3e-n19BU
