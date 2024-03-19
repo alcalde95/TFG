@@ -9,7 +9,7 @@ export const authorized = ({ token }) => {
     }
     return true
   } catch (error) {
-    throw new Error('Unauthorized')
+    return false
   }
 }
 
