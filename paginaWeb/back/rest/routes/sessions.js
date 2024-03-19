@@ -6,6 +6,6 @@ export const sessionsRouter = Router()
 sessionsRouter.get('/:classId', SessionsController.getSessions)
 // classesRouter.get('/:', SessionsController.getSession)
 
-// classesRouter.post('/', SessionsController.createSession)
+sessionsRouter.post('/', SessionsController.createSession)
 
-// classesRouter.delete('/:class_id', ClassesController.deleteClass)
+sessionsRouter.delete('/', SessionsController.deleteSession)
