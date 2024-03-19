@@ -17,7 +17,7 @@ Content-Type: application/json
   "description": "Descripción de la clase 1",
   "maxCapacity": 10,
   "duration": 60,
-  "instructorEmail": "instructor2@instructor.instructor"
+  "instructorEmail": "instructor@instructor.instructor"
 }
 
 ###hablar con dani sobre si se debería poder crear clases teniendo mismo nombre y mismo instructor
