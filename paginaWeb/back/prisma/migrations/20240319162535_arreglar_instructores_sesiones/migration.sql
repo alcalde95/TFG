@@ -40,7 +40,6 @@ CREATE TABLE `Sessions` (
     `UUID_Class` VARCHAR(191) NOT NULL,
 
     UNIQUE INDEX `Sessions_data_time_key`(`data_time`),
-    UNIQUE INDEX `Sessions_UUID_Class_key`(`UUID_Class`),
     PRIMARY KEY (`data_time`, `UUID_Class`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

@@ -26,9 +26,10 @@ model Clients {
 }
 
 model Instructors {
-  email   String  @id
-  user    Users   @relation(fields: [email], references: [email], onDelete: Cascade)
-  classes Class[]
+  email    String     @id
+  user     Users      @relation(fields: [email], references: [email], onDelete: Cascade)
+  classes  Class[]
+  Sessions Sessions[]
 }
 
 model Class {
@@ -43,13 +44,14 @@ model Class {
   session         Sessions[]
 }
 
-
-//REVISAR PQ ME CREA UN ÍNDICE EN UUID_Class HABLAR CON DANI
+//TODO: REVISAR NULOS EN LA BBDD
 model Sessions {
-  data_time      DateTime          @unique
-  UUID_Class     String            
-  class          Class             @relation(fields: [UUID_Class], references: [UUID_Class])
-  session_client Sessions_Client[]
+  data_time       DateTime          @unique
+  UUID_Class      String
+  instructorEmail String
+  instuctor       Instructors       @relation(fields: [instructorEmail], references: [email])
+  class           Class             @relation(fields: [UUID_Class], references: [UUID_Class])
+  session_client  Sessions_Client[]
 
   @@id([data_time, UUID_Class])
 }
