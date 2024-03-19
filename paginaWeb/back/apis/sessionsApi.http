@@ -1,3 +1,24 @@
 ###Get all sessions for a class
 GET http://localhost:1234/sessions/3e1b04a6-7eaa-43d0-aa17-59c1a6902358
-###meter logueo
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzExNDc3ODI4MDM0LCJpYXQiOjE3MTA4NzMwMjh9.KhMT9u1M6dgccibX4GcUUPETKGS8-Bl59SB_IF6V4P8
+###Post session
+POST http://localhost:1234/sessions
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzExNDc3ODI4MDM0LCJpYXQiOjE3MTA4NzMwMjh9.KhMT9u1M6dgccibX4GcUUPETKGS8-Bl59SB_IF6V4P8
+Content-Type: application/json
+
+{
+  "dataTime": "2028-12-12",
+  "uuidClass": "b04bc175-34f4-4775-96aa-82e005a131fd",
+  "instructorEmail" : "instructor@instructor.instructor"
+  
+}
+
+###Delete session
+DELETE http://localhost:1234/sessions/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzExNDc3ODI4MDM0LCJpYXQiOjE3MTA4NzMwMjh9.KhMT9u1M6dgccibX4GcUUPETKGS8-Bl59SB_IF6V4P8
+Content-Type: application/json
+
+{
+  "dataTime": "2028-12-12",
+  "uuidClass": "b04bc175-34f4-4775-96aa-82e005a131fd"
+}
