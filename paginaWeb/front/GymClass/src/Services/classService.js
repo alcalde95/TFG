@@ -58,7 +58,6 @@ export const createClassService = async ({ name, photo, description, maxCapacity
             body: JSON.stringify({ name, photo, description, maxCapacity, duration, instructorEmail })
         }
     )
-    console.log(res)
     if (!res.ok) throw new Error('Response is NOT ok')
-    return 'ok'
+    return 
 }
