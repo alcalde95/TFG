@@ -1,9 +1,9 @@
 import { ENDPOINT } from "./settings"
 
 
-export const sessionsService = async ({ classId, jwt }) => {
+export const sessionsService = async ({ uuidClass, jwt }) => {
 
-    const res = await fetch(`${ENDPOINT}/sessions/${classId}`,
+    const res = await fetch(`${ENDPOINT}/sessions/${uuidClass}`,
         {
             method: 'GET',
             headers: {
