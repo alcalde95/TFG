@@ -13,6 +13,7 @@ import { ErrorPage } from "./Components/ErrorPage"
 import { SessionsManagement } from "./Components/AdminManagement/SessionsManagement"
 import { InstructorPage } from "./Components/InstructorPage"
 import { ClientsManagement } from "./Components/AdminManagement/ClientsManagement"
+import { SessionsContextProvider } from "./Contexts/SessionsContext"
 
 function App() {
 
@@ -46,14 +47,14 @@ function App() {
       element: <ClassesManagement />
     },
     {
-      path: "/admin/classesManagement/:classId",
+      path: "/admin/classesManagement/:uuidClass",
       element: <SessionsManagement />
     },
     {
       path: "/instructor",
       element: <InstructorPage />
-    },{
-      path: "/instructor/:classId",
+    }, {
+      path: "/instructor/:uuidClass",
       element: <SessionsManagement />
     },
     {
@@ -66,9 +67,11 @@ function App() {
     <div className="box-content min-w-full  min-h-screen bg-slate-700 flex flex-col content-center items-center p-0 m-0 text-black font-mono">
       <UserContextProvider>
         <ClassesContextProvider>
-          <AdminUsersContextProvider>
-            <RouterProvider router={router} />
-          </AdminUsersContextProvider>
+          <SessionsContextProvider>
+            <AdminUsersContextProvider>
+              <RouterProvider router={router} />
+            </AdminUsersContextProvider>
+          </SessionsContextProvider>
         </ClassesContextProvider>
       </UserContextProvider>
 
