@@ -18,9 +18,9 @@ export const classesService = async (/*{ jwt }*/) => {
 
 }
 
-export const classService = async ({ classId }) => {
+export const classService = async ({ uuidClass }) => {
 
-    const res = await fetch(`${ENDPOINT}/classes/${classId}`,
+    const res = await fetch(`${ENDPOINT}/classes/${uuidClass}`,
         {
             method: 'GET'//,
             /*headers: {
