@@ -53,3 +53,29 @@ export const classDurationValidation = ({ duration }) => {
 
     return ""
 }
+
+export const sessionDateValidation = ({ date }) => {
+    
+        if (!date) {
+            return "La fecha es requerida"
+        }
+        
+        if (new Date(date) < new Date()) {
+            return "La fecha no puede ser anterior a la fecha actual"
+        }
+
+        return ""
+}
+
+export const sessionInstructorValidation = ({ instructorEmail }) => {
+        
+        if (!instructorEmail) {
+            return "El instructor es requerido"
+        }
+        
+        if (!emailValidation({ email: instructorEmail })) {
+            return "El email debe tener un formato válido"
+        }
+
+        return ""
+    }
