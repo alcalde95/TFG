@@ -43,12 +43,14 @@ Buscar componente calendario
 - Añadir calendario
 - Añadir duplicación de sesiones
 - Añadir creación de sesiones✔
-- Añadir validación de datos a la creación de sesiones
+- Añadir validación de datos de creación de sesiones✔
 - Recuperar todos los instructores y mostrarlos en la selección de instructores
-- Añadir validación de datos de creación de sesiones
 - Dividir entre clases creadas y clases que imparte el instructor. Crear 2 componentes -> mis clases, -> clases que imparto
 - En las clases que imparte mostrar los horarios
-- Modificar clases
+- Añadir Modificación de clases creadas por el instructor
+- Añadir mensajes personalizados para el login,registor,...
+- Añadir cargando...
+- Revisar a futuro el nombre classID
   
 ### Backend
 
