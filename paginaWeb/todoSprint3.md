@@ -42,7 +42,9 @@ Buscar componente calendario
 - Hacer la selección de instructor no como un input type text sino como un selector a la hora de crear las sesiones
 - Añadir calendario
 - Añadir duplicación de sesiones
-- Añadir creación de sesiones
+- Añadir creación de sesiones✔
+- Añadir validación de datos a la creación de sesiones
+- Recuperar todos los instructores y mostrarlos en la selección de instructores
 - Añadir validación de datos de creación de sesiones
 - Dividir entre clases creadas y clases que imparte el instructor. Crear 2 componentes -> mis clases, -> clases que imparto
 - En las clases que imparte mostrar los horarios
