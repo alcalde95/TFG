@@ -1,14 +1,14 @@
 import { ENDPOINT } from "./settings"
 
 
-export const sessionsService = async ({ classId }) => {
+export const sessionsService = async ({ classId, jwt }) => {
 
     const res = await fetch(`${ENDPOINT}/sessions/${classId}`,
         {
-            method: 'GET'//,
-            /*headers: {
+            method: 'GET',
+            headers: {
                 'Authorization': `token ${jwt}`
-            }*/,
+            },
 
         }
     )
@@ -16,4 +16,22 @@ export const sessionsService = async ({ classId }) => {
 
     return res.json()
 
+}
+
+
+export const createSessionService = async ({ uuidClass, dataTime, instructorEmail, jwt }) => {
+
+    const res = await fetch(`${ENDPOINT}/sessions/`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `token ${jwt}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ dataTime, uuidClass,instructorEmail })
+        }
+    )
+    console.log(res)
+    if (!res.ok) throw new Error(res)
+    return
 }
