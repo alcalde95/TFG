@@ -2,6 +2,7 @@ import { useContext, useState } from "react"
 import { createSessionService, sessionsService } from "../Services/sessionsService"
 import { SessionsContext } from "../Contexts/SessionsContext"
 import { sessionDateValidation, sessionInstructorValidation } from "../Validations"
+import { getAllInstructorsService } from "../Services/usersService"
 
 export const useSessions = () => {
 
@@ -9,12 +10,22 @@ export const useSessions = () => {
 
     const [dateError, setDateError] = useState("")
     const [instructorEmailError, setInstructorEmailError] = useState("")
-
+    const [instructors,setInstructors] = useState([])
+    
     const getSessions = async ({ uuidClass, jwt }) => {
         try {
             const res = await sessionsService({ uuidClass, jwt })
             setSessions(res)
 
+        } catch (e) {
+            console.error(e.message)
+        }
+    }
+
+    const getInstructors = async ({ jwt }) => {
+        try {
+            const res = await getAllInstructorsService({ jwt })
+            setInstructors(res)
         } catch (e) {
             console.error(e.message)
         }
@@ -43,7 +54,9 @@ export const useSessions = () => {
     return {
         createSession,
         getSessions,
+        getInstructors,
         dateError,
         instructorEmailError,
+        instructors,
     }
 }
