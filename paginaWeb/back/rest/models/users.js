@@ -78,7 +78,6 @@ export class UserModel {
         role: { in: ['I', 'i'] }
       }
     })
-    console.log(instructors)
     return instructors
   }
 
