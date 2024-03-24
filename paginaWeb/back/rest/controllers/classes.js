@@ -40,6 +40,19 @@ export class ClassesController {
     }
   }
 
+  static getManagedClassesInstructor = async (req, res) => {
+    try {
+      const { authorization } = req.headers
+      const token = authorization.split(' ')[1]
+      const instructorEmail = jwt.verify(token, SECRET).email
+      if (!authorized({ token })) res.status(401).send('Unauthorized')
+      const classes = await ClassesModel.getManagedClassesInstructor({ instructorEmail })
+      res.json(classes)
+    } catch (error) {
+      res.status(500).send(error.message)
+    }
+  }
+
   static createClass = async (req, res) => {
     const input = req.body
     const validatedData = validateClass({ input })
@@ -51,6 +64,25 @@ export class ClassesController {
       res.status(201).send('Created')
     } catch (e) {
       res.status(400).send('Bad request: ' + e.message)
+    }
+  }
+
+  static updateClass = async (req, res) => {
+    try {
+      const input = req.body
+      const { authorization } = req.headers
+      const token = authorization.split(' ')[1]
+
+      if (!authorized({ token })) res.status(401).send('Unauthorized')
+
+      const validatedData = validateClass({ input })
+      if (validatedData.error) return res.status(400).send(validatedData.error)
+
+      await ClassesModel.updateClass({ input })
+
+      res.send('Updated')
+    } catch (error) {
+      res.status(500).send(error.message)
     }
   }
 }

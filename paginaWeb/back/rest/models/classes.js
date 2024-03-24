@@ -40,6 +40,24 @@ export class ClassesModel {
     }
   }
 
+  static getManagedClassesInstructor = async ({ instructorEmail }) => {
+    try {
+      const classesData = await prisma.class.findMany({
+        where: {
+          session: {
+            some: {
+              instructorEmail
+            }
+          }
+        }
+      })
+
+      return convertClassesPhoto({ classes: classesData })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
   static create = async ({ input }) => {
     const { name, photo, description, maxCapacity, duration, instructorEmail } = input
     const UUIDClass = uuidv4()
@@ -56,6 +74,28 @@ export class ClassesModel {
         }
       })
     } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
+  static updateClass = async ({ input }) => {
+    const { UUIDClass, name, photo, description, maxCapacity, duration, instructorEmail } = input
+    try {
+      await prisma.class.update({
+        where: {
+          UUID_Class: UUIDClass
+        },
+        data: {
+          name,
+          photo,
+          description,
+          max_Capacity: maxCapacity,
+          duration,
+          instructorEmail
+        }
+      })
+    } catch (e) {
+      console.log(e)
       throw new Error(e.message)
     }
   }
