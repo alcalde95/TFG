@@ -61,3 +61,33 @@ export const createClassService = async ({ name, photo, description, maxCapacity
     if (!res.ok) throw new Error('Response is NOT ok')
     return 
 }
+
+
+export const updateClassService = async ({ UUIDClass, name, photo, description, maxCapacity, duration,instructorEmail,jwt }) => {
+    const res = await fetch(`${ENDPOINT}/classes/`,
+        {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${jwt}`,
+                'Content-Type': 'application/json',
+            }
+            ,
+            body: JSON.stringify({ UUIDClass,name, photo, description, maxCapacity, duration,instructorEmail })
+        }
+    )
+    if (!res.ok) console.log(res)
+    return 
+}
+
+export const getManagedClassesInstructorService = async ({ jwt }) => {
+    const res = await fetch(`${ENDPOINT}/classes/sessions/`,
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${jwt}`
+            }
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+    return res.json()
+}
