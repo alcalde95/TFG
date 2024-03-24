@@ -12,7 +12,7 @@ export const Class = ({ c, editable }) => {
     const [duration, setDuration] = useState(c.duration)
     const [maxCapacity, setMaxCapacity] = useState(c.max_Capacity)
 
-    const { updateClass, nameError, descriptionError, photoError, maxCapacityError, durationError, getClasses } = useClasses()
+    const { updateClass, nameError, descriptionError, photoError, maxCapacityError, durationError, getInstructorClasses } = useClasses()
 
     const navigate = useNavigate()
 
@@ -38,7 +38,7 @@ export const Class = ({ c, editable }) => {
         const res = await updateClass({ name, photo, description, maxCapacity, duration, jwt, UUIDClass: c.UUID_Class, instructorEmail: email })
         if (res) {
             setEditar(false)
-            getClasses()
+            getInstructorClasses({jwt})
         }
     }
 
