@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react"
 import { ClassesContext } from "../Contexts/ClassesContext"
-import { classService, classesInstructorService, classesService, createClassService } from "../Services/classService"
+import { classService, classesInstructorService, classesService, createClassService, getManagedClassesInstructorService, updateClassService } from "../Services/classService"
 import { classDescriptionValidation, classDurationValidation, classMaxCapacityValidation, classNameValidation } from "../Validations"
 
 export const useClasses = () => {
@@ -12,6 +12,7 @@ export const useClasses = () => {
     const [maxCapacityError, setMaxCapacityError] = useState("")
     const [durationError, setDurationError] = useState("")
     const [photoError, setPhotoError] = useState("")
+    const [managedClasses,setManagedClasses] = useState([])
     const getClasses = useCallback(async () => {
         try {
             setLoading(true)
@@ -33,6 +34,15 @@ export const useClasses = () => {
         try {
             const res = await classService({ uuidClass, jwt })
             setClasses(res)
+        } catch (e) {
+            console.error(e.message)
+        }
+    }
+
+    const getManagedClasses = async ({ jwt }) => {
+        try {
+            const res = await getManagedClassesInstructorService({ jwt })
+            setManagedClasses(res)
         } catch (e) {
             console.error(e.message)
         }
@@ -66,6 +76,32 @@ export const useClasses = () => {
 
     }
 
+    const updateClass = async ({ name, photo, description, maxCapacity, duration, instructorEmail,jwt,UUIDClass }) => {
+
+        const nameValidation = classNameValidation({ name })
+        const descriptionValidation = classDescriptionValidation({ description })
+        const maxCapacityValidation = classMaxCapacityValidation({ maxCapacity })
+        const durationValidation = classDurationValidation({ duration })
+
+        setNameError(nameValidation)
+        setDescriptionError(descriptionValidation)
+        setMaxCapacityError(maxCapacityValidation)
+        setDurationError(durationValidation)
+        setPhotoError(photo ? "" : "Debe subir una foto")
+
+        if (nameValidation || descriptionValidation || maxCapacityValidation || durationValidation || !photo) {
+            return false
+        }
+        try {
+            await updateClassService({ name, photo, description, maxCapacity, duration, instructorEmail,jwt,UUIDClass })
+            return true
+        } catch (error) {
+            console.log(error)
+            return false
+        }
+
+    }
+
 
     return {
         loading,
@@ -73,11 +109,14 @@ export const useClasses = () => {
         getInstructorClasses,
         createClass,
         getClass,
+        updateClass,
+        getManagedClasses,
         nameError,
         descriptionError,
         maxCapacityError,
         durationError,
         photoError,
+        managedClasses,
 
     }
 }
