@@ -38,3 +38,7 @@ Content-Type: application/json
   "instructorEmail": "instructor@instructor.instructor"
 
 }
+
+###Eliminación de una clase
+DELETE http://localhost:1234/classes/3edbc5ac-6847-4296-b646-978b7ad115a0
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzExOTkxNDAwMjU1LCJpYXQiOjE3MTEzODY2MDB9.86Q5ynplQ3-AwKe04UfCUGukl0QhmmmB-b4QJkbEKSk
