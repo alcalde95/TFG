@@ -45,7 +45,7 @@ Buscar componente calendario
 - ⭕Añadir creación de sesiones
 - ⭕Añadir validación de datos de creación de sesiones
 - ⭕Recuperar todos los instructores y mostrarlos en la selección de instructores
-- Dividir entre clases creadas y clases que imparte el instructor. Crear 2 componentes -> mis clases, -> clases que imparto🚧
+- ⭕Dividir entre clases creadas y clases que imparte el instructor. Crear 2 componentes -> mis clases, -> clases que imparto
 - Añadir botón eliminar sesiones
 - Añadir botón eliminar clases
 - Esconder botón eliminar sesión en las clases que impartes y no las que creas
@@ -65,11 +65,13 @@ Buscar componente calendario
 - ⭕Crear api sesiones
 - ⭕Crear endpoint obtener Sesiones para una clase
 - Añadir autenticación a el anterior punto
-- Añadir endpoint para obtener las clases en las que al menos una de sus sesiones tienen de instructor el instructor pasado -- +-, FALTA AÑADIR AUTENTICACIÓN,...🚧
+- ⭕Añadir endpoint para obtener las clases en las que al menos una de sus sesiones tienen de instructor el instructor pasado
 - ⭕Crear endpoint añadir Sesiones
 - ⭕Añadir autenticación a el anterior punto
 - ⭕Crear endpoint borrar sesiones
 - ⭕Crear endpoint editar clases
+- ⭕Crear endpoint borrar clases
+- ⭕Añadir endpoint para obtener todos los clientes inscritos a una clase
 - Añadir atributo checked al cliente para que si no lo tiene no pueda acceder a las clases
 - Implementar comprobación de si existe el token cuando lo recibe el backend en todos los endpoints
 - Revisar invalid token error, pasar de 500 a 401
