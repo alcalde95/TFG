@@ -49,8 +49,8 @@ model Sessions {
   data_time       DateTime          @unique
   UUID_Class      String
   instructorEmail String
-  instuctor       Instructors       @relation(fields: [instructorEmail], references: [email])
-  class           Class             @relation(fields: [UUID_Class], references: [UUID_Class])
+  instuctor       Instructors       @relation(fields: [instructorEmail], references: [email],onDelete: Cascade)
+  class           Class             @relation(fields: [UUID_Class], references: [UUID_Class],onDelete: Cascade)
   session_client  Sessions_Client[]
 
   @@id([data_time, UUID_Class])
@@ -58,7 +58,7 @@ model Sessions {
 
 model Sessions_Client {
   client_Email String
-  client       Clients  @relation(fields: [client_Email], references: [email])
+  client       Clients  @relation(fields: [client_Email], references: [email],onDelete: Cascade)
   data_time    DateTime @unique
   UUID_Class   String   @unique
   session      Sessions @relation(fields: [data_time, UUID_Class], references: [data_time, UUID_Class])
