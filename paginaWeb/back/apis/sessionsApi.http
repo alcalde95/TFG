@@ -19,6 +19,6 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydW
 Content-Type: application/json
 
 {
-  "dataTime": "2028-12-12",
-  "uuidClass": "b04bc175-34f4-4775-96aa-82e005a131fd"
+  "dataTime": "2024-03-27T18:50:00.000Z",
+  "uuidClass": "ae787e98-eab7-4b99-8c94-450dfa229348"
 }

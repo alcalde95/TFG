@@ -1,0 +1,4 @@
+###Get sessionsClients 4 a session
+GET http://localhost:1234/sessionsClients/b04bc175-34f4-4775-96aa-82e005a131fd/2002-02-02T00:00:00.000Z
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzExOTY5ODg2MTU3LCJpYXQiOjE3MTEzNjUwODZ9.YPxdVC-hBpThWTPA5u00aIfixEth77nyhMM9siA-Ts0
+###Get sessionsClients 4 a session
