@@ -91,3 +91,16 @@ export const getManagedClassesInstructorService = async ({ jwt }) => {
     if (!res.ok) throw new Error('Response is NOT ok')
     return res.json()
 }
+
+export const deleteClassService = async ({ uuidClass, jwt }) => {
+    const res = await fetch(`${ENDPOINT}/classes/${uuidClass}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `token ${jwt}`
+            }
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+    return
+}

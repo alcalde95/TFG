@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
-import { Header } from "../Header"
-import { Sessions } from "../Sessions"
-import { ClassHeaderInfo } from "../Classes/ClassHeaderInfo"
-import { UserContext } from "../../Contexts/UserContext"
-import { useSessions } from "../../hooks/useSessions"
 import { SessionsContext } from "../../Contexts/SessionsContext"
 import { ClassesContext } from "../../Contexts/ClassesContext"
+import { UserContext } from "../../Contexts/UserContext"
 import { useClasses } from "../../hooks/useClasses"
+import { useParams } from "react-router-dom"
+import { Header } from "../Header"
+import { ClassHeaderInfo } from "../Classes/ClassHeaderInfo"
+import { useSessions } from "../../hooks/useSessions"
+import { Sessions } from "../Sessions"
 
 export const SessionsManagement = () => {
 
@@ -24,8 +24,9 @@ export const SessionsManagement = () => {
 
   useEffect(() => {
     const { uuidClass } = params
-    getSessions({ uuidClass, jwt })
     getClass({ uuidClass, jwt })
+    
+    getSessions({ uuidClass, jwt })
     getInstructors({ jwt })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

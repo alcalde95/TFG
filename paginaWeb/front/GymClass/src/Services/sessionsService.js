@@ -31,7 +31,22 @@ export const createSessionService = async ({ uuidClass, dataTime, instructorEmai
             body: JSON.stringify({ dataTime, uuidClass,instructorEmail })
         }
     )
-    console.log(res)
     if (!res.ok) throw new Error(res)
+    return
+}
+
+
+export const deleteSessionService = async ({ uuidClass,dataTime, jwt }) => {
+    const res = await fetch(`${ENDPOINT}/sessions/`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `token ${jwt}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ uuidClass,dataTime })
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
     return
 }

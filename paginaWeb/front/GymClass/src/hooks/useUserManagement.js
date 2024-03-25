@@ -57,7 +57,6 @@ export const useUserManagement = () => {
 
     const deleteUser = async ({ email, role }) => {
         try {
-            console.log(jwt)
             await deleteUserService({ email, jwt })
             switch (role.toLowerCase()) {
                 case 'a':

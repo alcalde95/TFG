@@ -1,11 +1,11 @@
 import { Class } from "./Class"
 
-const ListOfClasses = ({ classes, editable }) => {
+const ListOfClasses = ({ classes, editable,managed }) => {
     
     return (
         <ul className="grid grid-cols-1 sm:grid-cols-2  gap-4 p-2 w-full place-items-center ">
             {
-                classes.map((c) => (<Class key={c.UUID_Class} c={c} editable={editable} />))
+                classes.map((c) => (<Class key={c.UUID_Class} c={c} editable={editable} managed={managed}/>))
             }
         </ul>
     )
@@ -17,12 +17,12 @@ const NoClasses = () => {
     )
 }
 
-export const Classes = ({ classes, editable }) => {
+export const Classes = ({ classes, editable,managed=false }) => {
     const hasClasses = classes?.length > 0
     return (
 
         hasClasses
-            ? <ListOfClasses classes={classes} editable={editable} />
+            ? <ListOfClasses classes={classes} editable={editable} managed = {managed} />
             : <NoClasses  />
 
     )

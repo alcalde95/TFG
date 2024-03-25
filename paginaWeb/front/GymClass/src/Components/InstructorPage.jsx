@@ -109,7 +109,7 @@ export const InstructorPage = () => {
                 <h1 className="text-4xl m-2 underline cursor-default">Clases que gestiono</h1>
                <div className="flex flex-col items-center text-center w-full">
                   {
-                    managedClasses && <Classes classes={managedClasses} editable={false} />
+                    managedClasses && <Classes classes={managedClasses} editable={false} managed={true}  />
                   }
                 </div>
               </>

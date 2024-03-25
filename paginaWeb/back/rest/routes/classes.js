@@ -11,4 +11,4 @@ classesRouter.post('/', ClassesController.createClass)
 
 classesRouter.put('/', ClassesController.updateClass)
 
-// classesRouter.delete('/:class_id', ClassesController.deleteClass)
+classesRouter.delete('/:class_id', ClassesController.deleteClass)

@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react"
 import { ClassesContext } from "../Contexts/ClassesContext"
-import { classService, classesInstructorService, classesService, createClassService, getManagedClassesInstructorService, updateClassService } from "../Services/classService"
+import { classService, classesInstructorService, classesService, createClassService, deleteClassService, getManagedClassesInstructorService, updateClassService } from "../Services/classService"
 import { classDescriptionValidation, classDurationValidation, classMaxCapacityValidation, classNameValidation } from "../Validations"
 
 export const useClasses = () => {
@@ -102,6 +102,18 @@ export const useClasses = () => {
 
     }
 
+    const deleteClass = async ({ uuidClass,jwt }) => {
+        try {
+            await deleteClassService({ uuidClass,jwt })
+            console.log("hola :D")
+            return true
+        }catch(e){
+            console.error(e.message)
+            return false
+        }
+    }
+
+
 
     return {
         loading,
@@ -111,6 +123,7 @@ export const useClasses = () => {
         getClass,
         updateClass,
         getManagedClasses,
+        deleteClass,
         nameError,
         descriptionError,
         maxCapacityError,

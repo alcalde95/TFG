@@ -99,4 +99,24 @@ export class ClassesModel {
       throw new Error(e.message)
     }
   }
+
+  static deleteClass = async ({ uuidClass, instructorEmail }) => {
+    try {
+      const c = await prisma.class.findUnique({
+        where: {
+          UUID_Class: uuidClass
+        }
+      })
+      if (!c) throw new Error('Class not found')
+      if (c.instructorEmail !== instructorEmail) return new Error('Unauthorized')
+
+      await prisma.class.delete({
+        where: {
+          UUID_Class: uuidClass
+        }
+      })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
 }

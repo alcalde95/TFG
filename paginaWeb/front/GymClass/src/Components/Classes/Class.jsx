@@ -4,7 +4,7 @@ import { UserContext } from "../../Contexts/UserContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useClasses } from "../../hooks/useClasses";
 import { convertFile } from "../../utils";
-export const Class = ({ c, editable }) => {
+export const Class = ({ c, editable, managed }) => {
     const { jwt, email } = useContext(UserContext)
     const [editar, setEditar] = useState(false)
     const [name, setName] = useState(c.name)
@@ -12,7 +12,7 @@ export const Class = ({ c, editable }) => {
     const [duration, setDuration] = useState(c.duration)
     const [maxCapacity, setMaxCapacity] = useState(c.max_Capacity)
 
-    const { updateClass, nameError, descriptionError, photoError, maxCapacityError, durationError, getInstructorClasses } = useClasses()
+    const { updateClass, nameError, descriptionError, photoError, maxCapacityError, durationError, getInstructorClasses, deleteClass } = useClasses()
 
     const navigate = useNavigate()
 
@@ -20,8 +20,8 @@ export const Class = ({ c, editable }) => {
     const handleClick = (e) => {
         e.preventDefault()
         if (!jwt) navigate("/login")
-
-        navigate(`${location.pathname}/${c.UUID_Class}`)
+        managed ? navigate(`${location.pathname}/managed/${c.UUID_Class}`)
+            : navigate(`${location.pathname}/${c.UUID_Class}`)
     }
 
     const handleSubmit = async (e) => {
@@ -32,22 +32,34 @@ export const Class = ({ c, editable }) => {
         let photo = data.get("photo")
         if (!photo.name) {
             photo = c.photo.split(",")[1]
-        }else{
+        } else {
             photo = (await convertFile(photo)).split(",")[1]
         }
         const res = await updateClass({ name, photo, description, maxCapacity, duration, jwt, UUIDClass: c.UUID_Class, instructorEmail: email })
         if (res) {
             setEditar(false)
-            getInstructorClasses({jwt})
+            getInstructorClasses({ jwt })
         }
     }
 
+    const handleDeleteClick = async (e) => {
+        e.preventDefault()
+        const res = await deleteClass({ uuidClass: c.UUID_Class, jwt })
+        if (res) {
+            getInstructorClasses({ jwt })
+        }
+    }
+
+
+    //TODO: MEJORAR EL CÓDIGO DE MODO QUE SEA EDITABLE Y ELIMINABLE SI EL USUARIO ES EL INSTRUCTOR(MENOS EN LA LANDING)
     return (
         <>
-            <div className="flex flex-col items-center border-2 w-10/12 border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-200 ease-in-out ">
+            <div className="flex flex-col items-center border-2 w-10/12 border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-200 ease-in-out relative">
                 <h1 className="font-bold text-3xl m-2 underline active:text-black hover:text-teal-500 transition-all duration-300 ease-in-out"
                     onClick={handleClick}>{c.name}</h1>
-
+                <button className="absolute right-11 bg-red-600 text-white p-2 rounded-md m-2 w-auto h-max hover:bg-white" onClick={handleDeleteClick}>
+                ❌
+                </button>
                 <img src={c.photo.length > 50 ? c.photo : "https://picsum.photos/300/300"} alt={c.description} className="aspect-square w-11/12 lg:w-96 rounded-lg  border-2"></img>
 
                 <section className="flex flex-col w-11/12 lg:w-96 justify-center items-center text-center m-4 p-4 bg-slate-500 border-2 rounded-lg text-slate-200">

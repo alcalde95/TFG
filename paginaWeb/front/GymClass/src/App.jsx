@@ -10,10 +10,13 @@ import { ClassesManagement } from "./Components/AdminManagement/ClassesManagemen
 import { AdminUsersContextProvider } from "./Contexts/AdminUsersContext"
 import { ClassesContextProvider } from "./Contexts/ClassesContext"
 import { ErrorPage } from "./Components/ErrorPage"
-import { SessionsManagement } from "./Components/AdminManagement/SessionsManagement"
 import { InstructorPage } from "./Components/InstructorPage"
 import { ClientsManagement } from "./Components/AdminManagement/ClientsManagement"
 import { SessionsContextProvider } from "./Contexts/SessionsContext"
+import { SessionsManagement } from "./Components/AdminManagement/SessionsManagement"
+import { ManagedSessionsManagement } from "./Components/AdminManagement/ManagedSessionsManagement"
+import { SessionClientsManagement } from "./Components/SessionClientsManagement"
+import { SessionClientsContextProvider } from "./Contexts/SessionClientsContext"
 
 function App() {
 
@@ -56,6 +59,12 @@ function App() {
     }, {
       path: "/instructor/:uuidClass",
       element: <SessionsManagement />
+    }, {
+      path: "/instructor/managed/:uuidClass",
+      element: <ManagedSessionsManagement />
+    }, {
+      path: "/instructor/managed/:uuidClass/:date",
+      element: <SessionClientsManagement />
     },
     {
       path: "*",
@@ -65,15 +74,17 @@ function App() {
 
   return (
     <div className="box-content min-w-full  min-h-screen bg-slate-700 flex flex-col content-center items-center p-0 m-0 text-black font-mono">
-      <UserContextProvider>
-        <ClassesContextProvider>
-          <SessionsContextProvider>
-            <AdminUsersContextProvider>
-              <RouterProvider router={router} />
-            </AdminUsersContextProvider>
-          </SessionsContextProvider>
-        </ClassesContextProvider>
-      </UserContextProvider>
+      <SessionClientsContextProvider>
+        <UserContextProvider>
+          <ClassesContextProvider>
+            <SessionsContextProvider>
+              <AdminUsersContextProvider>
+                <RouterProvider router={router} />
+              </AdminUsersContextProvider>
+            </SessionsContextProvider>
+          </ClassesContextProvider>
+        </UserContextProvider>
+      </SessionClientsContextProvider>
 
     </div>
   )
