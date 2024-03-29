@@ -8,4 +8,5 @@ sessionsRouter.get('/:classId', SessionsController.getSessions)
 
 sessionsRouter.post('/', SessionsController.createSession)
 
+sessionsRouter.put('/', SessionsController.updateSession)
 sessionsRouter.delete('/', SessionsController.deleteSession)
