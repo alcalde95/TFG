@@ -57,9 +57,11 @@ export const Class = ({ c, editable, managed }) => {
             <div className="flex flex-col items-center border-2 w-10/12 border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-200 ease-in-out relative">
                 <h1 className="font-bold text-3xl m-2 underline active:text-black hover:text-teal-500 transition-all duration-300 ease-in-out"
                     onClick={handleClick}>{c.name}</h1>
-                <button className="absolute right-11 bg-red-600 text-white p-2 rounded-md m-2 w-auto h-max hover:bg-white" onClick={handleDeleteClick}>
-                ❌
-                </button>
+                {managed
+                    ? null
+                    : <button className="absolute right-11 bg-red-600 text-white p-2 rounded-md m-2 w-auto h-max hover:bg-white" onClick={handleDeleteClick}>
+                        ❌
+                    </button>}
                 <img src={c.photo.length > 50 ? c.photo : "https://picsum.photos/300/300"} alt={c.description} className="aspect-square w-11/12 lg:w-96 rounded-lg  border-2"></img>
 
                 <section className="flex flex-col w-11/12 lg:w-96 justify-center items-center text-center m-4 p-4 bg-slate-500 border-2 rounded-lg text-slate-200">
