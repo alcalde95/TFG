@@ -35,7 +35,6 @@ export const createSessionService = async ({ uuidClass, dataTime, instructorEmai
     return
 }
 export const updateSessionService = async ({ uuidClass, dataTime, instructorEmail, jwt }) => {
-    console.log(instructorEmail)
     const res = await fetch(`${ENDPOINT}/sessions/`,
         {
             method: 'PUT',
