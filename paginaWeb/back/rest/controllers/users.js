@@ -34,6 +34,19 @@ export class UserController {
     }
   }
 
+  static getClients = async (req, res) => {
+    const { authorization } = req.headers
+    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
+    const token = authorization.split(' ')[1]
+    const userEmail = jwt.verify(token, SECRET).email
+    if (authorized({ token })) {
+      const { clients } = await UserModel.getClients({ userEmail })
+      res.json(clients)
+    } else {
+      res.status(401).send('Unauthorized')
+    }
+  }
+
   static getAllInstructors = async (req, res) => {
     const { authorization } = req.headers
     if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
@@ -107,6 +120,21 @@ export class UserController {
       }
     } else {
       res.status(401).send('Unauthorized')
+    }
+  }
+
+  static updateClient = async (req, res) => {
+    try {
+      const { authorization } = req.headers
+      const token = authorization.split(' ')[1]
+      if (authorized({ token })) {
+        await UserModel.updateClient({ input: req.body })
+        res.send('Updated')
+      } else {
+        res.status(401).send('Unauthorized')
+      }
+    } catch (error) {
+      res.status(500).send(error.message)
     }
   }
 }
