@@ -11,6 +11,7 @@ export const LandingPage = () => {
 
     useEffect(() => {
         getClasses()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -25,7 +26,7 @@ export const LandingPage = () => {
                 {
                     loading
                         ? <p className="text-2xl ">Cargando...</p>
-                        : <Classes classes={classes} editable={false} />
+                        : <Classes classes={classes} editable={false} managed={true} />
 
                 }
 
