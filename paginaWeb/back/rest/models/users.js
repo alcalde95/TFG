@@ -26,6 +26,24 @@ export class UserModel {
     }
   }
 
+  static getClients = async ({ userEmail }) => {
+    const role = await prisma.users.findUnique({
+      where: {
+        email: userEmail
+      },
+      select: {
+        role: true
+      }
+    })
+
+    if (role.role.toLowerCase() !== 'a') {
+      return 'Unauthorized'
+    }
+
+    const clients = await prisma.clients.findMany()
+    return { clients }
+  }
+
   static getAllUsers = async ({ userEmail }) => {
     // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
     const role = await prisma.users.findUnique({
@@ -47,6 +65,7 @@ export class UserModel {
       }
     })
     const clients = await prisma.users.findMany({
+      include: { client: true },
       where: {
         role: { in: ['c', 'C'] }
       }
@@ -150,7 +169,6 @@ export class UserModel {
     const { email, password, role } = input
 
     let newPassword = password
-    // se podría hacer con un trigger? Sí, pero me da todo el palo de hacerlo en SQL
     try {
       const oldUserData = await prisma.users.findUnique({
         where: {
@@ -221,6 +239,22 @@ export class UserModel {
           }
         }
       }
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
+  static updateClient = async ({ input }) => {
+    try {
+      const { email, validated } = input
+      await prisma.clients.update({
+        where: {
+          email
+        },
+        data: {
+          validated
+        }
+      })
     } catch (e) {
       throw new Error(e.message)
     }
