@@ -51,6 +51,34 @@ export class SessionsModel {
     }
   }
 
+  static updateSession = async ({ input, userEmail }) => {
+    try {
+      const c = await prisma.class.findUnique({
+        where: {
+          UUID_Class: input.uuidClass
+        }
+      })
+
+      if (c.instructorEmail !== userEmail) throw new Error('Unauthorized')
+
+      const { dataTime, uuidClass, instructorEmail } = input
+
+      // sólo se puede cambiar el instructor
+      await prisma.sessions.update({
+        where: {
+          data_time: dataTime,
+          UUID_Class: uuidClass
+
+        },
+        data: {
+          instructorEmail
+        }
+      })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
   static deleteSession = async ({ input, userEmail }) => {
     const role = await prisma.users.findUnique({
       where: {
