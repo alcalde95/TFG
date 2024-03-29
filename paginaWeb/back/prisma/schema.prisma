@@ -20,7 +20,7 @@ model Users {
 
 model Clients {
   email String @id
-
+  validated String @default("N")
   user           Users             @relation(fields: [email], references: [email], onDelete: Cascade)
   session_client Sessions_Client[]
 }
