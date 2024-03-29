@@ -44,6 +44,48 @@ export class SessionsController {
     }
   }
 
+  static updateSession = async (req, res) => {
+    try {
+      const { authorization } = req.headers
+      if (!authorization) return res.status(401).send('Unauthorized')
+      const token = authorization.split(' ')[1]
+      const userEmail = jwt.verify(token, SECRET).email
+      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const body = req.body
+      const input = {
+        dataTime: new Date(body.dataTime),
+        uuidClass: body.uuidClass,
+        instructorEmail: body.instructorEmail
+      }
+      const validatedData = validateSession({ input })
+
+      if (validatedData.error) return res.status(400).send(validatedData.error.message)
+
+      await SessionsModel.updateSession({ input, userEmail })
+      res.status(201).send('Updated')
+    } catch (e) {
+      res.status(400).send('Bad request: ' + e.message)
+    }
+  }
+  /*
+   try {
+      const input = req.body
+      const { authorization } = req.headers
+      const token = authorization.split(' ')[1]
+
+      if (!authorized({ token })) res.status(401).send('Unauthorized')
+
+      const validatedData = validateClass({ input })
+      if (validatedData.error) return res.status(400).send(validatedData.error)
+
+      await ClassesModel.updateClass({ input })
+
+      res.send('Updated')
+    } catch (error) {
+      res.status(500).send(error.message)
+    }
+  */
+
   static deleteSession = async (req, res) => {
     try {
       const { authorization } = req.headers
