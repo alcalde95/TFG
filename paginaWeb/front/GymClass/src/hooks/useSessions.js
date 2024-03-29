@@ -1,8 +1,9 @@
 import { useContext, useState } from "react"
-import { createSessionService, deleteSessionService, sessionsService } from "../Services/sessionsService"
+import { createSessionService, deleteSessionService, sessionsService, updateSessionService } from "../Services/sessionsService"
 import { SessionsContext } from "../Contexts/SessionsContext"
 import { sessionDateValidation, sessionInstructorValidation } from "../Validations"
 import { getAllInstructorsService } from "../Services/usersService"
+import { AdminUsersContext } from "../Contexts/AdminUsersContext"
 
 export const useSessions = () => {
 
@@ -10,8 +11,7 @@ export const useSessions = () => {
 
     const [dateError, setDateError] = useState("")
     const [instructorEmailError, setInstructorEmailError] = useState("")
-    const [instructors,setInstructors] = useState([])
-    
+    const {instructors,setInstructors} = useContext(AdminUsersContext)
     const getSessions = async ({ uuidClass, jwt }) => {
         try {
             const res = await sessionsService({ uuidClass, jwt })
@@ -60,6 +60,15 @@ export const useSessions = () => {
         }
     }
 
+    const updateSession = async ({ uuidClass,dataTime,instructorEmail,jwt }) => {
+        try {
+            await updateSessionService({ uuidClass,dataTime,instructorEmail,jwt })
+            return true
+        }catch(e){
+            console.error(e.message)
+            return false
+        }
+    }
     const deleteSession = async ({ uuidClass,dataTime,jwt }) => {
         try {
             await deleteSessionService({ uuidClass,dataTime,jwt })
@@ -75,6 +84,7 @@ export const useSessions = () => {
         getSessions,
         getInstructors,
         getManagedSessions,
+        updateSession,
         deleteSession,
         dateError,
         instructorEmailError,
