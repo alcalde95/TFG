@@ -18,6 +18,22 @@ export const allUsersService = async ({ jwt }) => {
     return res.json()
 
 }
+export const allClientsService = async ({ jwt }) => {
+
+    const res = await fetch(`${ENDPOINT}/users/clients/`,
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${jwt}`
+            },
+
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+
+    return res.json()
+
+}
 
 export const deleteUserService = async ({ email, jwt }) => {
 
@@ -36,7 +52,6 @@ export const deleteUserService = async ({ email, jwt }) => {
 
 }
 
-
 export const updateUserService = async ({ email, password, role, jwt }) => {
 
 
@@ -48,6 +63,21 @@ export const updateUserService = async ({ email, password, role, jwt }) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email, password, role })
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+}
+export const updateClientService = async ({ email,validated, jwt }) => {
+
+
+    const res = await fetch(`${ENDPOINT}/users/clients/`,
+        {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${jwt}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, validated})
         }
     )
     if (!res.ok) throw new Error('Response is NOT ok')
