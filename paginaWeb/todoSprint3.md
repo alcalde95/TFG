@@ -41,21 +41,24 @@ Buscar componente calendario
 - ⭕Validación datos clases a crear
 - ⭕Hacer la selección de instructor no como un input type text sino como un selector a la hora de crear las sesiones
 - Añadir calendario
-- Añadir duplicación de sesiones
+- ⭕Añadir duplicación de sesiones
 - ⭕Añadir creación de sesiones
 - ⭕Añadir validación de datos de creación de sesiones
 - ⭕Recuperar todos los instructores y mostrarlos en la selección de instructores
 - ⭕Dividir entre clases creadas y clases que imparte el instructor. Crear 2 componentes -> mis clases, -> clases que imparto
-- Añadir botón eliminar sesiones
-- Añadir botón eliminar clases
-- Esconder botón eliminar sesión en las clases que impartes y no las que creas
+- ⭕Añadir botón eliminar sesiones
+- ⭕Añadir botón eliminar clases
+- ⭕Esconder botón eliminar sesión en las clases que impartes y no las que creas
 - Esconder botón añadir sesiones en las clases que impartes --REVISAR
-- En las clases que imparte mostrar los horarios
+- En las clases que imparte mostrar las horas a las que impartes clase
+- ⭕Esconder botón borrar sesión en las clases que impartes
 - ⭕Añadir Modificación de clases creadas por el instructor
 - ⭕Añadir validaciones y refactorizar el código
 - Añadir mensajes personalizados para el login,registor,...
 - Añadir cargando...
 - Revisar a futuro el nombre classID
+- ⭕Eliminar acceso desde creación de sesiones a la página de las clases gestionadas :v
+- Añadir edición sesiones
   
 ### Backend
 
@@ -72,6 +75,6 @@ Buscar componente calendario
 - ⭕Crear endpoint editar clases
 - ⭕Crear endpoint borrar clases
 - ⭕Añadir endpoint para obtener todos los clientes inscritos a una clase
-- Añadir atributo checked al cliente para que si no lo tiene no pueda acceder a las clases
-- Implementar comprobación de si existe el token cuando lo recibe el backend en todos los endpoints
+- ⭕Añadir atributo checked al cliente para que si no lo tiene no pueda acceder a las clases
+- Implementar comprobación de si existe el token(jwt) cuando lo recibe el backend en todos los endpoints
 - Revisar invalid token error, pasar de 500 a 401
