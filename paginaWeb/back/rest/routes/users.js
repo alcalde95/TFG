@@ -5,10 +5,12 @@ export const usersRouter = Router()
 usersRouter.get('/', UserController.getUsers)
 usersRouter.get('/all', UserController.getAllUsers)
 usersRouter.get('/instructors/', UserController.getAllInstructors)
+usersRouter.get('/clients/', UserController.getClients)
 
 usersRouter.post('/login', UserController.login)
 usersRouter.post('/', UserController.register)
 
 usersRouter.put('/', UserController.updateUser)
+usersRouter.put('/clients/', UserController.updateClient)
 
 usersRouter.delete('/:email', UserController.deleteUser)
