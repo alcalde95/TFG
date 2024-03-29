@@ -7,7 +7,7 @@ const ClientsTable = ({ clients }) => {
             <thead>
                 <tr>
                     <th>Email</th>
-                    <th>Role</th>
+                    <th>Validado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
