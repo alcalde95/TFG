@@ -7,7 +7,6 @@ export class SessionsClientsModel {
   static getSessionClients = async ({ UUIDClass, date }) => {
     try {
       const data_time = new Date(date)
-      console.log(data_time)
       const sessionsClients = await prisma.sessions_Client.findMany(
         {
           where: {
