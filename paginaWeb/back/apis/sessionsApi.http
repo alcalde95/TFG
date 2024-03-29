@@ -12,7 +12,16 @@ Content-Type: application/json
   "instructorEmail" : "instructor@instructor.instructor"
   
 }
+###update session
+PUT http://localhost:1234/sessions/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEyMzMwMzA0MDI4LCJpYXQiOjE3MTE3MjU1MDR9.mX8OG-i6FUXWjzMSZ_slEoMwRnvRzNoCLfXFtxJRLNE
+Content-Type: application/json
 
+{
+  "dataTime": "2024-04-06T18:47:00.000Z",
+  "uuidClass": "ae787e98-eab7-4b99-8c94-450dfa229348",
+  "instructorEmail" : "instructor2@instructor.instructor"
+}
 ###Delete session
 DELETE http://localhost:1234/sessions/
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzExNDc3ODI4MDM0LCJpYXQiOjE3MTA4NzMwMjh9.KhMT9u1M6dgccibX4GcUUPETKGS8-Bl59SB_IF6V4P8
