@@ -1,5 +1,5 @@
 import { useCallback, useState, useContext, useRef } from 'react'
-import { allUsersService, deleteUserService, updateUserService } from '../Services/adminService'
+import { allClientsService, allUsersService, deleteUserService, updateClientService, updateUserService } from '../Services/adminService'
 
 import { UserContext } from '../Contexts/UserContext'
 import { passwordValidation, roleValidation } from '../Validations'
@@ -33,6 +33,19 @@ export const useUserManagement = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [admins, clients, instructors])
+    
+    const getClients = useCallback(async () => {
+
+        setLoading(true)
+        const clients = await allClientsService({ jwt })
+        setClients(clients)
+        setLoading(false)
+        previousData.current = { admins, clients, instructors }
+
+        if (firstRender.current === true) firstRender.current = false
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [clients])
 
 
     const editUser = async ({ email, password, role }) => {
@@ -78,12 +91,24 @@ export const useUserManagement = () => {
         }
     }
 
+    const validateClient = async ({ email,validated }) => {
+        try {
+            await updateClientService({ email,validated,jwt })
+            getUsers()
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+
     return {
-        loading,
         editUser,
         deleteUser,
+        getUsers,
+        getClients,
+        validateClient,
+        loading,
         view,
         setView,
-        getUsers
     }
 }
