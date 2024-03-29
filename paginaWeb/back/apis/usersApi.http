@@ -1,5 +1,3 @@
-### Get Token
-GET http://localhost:1234/token
 
 ### Response
 GET http://localhost:1234/private
@@ -9,11 +7,13 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiSmF2aUluVX
 
 #### Get all users
 GET http://localhost:1234/users
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzExNDY5NzA5NDQxLCJpYXQiOjE3MTA4NjQ5MDl9.OMlFgRBnpVnEajDpLY41LK55JJWVJqlYXGA3e-n19BU
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzEyMzExNjAyOTE1LCJpYXQiOjE3MTE3MDY4MDJ9.OceLwv5vDhtgeJmdyt-kyAh3idPrCbbEdI4nwqiMhck
+#### Get all clients
+GET http://localhost:1234/users/clients/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzEyMzExNjAyOTE1LCJpYXQiOjE3MTE3MDY4MDJ9.OceLwv5vDhtgeJmdyt-kyAh3idPrCbbEdI4nwqiMhck
 ### Get all admins,clients and instructors 
 GET http://localhost:1234/users/all
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzEwNjA0NjY2Njc2LCJpYXQiOjE3MDk5OTk4NjZ9.TeOzNkHCutp8Y0LDmPXZuiwAj8FGhCGatPFHYdc2YiY
-
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzEyMzExNjAyOTE1LCJpYXQiOjE3MTE3MDY4MDJ9.OceLwv5vDhtgeJmdyt-kyAh3idPrCbbEdI4nwqiMhck
 #### Login
 POST http://localhost:1234/users/login
 Content-Type: application/json
@@ -40,6 +40,15 @@ Content-Type: application/json
 {
     "email": "instructor@instructor.instructor",
     "role": "I"
+}
+###Update client
+PUT http://localhost:1234/users/clients/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzEyMzExNjAyOTE1LCJpYXQiOjE3MTE3MDY4MDJ9.OceLwv5vDhtgeJmdyt-kyAh3idPrCbbEdI4nwqiMhck
+Content-Type: application/json
+
+{
+    "email": "client@client.client",
+    "validated": "S"
 }
 
 ### Delete user
