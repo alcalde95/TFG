@@ -67,24 +67,6 @@ export class SessionsController {
       res.status(400).send('Bad request: ' + e.message)
     }
   }
-  /*
-   try {
-      const input = req.body
-      const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-
-      if (!authorized({ token })) res.status(401).send('Unauthorized')
-
-      const validatedData = validateClass({ input })
-      if (validatedData.error) return res.status(400).send(validatedData.error)
-
-      await ClassesModel.updateClass({ input })
-
-      res.send('Updated')
-    } catch (error) {
-      res.status(500).send(error.message)
-    }
-  */
 
   static deleteSession = async (req, res) => {
     try {
