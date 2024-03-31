@@ -16,7 +16,7 @@ export const SessionClientsManagement = () => {
 
   const { getClass } = useClasses()
 
-  const { getSessionClients } = useSessionClients()
+  const { getSessionClients,updateSessionClients } = useSessionClients()
 
   const params = useParams()
 
@@ -26,6 +26,20 @@ export const SessionClientsManagement = () => {
     getSessionClients({ jwt, UUIDClass: uuidClass, date })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const handleChangeAttend = async ({sessionClient}) => {
+    const attend = !sessionClient.attend
+    const res = await updateSessionClients({jwt,uuidClass:sessionClient.UUID_Class,dataTime:sessionClient.data_time,clientEmail:sessionClient.client_Email,attend,justified:sessionClient.justified})
+    if(!res) return
+    getSessionClients({ jwt, UUIDClass: sessionClient.UUID_Class, date:sessionClient.data_time })
+  }
+  const handleChangeJustified = async ({sessionClient}) => {
+    const justified = !sessionClient.justified
+    const res = await updateSessionClients({jwt,uuidClass:sessionClient.UUID_Class,dataTime:sessionClient.data_time,clientEmail:sessionClient.client_Email,attend:sessionClient.attend,justified:justified})
+    if(!res) return
+    getSessionClients({ jwt, UUIDClass: sessionClient.UUID_Class, date:sessionClient.data_time })
+  }
+
   //TODO: COMPONENTIZAR ESTO :D
   return (
     <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col ">
@@ -56,8 +70,8 @@ export const SessionClientsManagement = () => {
                     return (
                       <tr key={sessionClient.client_Email}>
                         <td>{sessionClient.client_Email}</td>
-                        <td><input type="checkbox" checked={sessionClient.attend} onChange={null} readOnly/></td>
-                        <td><input type="checkbox" checked={sessionClient.justified} onChange={null} readOnly/></td>
+                        <td><input type="checkbox" checked={sessionClient.attend} onChange={() => handleChangeAttend({sessionClient})} /></td>
+                        <td><input type="checkbox" checked={sessionClient.justified} onChange={() => handleChangeJustified({sessionClient})} /></td>
                         
                       </tr>
                     )
