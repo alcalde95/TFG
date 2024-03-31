@@ -59,11 +59,11 @@ model Sessions {
 model Sessions_Client {
   client_Email String
   client       Clients  @relation(fields: [client_Email], references: [email],onDelete: Cascade)
-  data_time    DateTime @unique
-  UUID_Class   String   @unique
+  data_time    DateTime 
+  UUID_Class   String   
   session      Sessions @relation(fields: [data_time, UUID_Class], references: [data_time, UUID_Class])
-  attend       Boolean
-  justified    Boolean
+  attend       Boolean @default(false)
+  justified    Boolean @default(false)
 
   @@id([client_Email, data_time, UUID_Class])
 }
