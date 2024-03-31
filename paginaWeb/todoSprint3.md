@@ -49,8 +49,8 @@ Buscar componente calendario
 - ⭕Añadir botón eliminar sesiones
 - ⭕Añadir botón eliminar clases
 - ⭕Esconder botón eliminar sesión en las clases que impartes y no las que creas
-- Esconder botón añadir sesiones en las clases que impartes --REVISAR
-- En las clases que imparte mostrar las horas a las que impartes clase
+- ⭕Esconder botón añadir sesiones en las clases que impartes --REVISAR
+- ⭕En las clases que imparte mostrar las horas a las que impartes clase
 - ⭕Esconder botón borrar sesión en las clases que impartes
 - ⭕Añadir Modificación de clases creadas por el instructor
 - ⭕Añadir validaciones y refactorizar el código
@@ -58,7 +58,8 @@ Buscar componente calendario
 - Añadir cargando...
 - Revisar a futuro el nombre classID
 - ⭕Eliminar acceso desde creación de sesiones a la página de las clases gestionadas :v
-- Añadir edición sesiones
+- ⭕Añadir edición sesiones
+- ⭕Añadir funcionalidad para marcar asistencia y justificar
   
 ### Backend
 
@@ -67,7 +68,7 @@ Buscar componente calendario
 - ⭕Añadir atributo instructor en las sesiones
 - ⭕Crear api sesiones
 - ⭕Crear endpoint obtener Sesiones para una clase
-- Añadir autenticación a el anterior punto
+- ⭕Añadir autenticación a el anterior punto
 - ⭕Añadir endpoint para obtener las clases en las que al menos una de sus sesiones tienen de instructor el instructor pasado
 - ⭕Crear endpoint añadir Sesiones
 - ⭕Añadir autenticación a el anterior punto
@@ -76,5 +77,6 @@ Buscar componente calendario
 - ⭕Crear endpoint borrar clases
 - ⭕Añadir endpoint para obtener todos los clientes inscritos a una clase
 - ⭕Añadir atributo checked al cliente para que si no lo tiene no pueda acceder a las clases
+- ⭕Añadir endpoint acualizazr session-class
 - Implementar comprobación de si existe el token(jwt) cuando lo recibe el backend en todos los endpoints
 - Revisar invalid token error, pasar de 500 a 401
