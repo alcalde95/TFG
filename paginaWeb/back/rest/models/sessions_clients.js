@@ -20,4 +20,34 @@ export class SessionsClientsModel {
       throw new Error(e.message)
     }
   }
+
+  static updateSessionClients = async ({ input, userEmail }) => {
+    try {
+      const c = await prisma.sessions.findUnique({
+        where: {
+          UUID_Class: input.uuidClass,
+          data_time: input.dataTime
+        }
+      })
+
+      if (c.instructorEmail !== userEmail) throw new Error('Unauthorized')
+
+      const { dataTime, uuidClass, clientEmail, attend, justified } = input
+
+      // sólo se puede cambiar el instructor
+      await prisma.sessions_Client.update({
+        where: {
+          data_time: dataTime,
+          UUID_Class: uuidClass,
+          client_Email: clientEmail
+        },
+        data: {
+          attend,
+          justified
+        }
+      })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
 }
