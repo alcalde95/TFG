@@ -1,4 +1,4 @@
-import { sessionsClientsService } from '../Services/sessionsClientsService'
+import { sessionsClientsService, updateSessionsClientsService } from '../Services/sessionsClientsService'
 import { SessionClientsContext } from '../Contexts/SessionClientsContext'
 import { useContext } from 'react'
 
@@ -15,7 +15,18 @@ export const useSessionClients = () => {
         }
     }
 
+    const updateSessionClients = async ({ jwt, uuidClass, dataTime, clientEmail, attend, justified }) => {
+        try {
+            await updateSessionsClientsService({ jwt, uuidClass, dataTime, clientEmail, attend, justified })
+            return true
+        } catch (e) {
+            console.log(e.message)
+            return false;
+        }
+    }
+
     return ({
         getSessionClients,
+        updateSessionClients,
     })
 }
