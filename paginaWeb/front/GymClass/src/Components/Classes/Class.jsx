@@ -59,7 +59,7 @@ export const Class = ({ c, editable, managed }) => {
                     onClick={handleClick}>{c.name}</h1>
                 {managed
                     ? null
-                    : <button className="absolute right-11 bg-red-600 text-white p-2 rounded-md m-2 w-auto h-max hover:bg-white" onClick={handleDeleteClick}>
+                    : <button className="absolute top-1 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 hover:bg-red-600" onClick={handleDeleteClick}>
                         ❌
                     </button>}
                 <img src={c.photo.length > 50 ? c.photo : "https://picsum.photos/300/300"} alt={c.description} className="aspect-square w-11/12 lg:w-96 rounded-lg  border-2"></img>
@@ -80,14 +80,16 @@ export const Class = ({ c, editable, managed }) => {
                 </section>
                 {
                     editable
-                        ? <button className="bg-teal-500  w-full h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                            onClick={() => setEditar(!editar)}>
-                            Editar
+                        ? <button className="absolute top-6 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 hover:bg-red-600"
+                            onClick={() => setEditar(!editar)}
+                        >
+                            🛠
                         </button>
                         : null
                 }
                 {
-                    editar ? <form name="editUserForm"
+                    editar ? <form name="editUserForm" 
+                        id = "editUserForm"
                         className="flex flex-col items-center w-10/12  md:w-auto lg:w-full m-2 gap-4 p-2 text-black text-center"
                         onSubmit={handleSubmit}
                     >

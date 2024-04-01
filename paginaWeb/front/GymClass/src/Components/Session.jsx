@@ -3,6 +3,7 @@ import { UserContext } from "../Contexts/UserContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSessions } from "../hooks/useSessions";
 import { AdminUsersContext } from "../Contexts/AdminUsersContext";
+import { IoDuplicate } from "react-icons/io5";
 
 export const Session = ({ session }) => {
     const { jwt, email } = useContext(UserContext)
@@ -17,11 +18,12 @@ export const Session = ({ session }) => {
 
     const { instructors } = useContext(AdminUsersContext)
     const [edit, setEdit] = useState(false)
+    const [dup, setDup] = useState(false)
 
     const { createSession, getSessions, updateSession } = useSessions()
 
     const location = useLocation()
-    //TODO: REVISAR ESTO, CLARO, SI ERES EL INSTRUCTOR, TE PETA Xd(SI ENTRAS DD MIS CLASES, SINO NO PETA :D)
+
     const handleClick = (e) => {
         e.preventDefault()
         if (!jwt) navigate("/login")
@@ -53,11 +55,11 @@ export const Session = ({ session }) => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const instructorEmail = e.target.Instructor.value
-        if( instructorEmail === session.instructorEmail ){
+        if (instructorEmail === session.instructorEmail) {
             setEdit(false)
             return
         }
-        const res = await updateSession({ uuidClass: session.UUID_Class, dataTime: session.data_time,instructorEmail, jwt })
+        const res = await updateSession({ uuidClass: session.UUID_Class, dataTime: session.data_time, instructorEmail, jwt })
         if (res) {
             setEdit(false)
             getSessions({ uuidClass: session.UUID_Class, jwt })
@@ -66,34 +68,42 @@ export const Session = ({ session }) => {
 
     return (
         <>
-            <div className="bg-slate-400 text-center w-72 border-white border-2 rounded-lg h-96
+            <div className="bg-slate-400 text-center w-72 border-white border-2 rounded-lg h-auto
                         flex flex-col items-center justify-center 
                         hover:bg-slate-700 hover:text-white 
                         transition duration-200 ease-in-out hover:cursor-pointer
                         relative
-                        p-4"
+                        p-8
+                        gap-4"
             >
-                {/*TODO REVISAR ESTO*/}
 
-                <p >{session.data_time}</p>
                 <p >{((new Date(session.data_time)).toLocaleString('es-ES', options))}</p>
                 <p >{session.instructorEmail}</p>
                 {
                     !location.pathname.includes("managed") &&
                     <section className="flex flex-col items-center">
-                        <button className="bg-red-600 text-white p-2 rounded-md m-2 w-10 h-max hover:bg-white"
+                        <button className="absolute top-1 right-2 bg-transparent text-white rounded-md m-0 p-0 hover:bg-red-600"
                             onClick={handleDeleteClick}>
                             ❌
                         </button>
-                        <form>
-                            <p>Seleccione el nº dias a duplicar</p>
-                            <input type="number" min="1" name="days" className="text-black" />
-                            <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                                onClick={handleDuplicationClick}
-                            >
-                                Click
-                            </button>
-                        </form>
+                        <button className="absolute top-2 right-8"
+                            onClick={() => setDup(!dup)}
+                        >
+                            <IoDuplicate className="hover:text-gray-400 ease-out transition-all duration-100"/>
+                        </button>
+                        {
+                            dup ?
+                                <form>
+                                    <p>Seleccione el nº dias a duplicar</p>
+                                    <input type="number" min="1" name="days" className="text-black" />
+                                    <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+                                        onClick={handleDuplicationClick}
+                                    >
+                                        Click
+                                    </button>
+                                </form>
+                                : null
+                        }
                     </section>
                 }
                 {

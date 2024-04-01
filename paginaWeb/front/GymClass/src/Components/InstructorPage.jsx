@@ -10,11 +10,11 @@ import { convertFile } from "../utils"
 export const InstructorPage = () => {
 
   const [ver, setVer] = useState(false)
-  const [mode, setMode] = useState(true)
+  const [mode, setMode] = useState("mine")
   const { jwt, email } = useContext(UserContext)
   const { classes } = useContext(ClassesContext)
 
-  const { getInstructorClasses, createClass,getManagedClasses, nameError, descriptionError, maxCapacityError, durationError, photoError,managedClasses } = useClasses()
+  const { getInstructorClasses, createClass, getManagedClasses, nameError, descriptionError, maxCapacityError, durationError, photoError, managedClasses } = useClasses()
 
   useEffect(() => {
     getInstructorClasses({ jwt })
@@ -40,33 +40,31 @@ export const InstructorPage = () => {
     }
   }
 
-  //TODO: MEJORAR LOS BOTONES, NO SOY CAPAZ DE CENTRARLOS Xdddddddddd
-  //UPGRADE: SEPARAR MIS CLASES Y LAS CLASES QUE GESTIONO
   return (
     <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col relative">
       <Header />
-      <div className="sticky top-0 ">
-        <button onClick={() => setMode(true)}
-          className="bg-teal-500 w-32 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+      <div className="sticky top-0.5 left-7 z-50 flex flex-col sm:flex-row items-center justify-center gap-2">
+        <button onClick={() => setMode("mine")}
+          className="bg-teal-500 w-44  h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500 "
         >
           Mis Clases
         </button>
-        <button onClick={() => setMode(false)}
+        <button onClick={() => setMode("managed")}
           className="bg-teal-500 w-44 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
         >
-          Clases gestionadas
+          Clases gestionadas  
         </button>
       </div>
       <main className="h-full bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2">
 
 
         {
-          mode ? <>
+          mode === "mine" ? <>
             <h1 className="text-4xl m-2 underline cursor-default">Mis Clases</h1>
             <button onClick={() => setVer(!ver)} className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">Add</button>
             {
               ver
-                ? <form className="w-full gap-2 flex flex-col" onSubmit={handleSubmit}>
+                ? <form className="w-11/12 md:w-4/6 gap-2 flex flex-col items-center bg-slate-200   p-2 rounded-lg border-teal-500 border-2 mt-2" onSubmit={handleSubmit}>
                   <InputMovinTitle name="Nombre" type="text" />
                   {
                     nameError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{nameError}</div>
@@ -77,7 +75,17 @@ export const InstructorPage = () => {
                     descriptionError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{descriptionError}</div>
                       : null
                   }
-                  <input type="file" name="photo" accept="image/*" onChange={null} />
+                  <input type="file"
+                    name="photo"
+                    accept="image/*"
+                    className="block w-full text-sm text-slate-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-full file:border-0
+                    file:text-sm file:font-semibold
+                    file:bg-teal-500 file:text-white
+                    hover:file:bg-teal-400 
+                    hover:file:cursor-pointer"
+                  />
                   {
                     photoError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{photoError}</div>
                       : null
@@ -106,15 +114,15 @@ export const InstructorPage = () => {
             </div>
           </>
             : <>
-                <h1 className="text-4xl m-2 underline cursor-default">Clases que gestiono</h1>
-               <div className="flex flex-col items-center text-center w-full">
-                  {
-                    managedClasses && <Classes classes={managedClasses} editable={false} managed={true}  />
-                  }
-                </div>
-              </>
+              <h1 className="text-4xl m-2 underline cursor-default">Clases que gestiono</h1>
+              <div className="flex flex-col items-center text-center w-full">
+                {
+                  managedClasses && <Classes classes={managedClasses} editable={false} managed={true} />
+                }
+              </div>
+            </>
         }
-            </main>
+      </main>
     </div>
   )
 }
