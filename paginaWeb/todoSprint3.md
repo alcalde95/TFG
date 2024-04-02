@@ -57,7 +57,7 @@ Buscar componente calendario
 - Añadir mensajes personalizados para el login,registor,...
 - Añadir cargando...
 - Revisar a futuro el nombre classID
-- Añadir nº clientes inscritos a la sesión
+- ⭕Añadir nº clientes inscritos a la sesión
 - ⭕Eliminar acceso desde creación de sesiones a la página de las clases gestionadas :v
 - ⭕Añadir edición sesiones
 - ⭕Añadir funcionalidad para marcar asistencia y justificar
@@ -79,6 +79,6 @@ Buscar componente calendario
 - ⭕Añadir endpoint para obtener todos los clientes inscritos a una clase
 - ⭕Añadir atributo checked al cliente para que si no lo tiene no pueda acceder a las clases
 - ⭕Añadir endpoint acualizazr session-class
-- Al recuperar una sesión, devolver tb el nº de clientes inscritos
+- ⭕Al recuperar una sesión, devolver tb el nº de clientes inscritos
 - Implementar comprobación de si existe el token(jwt) cuando lo recibe el backend en todos los endpoints
 - Revisar invalid token error, pasar de 500 a 401
