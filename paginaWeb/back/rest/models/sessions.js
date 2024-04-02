@@ -15,12 +15,52 @@ export class SessionsModel {
 
       if (role.role.toLowerCase() !== 'i') throw new Error('Unauthorized')
 
-      const classes = await prisma.sessions.findMany({
+      const sessions = await prisma.sessions.findMany({
         where: {
           UUID_Class: classId
+        },
+        include: {
+          _count: {
+            select: {
+              session_client: true
+            }
+          }
         }
       })
-      return classes
+      return sessions
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
+  static getSession = async ({ classId, date, userEmail }) => {
+    try {
+      const role = await prisma.users.findUnique({
+        where: {
+          email: userEmail
+        },
+        select: {
+          role: true
+        }
+      })
+
+      if (role.role.toLowerCase() !== 'i') throw new Error('Unauthorized')
+
+      const session = await prisma.sessions.findUnique({
+        where: {
+          UUID_Class: classId,
+          data_time: date
+        },
+        include: {
+          _count: {
+            select: {
+              session_client: true
+            }
+          }
+        }
+      })
+      console.log(session)
+      return session
     } catch (e) {
       throw new Error(e.message)
     }

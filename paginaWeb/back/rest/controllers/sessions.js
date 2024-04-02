@@ -20,6 +20,23 @@ export class SessionsController {
     }
   }
 
+  static getSession = async (req, res) => {
+    try {
+      const { authorization } = req.headers
+      if (!authorization) return res.status(401).send('Unauthorized')
+      const token = authorization.split(' ')[1]
+      const userEmail = jwt.verify(token, SECRET).email
+      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { classId } = req.params
+      const { date } = req.params
+      const session = await SessionsModel.getSession({ classId, date, userEmail })
+      res.json(session)
+    } catch (error) {
+      if (error.message === 'Unauthorized') return res.status(401).send(error.message)
+      res.status(500).send(error.message)
+    }
+  }
+
   static createSession = async (req, res) => {
     try {
       const { authorization } = req.headers

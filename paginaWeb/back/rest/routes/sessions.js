@@ -4,7 +4,7 @@ import { SessionsController } from '../controllers/sessions.js'
 export const sessionsRouter = Router()
 
 sessionsRouter.get('/:classId', SessionsController.getSessions)
-// classesRouter.get('/:', SessionsController.getSession)
+sessionsRouter.get('/:classId/:date', SessionsController.getSession)
 
 sessionsRouter.post('/', SessionsController.createSession)
 
