@@ -12,6 +12,9 @@ export const Session = ({ session }) => {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric'
+
     };
     const { deleteSession } = useSessions()
     const navigate = useNavigate()
@@ -65,10 +68,9 @@ export const Session = ({ session }) => {
             getSessions({ uuidClass: session.UUID_Class, jwt })
         }
     }
-
     return (
         <>
-            <div className="bg-slate-400 text-center w-72 border-white border-2 rounded-lg h-auto
+            <div className="bg-slate-400 text-center w-11/12 lg:w-72 border-white border-2 rounded-lg h-auto
                         flex flex-col items-center justify-center 
                         hover:bg-slate-700 hover:text-white 
                         transition duration-200 ease-in-out hover:cursor-pointer
@@ -78,6 +80,7 @@ export const Session = ({ session }) => {
             >
 
                 <p >{((new Date(session.data_time)).toLocaleString('es-ES', options))}</p>
+                <p >Clientes inscritos: {session._count.session_client}</p>
                 <p >{session.instructorEmail}</p>
                 {
                     !location.pathname.includes("managed") &&
@@ -89,13 +92,13 @@ export const Session = ({ session }) => {
                         <button className="absolute top-2 right-8"
                             onClick={() => setDup(!dup)}
                         >
-                            <IoDuplicate className="hover:text-gray-400 ease-out transition-all duration-100"/>
+                            <IoDuplicate className="hover:text-gray-400 ease-out transition-all duration-100" />
                         </button>
                         {
                             dup ?
                                 <form>
                                     <p>Seleccione el nº dias a duplicar</p>
-                                    <input type="number" min="1" name="days" className="text-black" />
+                                    <input type="number" min="1" name="days" className="text-black " />
                                     <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
                                         onClick={handleDuplicationClick}
                                     >
@@ -125,7 +128,7 @@ export const Session = ({ session }) => {
                     edit &&
                     <form onSubmit={handleSubmit}>
                         <select name="Instructor"
-                            className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md m-0 text-black"
+                            className="border-2 border-teal-500  w-11/12 h-10 p-1 rounded-md m-0 text-black"
                         >
                             {
                                 instructors.map((instructor, index) => {
