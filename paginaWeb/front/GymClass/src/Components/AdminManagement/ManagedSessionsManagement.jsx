@@ -1,17 +1,26 @@
 import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { Header } from "../Header"
-import { Sessions } from "../Sessions"
 import { ClassHeaderInfo } from "../Classes/ClassHeaderInfo"
 import { UserContext } from "../../Contexts/UserContext"
 import { useSessions } from "../../hooks/useSessions"
 import { SessionsContext } from "../../Contexts/SessionsContext"
 import { ClassesContext } from "../../Contexts/ClassesContext"
 import { useClasses } from "../../hooks/useClasses"
+import { WeekSessions } from "../WeekSessions"
 
 export const ManagedSessionsManagement = () => {
 
-  const { sessions } = useContext(SessionsContext)
+  const { sessions,
+    mondaySessions,
+    tuesdaySessions,
+    wednesdaySessions,
+    thursdaySessions,
+    fridaySessions,
+    saturdaySessions,
+    sundaySessions
+  } = useContext(SessionsContext)
+
   const { classes } = useContext(ClassesContext)
   const { jwt,email } = useContext(UserContext)
 
@@ -44,7 +53,7 @@ export const ManagedSessionsManagement = () => {
         
 
         {
-          sessions && <Sessions sessions={sessions} />
+          sessions && <WeekSessions mondaySessions={mondaySessions} tuesdaySessions={tuesdaySessions} wednesdaySessions={wednesdaySessions} thursdaySessions={thursdaySessions} fridaySessions={fridaySessions} saturdaySessions={saturdaySessions} sundaySessions={sundaySessions} />
         }
       </section>
 
