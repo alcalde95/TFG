@@ -7,14 +7,23 @@ import { useParams } from "react-router-dom"
 import { Header } from "../Header"
 import { ClassHeaderInfo } from "../Classes/ClassHeaderInfo"
 import { useSessions } from "../../hooks/useSessions"
-import { Sessions } from "../Sessions"
+import { WeekSessions } from "../WeekSessions"
 
 export const SessionsManagement = () => {
 
   const [show, setShow] = useState(false)
-  const { sessions } = useContext(SessionsContext)
+  const { sessions,
+    mondaySessions,
+    tuesdaySessions,
+    wednesdaySessions,
+    thursdaySessions,
+    fridaySessions,
+    saturdaySessions,
+    sundaySessions
+  } = useContext(SessionsContext)
+  
   const { classes } = useContext(ClassesContext)
-  const { jwt,email } = useContext(UserContext)
+  const { jwt, email } = useContext(UserContext)
 
   const { createSession, getSessions, getInstructors, dateError, instructorEmailError, instructors } = useSessions()
   const { getClass } = useClasses()
@@ -25,7 +34,7 @@ export const SessionsManagement = () => {
   useEffect(() => {
     const { uuidClass } = params
     getClass({ uuidClass, jwt })
-    
+
     getSessions({ uuidClass, jwt })
     getInstructors({ jwt })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -40,6 +49,7 @@ export const SessionsManagement = () => {
     const instructor = data.get("Instructor")
     const res = await createSession({ uuidClass: params.uuidClass, dataTime: date, instructorEmail: instructor, jwt })
     if (res) {
+      console.log(sessions)
       getSessions({ uuidClass: params.uuidClass, jwt })
       setShow(false)
     }
@@ -57,10 +67,10 @@ export const SessionsManagement = () => {
       <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
         <h1 className="text-4xl m-2">Sesiones</h1>
         {
-        email === classes.instructorEmail && <button className="bg-teal-500 w-40 h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-          onClick={() => setShow(!show)}>Añadir sesión</button>
+          email === classes.instructorEmail && <button className="bg-teal-500 w-40 h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+            onClick={() => setShow(!show)}>Añadir sesión</button>
         }
-          {
+        {
           show
             ? <form className="flex flex-col items-center md:grid md:grid-cols-3 w-80 md:w-full border-2 border-teal-500 bg-gray-400 m-2 rounded-md gap-4 p-2 shadow-[2px_2px_5px_0px] shadow-gray-800"
               onSubmit={handleSubmit}>
@@ -68,15 +78,15 @@ export const SessionsManagement = () => {
               {
                 dateError ? <p className="text-red-500">{dateError}</p> : null
               }
-               <select name="Instructor"
-                  className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md m-0"
-                >
-                  {
-                    instructors.map((instructor, index) => {
-                      return <option key={index} value={instructor.email}>{instructor.email}</option>
-                    })
-                  }
-                </select>
+              <select name="Instructor"
+                className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md m-0"
+              >
+                {
+                  instructors.map((instructor, index) => {
+                    return <option key={index} value={instructor.email}>{instructor.email}</option>
+                  })
+                }
+              </select>
               {
                 instructorEmailError ? <p className="text-red-500">{instructorEmailError}</p> : null
               }
@@ -86,7 +96,7 @@ export const SessionsManagement = () => {
         }
 
         {
-          sessions && <Sessions sessions={sessions} />
+          sessions && <WeekSessions mondaySessions={mondaySessions} tuesdaySessions={tuesdaySessions} wednesdaySessions={wednesdaySessions} thursdaySessions={thursdaySessions} fridaySessions={fridaySessions} saturdaySessions={saturdaySessions} sundaySessions={sundaySessions} />
         }
       </section>
 
