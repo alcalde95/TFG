@@ -18,6 +18,23 @@ export const sessionsService = async ({ uuidClass, jwt }) => {
 
 }
 
+export const sessionService = async ({ uuidClass,dataTime, jwt }) => {
+
+    const res = await fetch(`${ENDPOINT}/sessions/${uuidClass}/${dataTime}`,
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${jwt}`
+            },
+
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+
+    return res.json()
+
+}
+
 
 export const createSessionService = async ({ uuidClass, dataTime, instructorEmail, jwt }) => {
 
