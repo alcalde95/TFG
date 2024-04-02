@@ -17,6 +17,7 @@ import { SessionsManagement } from "./Components/AdminManagement/SessionsManagem
 import { ManagedSessionsManagement } from "./Components/AdminManagement/ManagedSessionsManagement"
 import { SessionClientsManagement } from "./Components/SessionClientsManagement"
 import { SessionClientsContextProvider } from "./Contexts/SessionClientsContext"
+import { SessionContextProvider } from "./Contexts/SessionContext"
 
 function App() {
 
@@ -74,17 +75,19 @@ function App() {
 
   return (
     <div className="box-content min-w-full  min-h-screen bg-slate-700 flex flex-col content-center items-center p-0 m-0 text-black font-mono">
-      <SessionClientsContextProvider>
-        <UserContextProvider>
-          <ClassesContextProvider>
-            <SessionsContextProvider>
-              <AdminUsersContextProvider>
-                <RouterProvider router={router} />
-              </AdminUsersContextProvider>
-            </SessionsContextProvider>
-          </ClassesContextProvider>
-        </UserContextProvider>
-      </SessionClientsContextProvider>
+      <SessionContextProvider>
+        <SessionClientsContextProvider>
+          <UserContextProvider>
+            <ClassesContextProvider>
+              <SessionsContextProvider>
+                <AdminUsersContextProvider>
+                  <RouterProvider router={router} />
+                </AdminUsersContextProvider>
+              </SessionsContextProvider>
+            </ClassesContextProvider>
+          </UserContextProvider>
+        </SessionClientsContextProvider>
+      </SessionContextProvider>
 
     </div>
   )
