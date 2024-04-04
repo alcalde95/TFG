@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useClasses } from "../../hooks/useClasses";
 import { convertFile } from "../../utils";
 export const Class = ({ c, editable, managed }) => {
-    const { jwt, email } = useContext(UserContext)
+    const { jwt, email, role } = useContext(UserContext)
     const [editar, setEditar] = useState(false)
     const [name, setName] = useState(c.name)
     const [description, setDescription] = useState(c.description)
@@ -20,8 +20,19 @@ export const Class = ({ c, editable, managed }) => {
     const handleClick = (e) => {
         e.preventDefault()
         if (!jwt) navigate("/login")
-        managed ? navigate(`${location.pathname}/managed/${c.UUID_Class}`)
-            : navigate(`${location.pathname}/${c.UUID_Class}`)
+        if (location.pathname === '/' && role.toLowerCase() === "i" && email === c.instructorEmail) {
+            navigate(`/instructor/${c.UUID_Class}`)
+        } else {
+            if (email === c.instructorEmail && !managed) {
+                navigate(`${location.pathname}/${c.UUID_Class}`)
+            }
+            else {
+                if (managed) {
+                    navigate(`${location.pathname}/managed/${c.UUID_Class}`)
+
+                }
+            }
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -51,11 +62,10 @@ export const Class = ({ c, editable, managed }) => {
     }
 
 
-    //TODO: MEJORAR EL CÓDIGO DE MODO QUE SEA EDITABLE Y ELIMINABLE SI EL USUARIO ES EL INSTRUCTOR(MENOS EN LA LANDING)
     return (
         <>
-            <div className="flex flex-col items-center border-2 w-10/12 border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-200 ease-in-out relative">
-                <h1 className="font-bold text-3xl m-2 underline active:text-black hover:text-teal-500 transition-all duration-300 ease-in-out"
+            <div className="flex flex-col items-center border-2 w-11/12 md:w-10/12 lg:min-h-[570px] border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-200 ease-in-out relative">
+                <h1 className="font-bold text-3xl m-2 max-w-60 underline active:text-black hover:text-teal-500 transition-all duration-300 ease-in-out overflow-hidden text-center"
                     onClick={handleClick}>{c.name}</h1>
                 {managed
                     ? null
@@ -88,8 +98,8 @@ export const Class = ({ c, editable, managed }) => {
                         : null
                 }
                 {
-                    editar ? <form name="editUserForm" 
-                        id = "editUserForm"
+                    editar ? <form name="editUserForm"
+                        id="editUserForm"
                         className="flex flex-col items-center w-10/12  md:w-auto lg:w-full m-2 gap-4 p-2 text-black text-center"
                         onSubmit={handleSubmit}
                     >
