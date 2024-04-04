@@ -91,7 +91,6 @@ export class ClassesController {
       const { authorization } = req.headers
       const token = authorization.split(' ')[1]
       const instructorEmail = jwt.verify(token, SECRET).email
-      console.log(instructorEmail)
       if (!authorized({ token })) res.status(401).send('Unauthorized')
       await ClassesModel.deleteClass({ uuidClass: req.params.class_id, instructorEmail })
       res.send('Deleted')
