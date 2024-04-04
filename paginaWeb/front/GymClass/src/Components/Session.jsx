@@ -34,6 +34,8 @@ export const Session = ({ session }) => {
             navigate(`${location.pathname}/${session.data_time}`)
         }
     }
+
+    // TODO: AÑADIR GESTIÓN DE ERRORES
     const handleDuplicationClick = async (e) => {
         e.preventDefault()
         const form = e.target.form
@@ -42,8 +44,12 @@ export const Session = ({ session }) => {
         let dataTime = new Date(session.data_time)
         dataTime.setDate(dataTime.getDate() + parseInt(days))
         const res = await createSession({ uuidClass: session.UUID_Class, dataTime: dataTime, instructorEmail: session.instructorEmail, jwt })
-        if (!res) return
+        if (!res) {
+            alert("error")
+            return
+        }
         getSessions({ uuidClass: session.UUID_Class, jwt })
+        setDup(false)
     }
 
     const handleDeleteClick = async (e) => {
@@ -76,7 +82,8 @@ export const Session = ({ session }) => {
                         transition duration-200 ease-in-out hover:cursor-pointer
                         relative
                         p-8
-                        gap-4"
+                        gap-4
+                        overflow-hidden"
             >
 
                 <p >{((new Date(session.data_time)).toLocaleString('es-ES', options))}</p>
@@ -97,8 +104,7 @@ export const Session = ({ session }) => {
                         {
                             dup ?
                                 <form>
-                                    <p>Seleccione el nº dias a duplicar</p>
-                                    <input type="number" min="1" name="days" className="text-black " />
+                                    <input type="number" min="1" name="days" className="text-black " placeholder="nº días a adelantar" />
                                     <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
                                         onClick={handleDuplicationClick}
                                     >
