@@ -17,7 +17,9 @@ export const classNameValidation = ({ name }) => {
     if (name.length < 3) {
         return "El nombre debe tener al menos una longitud de 3 caracteres"
     }
-
+    if (name.length > 20) {
+        return "El nombre no puede tener una longitud mayor a 20 caracteres"
+    }
     return ""
 }
 
