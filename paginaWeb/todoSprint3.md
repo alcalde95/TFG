@@ -54,6 +54,7 @@ Buscar componente calendario
 - ⭕Esconder botón borrar sesión en las clases que impartes
 - ⭕Añadir Modificación de clases creadas por el instructor
 - ⭕Añadir validaciones y refactorizar el código
+- Añadir control de errores duplicar sesión
 - Añadir mensajes personalizados para el login,registor,...
 - Añadir cargando...
 - Revisar a futuro el nombre classID
