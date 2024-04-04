@@ -16,6 +16,8 @@ export const Session = ({ session }) => {
         minute: 'numeric'
 
     };
+
+    const [error, setError] = useState(false)
     const { deleteSession } = useSessions()
     const navigate = useNavigate()
 
@@ -45,9 +47,10 @@ export const Session = ({ session }) => {
         dataTime.setDate(dataTime.getDate() + parseInt(days))
         const res = await createSession({ uuidClass: session.UUID_Class, dataTime: dataTime, instructorEmail: session.instructorEmail, jwt })
         if (!res) {
-            alert("error")
+            setError(true)
             return
         }
+        setError(false)
         getSessions({ uuidClass: session.UUID_Class, jwt })
         setDup(false)
     }
@@ -86,7 +89,7 @@ export const Session = ({ session }) => {
                         overflow-hidden"
             >
 
-                <p >{((new Date(session.data_time)).toLocaleString('es-ES', options))}</p>
+                <p >{((new Date(session.data_time)).toLocaleString('es-ES', options)).charAt(0).toUpperCase() + ((new Date(session.data_time)).toLocaleString('es-ES', options)).slice(1)}</p>
                 <p >Clientes inscritos: {session._count.session_client}</p>
                 <p >{session.instructorEmail}</p>
                 {
@@ -105,6 +108,7 @@ export const Session = ({ session }) => {
                             dup ?
                                 <form>
                                     <input type="number" min="1" name="days" className="text-black " placeholder="nº días a adelantar" />
+                                    {error && <p className="text-red-500">Error</p>}
                                     <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
                                         onClick={handleDuplicationClick}
                                     >
