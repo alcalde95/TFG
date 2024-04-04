@@ -28,7 +28,6 @@ export class SessionsClientsController {
       if (!authorized({ token })) return res.status(401).send('Unauthorized')
       const body = req.body
       const input = { ...body, dataTime: new Date(body.dataTime) }
-      console.log(input)
       const validatedData = validateSessionClassesSchema({ input })
 
       if (validatedData.error) return res.status(400).send(validatedData.error.message)
