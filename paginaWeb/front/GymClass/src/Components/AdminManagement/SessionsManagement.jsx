@@ -49,7 +49,6 @@ export const SessionsManagement = () => {
     const instructor = data.get("Instructor")
     const res = await createSession({ uuidClass: params.uuidClass, dataTime: date, instructorEmail: instructor, jwt })
     if (res) {
-      console.log(sessions)
       getSessions({ uuidClass: params.uuidClass, jwt })
       setShow(false)
     }
