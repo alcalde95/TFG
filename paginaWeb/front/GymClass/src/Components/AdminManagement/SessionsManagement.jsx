@@ -21,7 +21,7 @@ export const SessionsManagement = () => {
     saturdaySessions,
     sundaySessions
   } = useContext(SessionsContext)
-  
+
   const { classes } = useContext(ClassesContext)
   const { jwt, email } = useContext(UserContext)
 
@@ -71,18 +71,21 @@ export const SessionsManagement = () => {
         }
         {
           show
-            ? <form className="flex flex-col items-center md:grid md:grid-cols-3 w-80 md:w-full border-2 border-teal-500 bg-gray-400 m-2 rounded-md gap-4 p-2 shadow-[2px_2px_5px_0px] shadow-gray-800"
+            ? <form className="flex flex-row flex-wrap items-center justify-around gap-4 w-11/12 lg:w-96 h-auto border-2 border-teal-500 bg-gray-400 rounded-md  m-2 p-2 shadow-[2px_2px_5px_0px] shadow-gray-800"
               onSubmit={handleSubmit}>
-              <p>Fecha clase:<input type="datetime-local" name="Date" /></p>
+              <input type="datetime-local"
+                name="Date"
+                className="border-2 border-teal-500 w-64  lg:w-full h-10 p-1 rounded-md m-0 text-center"
+              />
               {
                 dateError ? <p className="text-red-500">{dateError}</p> : null
               }
               <select name="Instructor"
-                className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md m-0"
+                className="border-2 border-teal-500 w-52  lg:w-full h-10 p-1 rounded-md m-0  text-center"
               >
                 {
                   instructors.map((instructor, index) => {
-                    return <option key={index} value={instructor.email}>{instructor.email}</option>
+                    return <option key={index} value={instructor.email} className="text-center rounded-lg border-2 border-teal-500">{instructor.email}</option>
                   })
                 }
               </select>
