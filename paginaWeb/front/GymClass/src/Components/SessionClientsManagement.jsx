@@ -34,20 +34,18 @@ export const SessionClientsManagement = () => {
     getSession({ uuidClass, dataTime: date, jwt })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  const x = sessionClients.length
-  console.log(x)
   return (
     <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col ">
       <Header />
       <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
         {
-          classes && sessionClients && <ClassHeaderInfo headerClass={classes} num={x} />
+          classes && sessionClients && <ClassHeaderInfo headerClass={classes} />
 
         }
       </section >
       <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
         {
-          session && <SessionHeaderInfo session={session} num={x} />
+          session && <SessionHeaderInfo session={session} num={sessionClients.length} />
 
         }
       </section >
