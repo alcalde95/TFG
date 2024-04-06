@@ -1,9 +1,9 @@
 import { ENDPOINT } from "./settings"
 
 
-export const classesService = async (/*{ jwt }*/) => {
-
-    const res = await fetch(`${ENDPOINT}/classes/`,
+export const classesService = async ({ name, maxCapacity, minDuration, maxDuration }) => {
+    console.log(`${ENDPOINT}/classes/?name=${name}&maxCapacity=${maxCapacity}&minDuration=${minDuration}&maxDuration=${maxDuration}`)
+    const res = await fetch(`${ENDPOINT}/classes/?name=${name}&maxCapacity=${maxCapacity}&minDuration=${minDuration}&maxDuration=${maxDuration}`,
         {
             method: 'GET'//,
             /*headers: {
