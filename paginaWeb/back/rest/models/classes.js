@@ -5,9 +5,22 @@ import { convertClassesPhoto, convertSingleClassesPhoto } from '../../utilFuncti
 const prisma = new PrismaClient()
 
 export class ClassesModel {
-  static getClasses = async () => {
+  static getClasses = async ({ name, maxCapacity, minDuration, maxDuration }) => {
     try {
-      const classes = await prisma.class.findMany()
+      const classes = await prisma.class.findMany({
+        where: {
+          name: {
+            contains: name
+          },
+          max_Capacity: {
+            lte: maxCapacity
+          },
+          duration: {
+            gte: minDuration,
+            lte: maxDuration
+          }
+        }
+      })
       return convertClassesPhoto({ classes })
     } catch (e) {
       throw new Error(e.message)
