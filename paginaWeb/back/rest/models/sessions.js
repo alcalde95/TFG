@@ -131,6 +131,15 @@ export class SessionsModel {
 
     if (role.role.toLowerCase() !== 'i') throw new Error('Unauthorized')
     const { dataTime, uuidClass } = input
+
+    const c = await prisma.class.findUnique({
+      where: {
+        UUID_Class: uuidClass
+      }
+    })
+
+    if (c.instructorEmail !== userEmail) throw new Error('Unauthorized')
+
     try {
       await prisma.sessions.delete({
         where: {
