@@ -11,6 +11,23 @@ export const Header = () => {
 
     useEffect(() => {
         if (!isLogged && location.pathname !== '/') navigate('/login')
+        //TODO: PREGUNTAR A DANI SI LOS CLIENTES Y ASÍ, UNA VEZ LOGUEADOS PUEDEN ACCEDER A LA LANDING O NO
+        if (location.pathname !== '/') {
+            switch (role.toLowerCase()) {
+                case 'a':
+                    if(!location.pathname.includes('/admin')) navigate('/admin')
+                    break;
+                case 'c':
+                    if(!location.pathname.includes('/client')) navigate('/client')
+                    break;
+                case 'i':
+                    if(!location.pathname.includes('/instructor')) navigate('/instructor')
+                    break;
+                default:
+                    navigate('/');
+            }
+        }
+       
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [role, isLogged])
