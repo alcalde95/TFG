@@ -18,6 +18,8 @@ import { ManagedSessionsManagement } from "./Components/AdminManagement/ManagedS
 import { SessionClientsManagement } from "./Components/SessionClientsManagement"
 import { SessionClientsContextProvider } from "./Contexts/SessionClientsContext"
 import { SessionContextProvider } from "./Contexts/SessionContext"
+import { BaseClientPage } from "./Components/Clients/BaseClientPage"
+import { SearchClassClientPage } from "./Components/Clients/SearchClassClientPage"
 
 function App() {
 
@@ -66,6 +68,12 @@ function App() {
     }, {
       path: "/instructor/managed/:uuidClass/:date",
       element: <SessionClientsManagement />
+    }, {
+      path: "/client",
+      element: <BaseClientPage />
+    }, {
+      path: "/client/clientClassSearch",
+      element: <SearchClassClientPage />
     },
     {
       path: "*",
