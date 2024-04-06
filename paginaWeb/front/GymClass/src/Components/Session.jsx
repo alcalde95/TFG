@@ -6,7 +6,7 @@ import { AdminUsersContext } from "../Contexts/AdminUsersContext";
 import { IoDuplicate } from "react-icons/io5";
 
 export const Session = ({ session }) => {
-    const { jwt, email } = useContext(UserContext)
+    const { jwt, email,role } = useContext(UserContext)
     const options = {
         weekday: 'long',
         year: 'numeric',
@@ -43,6 +43,10 @@ export const Session = ({ session }) => {
         const form = e.target.form
         const data = new FormData(form)
         const days = data.get("days")
+        if(parseInt(days) < 1){
+            setError(true)
+            return
+        }
         let dataTime = new Date(session.data_time)
         dataTime.setDate(dataTime.getDate() + parseInt(days))
         const res = await createSession({ uuidClass: session.UUID_Class, dataTime: dataTime, instructorEmail: session.instructorEmail, jwt })
@@ -93,7 +97,7 @@ export const Session = ({ session }) => {
                 <p >Clientes inscritos: {session._count.session_client}</p>
                 <p >{session.instructorEmail}</p>
                 {
-                    !location.pathname.includes("managed") &&
+                    !location.pathname.includes("managed") && role?.toLowerCase() === 'i' &&
                     <section className="flex flex-col items-center">
                         <button className="absolute top-1 right-2 bg-transparent text-white rounded-md m-0 p-0 hover:bg-red-600"
                             onClick={handleDeleteClick}>
@@ -120,7 +124,7 @@ export const Session = ({ session }) => {
                     </section>
                 }
                 {
-                    location.pathname.includes("managed") &&
+                    location.pathname.includes("managed") && role?.toLowerCase() === 'i' &&
                     <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
                         onClick={handleClick}>
                         Detalles
@@ -128,7 +132,7 @@ export const Session = ({ session }) => {
                 }
 
                 {
-                    !location.pathname.includes("managed") &&
+                    !location.pathname.includes("managed") && role?.toLowerCase() === 'i' &&
                     <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
                         onClick={() => setEdit(!edit)}>
                         🛠
