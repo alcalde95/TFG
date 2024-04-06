@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { ClassesContext } from "../Contexts/ClassesContext"
 import { classService, classesInstructorService, classesService, createClassService, deleteClassService, getManagedClassesInstructorService, updateClassService } from "../Services/classService"
 import { classDescriptionValidation, classDurationValidation, classMaxCapacityValidation, classNameValidation } from "../Validations"
@@ -12,18 +12,19 @@ export const useClasses = () => {
     const [maxCapacityError, setMaxCapacityError] = useState("")
     const [durationError, setDurationError] = useState("")
     const [photoError, setPhotoError] = useState("")
-    const [managedClasses,setManagedClasses] = useState([])
-    const getClasses = useCallback(async () => {
+    const [managedClasses, setManagedClasses] = useState([])
+
+    const getClasses = async ({ name = '', maxCapacity = '', minDuration = '', maxDuration = '' } = {}) => {
         try {
             setLoading(true)
-            const classes = await classesService()
+            const classes = await classesService({ name, maxCapacity, minDuration, maxDuration })
             setClasses(classes)
             setLoading(false)
         } catch (error) {
             console.log(error)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }
+
 
     const getInstructorClasses = async ({ jwt }) => {
         const res = await classesInstructorService({ jwt })
@@ -76,7 +77,7 @@ export const useClasses = () => {
 
     }
 
-    const updateClass = async ({ name, photo, description, maxCapacity, duration, instructorEmail,jwt,UUIDClass }) => {
+    const updateClass = async ({ name, photo, description, maxCapacity, duration, instructorEmail, jwt, UUIDClass }) => {
 
         const nameValidation = classNameValidation({ name })
         const descriptionValidation = classDescriptionValidation({ description })
@@ -93,7 +94,7 @@ export const useClasses = () => {
             return false
         }
         try {
-            await updateClassService({ name, photo, description, maxCapacity, duration, instructorEmail,jwt,UUIDClass })
+            await updateClassService({ name, photo, description, maxCapacity, duration, instructorEmail, jwt, UUIDClass })
             return true
         } catch (error) {
             console.log(error)
@@ -102,12 +103,12 @@ export const useClasses = () => {
 
     }
 
-    const deleteClass = async ({ uuidClass,jwt }) => {
+    const deleteClass = async ({ uuidClass, jwt }) => {
         try {
-            await deleteClassService({ uuidClass,jwt })
+            await deleteClassService({ uuidClass, jwt })
             console.log("hola :D")
             return true
-        }catch(e){
+        } catch (e) {
             console.error(e.message)
             return false
         }
