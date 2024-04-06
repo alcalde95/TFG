@@ -4,10 +4,20 @@ import { authorized } from '../../utilFunctions.js'
 import { ClassesModel } from '../models/classes.js'
 import { validateClass } from '../schemas/class.js'
 export class ClassesController {
-  static getClasses = async (_, res) => {
+  static getClasses = async (req, res) => {
     try {
-      // preguntar si esto debería ser privado
-      const classes = await ClassesModel.getClasses()
+      let { name, maxCapacity, minDuration, maxDuration } = req.query
+      if (name === '') name = undefined
+      if (maxCapacity === '') maxCapacity = undefined
+      if (minDuration === '') minDuration = undefined
+      if (maxDuration === '') maxDuration = undefined
+
+      if (maxCapacity) maxCapacity = parseInt(maxCapacity)
+      if (minDuration) minDuration = parseInt(minDuration)
+      if (maxDuration) maxDuration = parseInt(maxDuration)
+
+      console.log(name, maxCapacity, minDuration, maxDuration)
+      const classes = await ClassesModel.getClasses({ name, maxCapacity, minDuration, maxDuration })
       res.json(classes)
     } catch (error) {
       res.status(500).send(error.message)
