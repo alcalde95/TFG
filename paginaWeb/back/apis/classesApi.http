@@ -1,5 +1,5 @@
 ###Recuperación de todas las clases
-GET http://localhost:1234/classes/
+GET http://localhost:1234/classes/?name=&maxCapacity=30&minDuration=&maxDuration=
 
 ###Recuperación de una clase
 GET http://localhost:1234/classes/0d5e5cb7-6efc-4fce-af04-322255e80e13
