@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { ClassesContext } from '../../Contexts/ClassesContext'
 import { Header } from '../Header'
 import { Classes } from '../Classes/Classes'
 import { useClasses } from '../../hooks/useClasses'
+import debounce from 'just-debounce-it'
 
 export const SearchClassClientPage = () => {
 
@@ -15,6 +16,7 @@ export const SearchClassClientPage = () => {
     useEffect(() => {
         setClasses([])
         setLoading(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleSubmit = async (e) => {
@@ -31,13 +33,26 @@ export const SearchClassClientPage = () => {
         await getClasses({ name, maxCapacity, minDuration, maxDuration })
         setLoading(false)
     }
+    
+    const handleChange = async (e) => {
+        
+        const name = e.target.value
+        debouncedGetClasses({ name })
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const debouncedGetClasses = useCallback(
+        debounce(({ name, maxCapacity, minDuration, maxDuration }) => {
+            getClasses({ name, maxCapacity, minDuration, maxDuration })
+        }, 300)
+        , [getClasses])
 
     return (
         <div className="max-w-6xl min-w-80 w-full min-h-screen h-full flex flex-col">
             <Header />
             <section className=" bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2">
                 <form onSubmit={handleSubmit}>
-                    <input type='text' name='name' placeholder='introduzca el nombre de la clase a buscar' />
+                    <input type='text' name='name' placeholder='introduzca el nombre de la clase a buscar' onChange={handleChange}/>
                     <input type='number' name='maxCapacity' placeholder='nº max cli ' />
                     <input type='number' name='minDuration' placeholder='duración mínima ' />
                     <input type='number' name='maxDuration' placeholder='duración máxima' />
