@@ -1,6 +1,22 @@
 ###Get sessionsClients 4 a session
 GET http://localhost:1234/sessionsClients/ae787e98-eab7-4b99-8c94-450dfa229348/2024-03-27T19:47:00.000Z
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEyNTAzNDAwMzkxLCJpYXQiOjE3MTE4OTg2MDB9.gpcUvAqt39_jp0vbHBtmNcPycLl3zyzb9G4cn4PGmgA
+###Enroll client to session
+POST http://localhost:1234/sessionsClients/767b5509-4f2d-48e5-8e57-2f99092e8837/2024-04-09T05:42:00.000Z
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEzMjAxMzMzOTE5LCJpYXQiOjE3MTI1OTY1MzN9.aFt6KCLc-ksvXoHQlM9FpHHQjc_9VuVlvVDjrdg39zU
+Content-Type: application/json
+
+{
+  "clientEmail": "client@client.client"
+}
+### IsEnrolledClient
+POST http://localhost:1234/sessionsClients/767b5509-4f2d-48e5-8e57-2f99092e8837/2024-04-09T05:42:00.000Z/isEnrolled
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEzMjAxMzMzOTE5LCJpYXQiOjE3MTI1OTY1MzN9.aFt6KCLc-ksvXoHQlM9FpHHQjc_9VuVlvVDjrdg39zU
+Content-Type: application/json
+
+{
+  "clientEmail": "clisdaaent@client.client"
+}
 ###Update sessionClient
 PUT http://localhost:1234/sessionsClients/ae787e98-eab7-4b99-8c94-450dfa229348/2024-03-27T19:47:00.000Z
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEyNTAzNDAwMzkxLCJpYXQiOjE3MTE4OTg2MDB9.gpcUvAqt39_jp0vbHBtmNcPycLl3zyzb9G4cn4PGmgA
