@@ -4,17 +4,6 @@ const prisma = new PrismaClient()
 export class SessionsModel {
   static getSessions = async ({ classId, userEmail }) => {
     try {
-      const role = await prisma.users.findUnique({
-        where: {
-          email: userEmail
-        },
-        select: {
-          role: true
-        }
-      })
-
-      if (role.role.toLowerCase() !== 'i') throw new Error('Unauthorized')
-
       const sessions = await prisma.sessions.findMany({
         where: {
           UUID_Class: classId
