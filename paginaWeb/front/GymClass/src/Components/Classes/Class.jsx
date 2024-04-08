@@ -23,18 +23,21 @@ export const Class = ({ c, editable, managed }) => {
     const handleClick = (e) => {
         e.preventDefault()
         if (!jwt) navigate("/login")
-        if (location.pathname === '/' && role.toLowerCase() === "i" && email === c.instructorEmail) {
-            navigate(`/instructor/${c.UUID_Class}`)
-        } else {
-            if (email === c.instructorEmail && !managed) {
-                navigate(`${location.pathname}/${c.UUID_Class}`)
-            }
-            else {
-                if (managed) {
-                    navigate(`${location.pathname}/managed/${c.UUID_Class}`)
 
+        switch (role.toLowerCase()) {
+            case "i":
+                if (location.pathname === '/' && email === c.instructorEmail) {
+                    navigate(`/instructor/${c.UUID_Class}`)
+                } else if (email === c.instructorEmail && !managed) {
+                    navigate(`${location.pathname}/${c.UUID_Class}`)
+                } else if (managed) {
+                    navigate(`${location.pathname}/managed/${c.UUID_Class}`)
                 }
-            }
+                break
+            case "c":
+                navigate(`/client/${c.UUID_Class}`)
+                break
+
         }
     }
 
@@ -73,7 +76,7 @@ export const Class = ({ c, editable, managed }) => {
                 {managed
                     ? null
                     : <button className="absolute top-1 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 hover:bg-red-600" onClick={handleDeleteClick}>
-                        <ImCross className="w-3"/>
+                        <ImCross className="w-3" />
                     </button>}
                 <img src={c.photo.length > 50 ? c.photo : "https://picsum.photos/300/300"} alt={c.description} className="aspect-square w-11/12 lg:w-96 rounded-lg  border-2"></img>
 
@@ -96,7 +99,7 @@ export const Class = ({ c, editable, managed }) => {
                         ? <button className="absolute top-1 right-8 bg-transparent text-white rounded-md m-0 p-0 hover:text-black"
                             onClick={() => setEditar(!editar)}
                         >
-                            <IoIosOptions className="w-4"/>
+                            <IoIosOptions className="w-4" />
                         </button>
                         : null
                 }
