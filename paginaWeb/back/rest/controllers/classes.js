@@ -16,7 +16,6 @@ export class ClassesController {
       if (minDuration) minDuration = parseInt(minDuration)
       if (maxDuration) maxDuration = parseInt(maxDuration)
 
-      console.log(name, maxCapacity, minDuration, maxDuration)
       const classes = await ClassesModel.getClasses({ name, maxCapacity, minDuration, maxDuration })
       res.json(classes)
     } catch (error) {
