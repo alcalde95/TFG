@@ -20,6 +20,7 @@ import { SessionClientsContextProvider } from "./Contexts/SessionClientsContext"
 import { SessionContextProvider } from "./Contexts/SessionContext"
 import { BaseClientPage } from "./Components/Clients/BaseClientPage"
 import { SearchClassClientPage } from "./Components/Clients/SearchClassClientPage"
+import { ClientClassSessions } from "./Components/Clients/ClientClassSessions"
 
 function App() {
 
@@ -78,7 +79,10 @@ function App() {
     {
       path: "*",
       element: <ErrorPage />
-    }
+    },{
+      path: "/client/:uuidClass",
+      element: <ClientClassSessions />
+    },
   ])
 
   return (
