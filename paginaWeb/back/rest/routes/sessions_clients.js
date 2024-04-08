@@ -5,7 +5,8 @@ export const sessionsClientsRouter = Router()
 
 sessionsClientsRouter.get('/:UUIDClass/:date', SessionsClientsController.getSessionClients)
 
-// sessionsRouter.post('/', SessionsController.createSession)
+sessionsClientsRouter.post('/:UUIDClass/:date', SessionsClientsController.enrollClientToSession)
+sessionsClientsRouter.post('/:UUIDClass/:date/isEnrolled', SessionsClientsController.isEnrolled)
 
 sessionsClientsRouter.put('/:UUIDClass/:date', SessionsClientsController.updateSessionClients)
 
