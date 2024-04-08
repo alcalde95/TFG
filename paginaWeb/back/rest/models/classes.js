@@ -108,7 +108,6 @@ export class ClassesModel {
         }
       })
     } catch (e) {
-      console.log(e)
       throw new Error(e.message)
     }
   }
