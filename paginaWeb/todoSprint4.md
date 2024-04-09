@@ -23,7 +23,7 @@
 - ⭕La búsqueda hacerla mediante un debounce
 - ⭕Crear sistema inscripción en sesiones
 - ⭕Mostrar boton de inscribirse y desinscribirse respectivamente
-- Crear sistema desinscribirse de sesiones
+- ⭕Crear sistema desinscribirse de sesiones
 - Crear zona en la que se muestran todas las clases
 - Mostrar sesiones dentro de las clases
 - Dentro de las sesiones que se mnuestran, permitir inscribirse al hacer click
@@ -35,3 +35,4 @@
 - ⭕Añadir verificación en sesiones. Sólo borrar si aquel que te manda la petición es el creador de la clase que cuelga la sesión
 - ⭕Añadir endpoint post en sessionClients  para poder inscribirse los clientes a las sesiones
 - ⭕Añadir endpoint para ver si un cliente está inscrito a una clase o no
+- ⭕Añadir endpoint para desinscribirse de sesiones
