@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { ClassesContext } from "../Contexts/ClassesContext"
-import { classService, classesInstructorService, classesService, createClassService, deleteClassService, getManagedClassesInstructorService, updateClassService } from "../Services/classService"
+import { classService, classesInstructorService, classesService, clientClassesService, createClassService, deleteClassService, getManagedClassesInstructorService, updateClassService } from "../Services/classService"
 import { classDescriptionValidation, classDurationValidation, classMaxCapacityValidation, classNameValidation } from "../Validations"
 
 export const useClasses = () => {
@@ -18,6 +18,16 @@ export const useClasses = () => {
         try {
             setLoading(true)
             const classes = await classesService({ name, maxCapacity, minDuration, maxDuration })
+            setClasses(classes)
+            setLoading(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const getClassesClient = async ({jwt}) => {
+        try {
+            setLoading(true)
+            const classes = await clientClassesService({ jwt })
             setClasses(classes)
             setLoading(false)
         } catch (error) {
@@ -120,6 +130,7 @@ export const useClasses = () => {
         loading,
         getClasses,
         getInstructorClasses,
+        getClassesClient,
         createClass,
         getClass,
         updateClass,
