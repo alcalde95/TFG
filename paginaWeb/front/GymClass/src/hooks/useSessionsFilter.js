@@ -7,8 +7,10 @@ export const useSessionsFilter = () => {
     const filterSessions = ({ sessions }) => {
 
         if (!filtered) return sessions
+        return sessions.filter(session => {
 
-        return sessions.filter(session => new Date(session.data_time) >= (new Date().setDate((new Date()).getDay() - 1))
+            return (new Date(session.data_time) >= new Date((new Date()).getTime() - 1000*60*60))
+        }
         )
     }
 
