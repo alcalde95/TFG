@@ -16,6 +16,21 @@ export const classesService = async ({ name, maxCapacity, minDuration, maxDurati
     return res.json()
 
 }
+export const clientClassesService = async ({jwt }) => {
+    const res = await fetch(`${ENDPOINT}/classes/client/`,
+        {
+            method: 'GET',
+            headers: {
+                'Authorization': `token ${jwt}`
+            },
+
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+
+    return res.json()
+
+}
 
 export const classService = async ({ uuidClass }) => {
 
