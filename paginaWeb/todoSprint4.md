@@ -24,11 +24,11 @@
 - ⭕Crear sistema inscripción en sesiones
 - ⭕Mostrar boton de inscribirse y desinscribirse respectivamente
 - ⭕Crear sistema desinscribirse de sesiones
-- Crear zona en la que se muestran todas las clases
-- Mostrar sesiones dentro de las clases
-- Dentro de las sesiones que se mnuestran, permitir inscribirse al hacer click
-- Mostrar clases a las que se están inscritas
+- ⭕Mostrar sesiones dentro de las clases
+- ⭕Dentro de las sesiones que se mnuestran, permitir inscribirse al hacer click
 - ⭕(creo)Añadir control rutas. El cliente no puede estar en la zona de instructores y viceversa
+- ⭕Mostrar clases a las que se están inscritas
+- Añadir restricciones a la hora de inscribirse. No permitir inscribirse en caso de tener más de 3 faltas recientes
 
 ### BACK-END
 
@@ -36,3 +36,4 @@
 - ⭕Añadir endpoint post en sessionClients  para poder inscribirse los clientes a las sesiones
 - ⭕Añadir endpoint para ver si un cliente está inscrito a una clase o no
 - ⭕Añadir endpoint para desinscribirse de sesiones
+- ⭕Añadir endpoint para recuperar las clases para los clientes que estean inscritos a al menos una clase de todas
