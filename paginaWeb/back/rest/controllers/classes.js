@@ -62,6 +62,19 @@ export class ClassesController {
     }
   }
 
+  static getClassesEnrolledClient = async (req, res) => {
+    try {
+      const { authorization } = req.headers
+      const token = authorization.split(' ')[1]
+      const clientEmail = jwt.verify(token, SECRET).email
+      if (!authorized({ token })) res.status(401).send('Unauthorized')
+      const classes = await ClassesModel.getClassesEnrolledClient({ clientEmail })
+      res.json(classes)
+    } catch (error) {
+      res.status(500).send(error.message)
+    }
+  }
+
   static createClass = async (req, res) => {
     const input = req.body
     const validatedData = validateClass({ input })

@@ -53,6 +53,34 @@ export class ClassesModel {
     }
   }
 
+  static getClassesEnrolledClient = async ({ clientEmail }) => {
+    try {
+      const classesData = await prisma.class.findMany({
+        where: {
+          session: {
+            some: {
+              session_client: {
+                some: {
+                  client_Email: clientEmail
+                  // la fecha mayor a la actual
+
+                },
+                every: {
+                  data_time: {
+                    gt: new Date()
+                  }
+                }
+              }
+            }
+          }
+        }
+      })
+      return convertClassesPhoto({ classes: classesData })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
+
   static getManagedClassesInstructor = async ({ instructorEmail }) => {
     try {
       const classesData = await prisma.class.findMany({

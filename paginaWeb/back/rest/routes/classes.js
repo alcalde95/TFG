@@ -4,6 +4,7 @@ export const classesRouter = Router()
 
 classesRouter.get('/', ClassesController.getClasses)
 classesRouter.get('/instructor/', ClassesController.getClassesInstructor)
+classesRouter.get('/client/', ClassesController.getClassesEnrolledClient)
 classesRouter.get('/sessions/', ClassesController.getManagedClassesInstructor)
 classesRouter.get('/:classId', ClassesController.getClass)
 
