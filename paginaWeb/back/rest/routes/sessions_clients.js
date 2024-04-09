@@ -10,4 +10,4 @@ sessionsClientsRouter.post('/:UUIDClass/:date/isEnrolled', SessionsClientsContro
 
 sessionsClientsRouter.put('/:UUIDClass/:date', SessionsClientsController.updateSessionClients)
 
-// sessionsRouter.delete('/', SessionsController.deleteSession)
+sessionsClientsRouter.delete('/:UUIDClass/:date', SessionsClientsController.unenrollClientToSession)

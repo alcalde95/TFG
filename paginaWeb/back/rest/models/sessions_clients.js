@@ -86,4 +86,20 @@ export class SessionsClientsModel {
       throw new Error(e.message)
     }
   }
+
+  static unenrollClientToSession = async ({ input }) => {
+    try {
+      const { dataTime, uuidClass, clientEmail } = input
+
+      await prisma.sessions_Client.delete({
+        where: {
+          data_time: dataTime,
+          UUID_Class: uuidClass,
+          client_Email: clientEmail
+        }
+      })
+    } catch (e) {
+      throw new Error(e.message)
+    }
+  }
 }

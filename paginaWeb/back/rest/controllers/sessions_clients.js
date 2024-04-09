@@ -75,4 +75,23 @@ export class SessionsClientsController {
       res.status(400).send('Bad request: ' + e.message)
     }
   }
+
+  static unenrollClientToSession = async (req, res) => {
+    try {
+      const { authorization } = req.headers
+      if (!authorization) return res.status(401).send('Unauthorized')
+      const token = authorization.split(' ')[1]
+      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { date, UUIDClass } = req.params
+      const input = { uuidClass: UUIDClass, dataTime: new Date(date), clientEmail: req.body.clientEmail }
+      const validatedData = partialValidateSessionClassesSchema({ input })
+
+      if (validatedData.error) return res.status(400).send(validatedData.error.message)
+
+      await SessionsClientsModel.unenrollClientToSession({ input })
+      res.send('Deleted')
+    } catch (e) {
+      res.status(400).send('Bad request: ' + e.message)
+    }
+  }
 }
