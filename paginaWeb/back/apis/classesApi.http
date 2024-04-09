@@ -10,6 +10,10 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydW
 ###Recuperación de las clases en las que existe al menos 1 sesión gestionada por el instructor
 GET http://localhost:1234/classes/sessions/
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzExOTA1NzQ3MDIxLCJpYXQiOjE3MTEzMDA5NDd9.ovtkrMYDB4c7o516GeKYoQgHDIf6BB1VS80RuwN24Pk
+###Get all the classes 4 a client
+GET http://localhost:1234/classes/client/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzEzMjc3MzE5NzE0LCJpYXQiOjE3MTI2NzI1MTl9.sKf7gQNmsGzxC2N9ggSAKEnlslsnICIQI6CoG5W6C4o
+
 ###Creación de una clase
 POST http://localhost:1234/classes/
 Content-Type: application/json
