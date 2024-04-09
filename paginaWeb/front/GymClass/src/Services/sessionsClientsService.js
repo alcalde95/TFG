@@ -59,3 +59,18 @@ export const isEnrolledService = async ({ jwt, dataTime, uuidClass, clientEmail 
     
     return res.json()
 }
+export const unenrollClientToSessionService = async ({ jwt, dataTime, uuidClass, clientEmail }) => {
+    const res = await fetch(`${ENDPOINT}/sessionsClients/${uuidClass}/${dataTime}`,
+        {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `token ${jwt}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ clientEmail })
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+    
+    return 
+}
