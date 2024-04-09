@@ -16,13 +16,12 @@ export const ClientSessionCard = ({ session }) => {
 
     };
 
-    const { enrollClientToSession, isEnrolled } = useSessionClients()
+    const { enrollClientToSession,unenrollClientToSession, isEnrolled } = useSessionClients()
     const { getSessions } = useSessions()
 
     const [isEnrolledState, setIsEnrolledState] = useState(false)
 
     const handleClick = async () => {
-        console.log("pepe")
         const dataTime = session.data_time
         const uuidClass = session.UUID_Class
         const clientEmail = email
@@ -37,6 +36,23 @@ export const ClientSessionCard = ({ session }) => {
         alert('Inscrito correctamente')
         getSessions({ uuidClass, jwt })
         setIsEnrolledState(true)
+        
+    }
+    const handleUnenrollClick = async () => {
+        const dataTime = session.data_time
+        const uuidClass = session.UUID_Class
+        const clientEmail = email
+
+        const res = await unenrollClientToSession({ jwt, dataTime, uuidClass, clientEmail })
+
+        if (!res) {
+            alert('No se ha podido inscribir')
+            setIsEnrolledState(true)
+            return
+        }
+        alert('Desinscrito correctamente')
+        getSessions({ uuidClass, jwt })
+        setIsEnrolledState(false)
         
     }
 
@@ -74,7 +90,7 @@ export const ClientSessionCard = ({ session }) => {
                             Inscribirse
                         </button>
                         : <button className="bg-red-600 w-auto h-10 border-2 border-black text-white p-1 rounded-md mr-2  hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                            onClick={null}
+                            onClick={handleUnenrollClick}
                         >
                             DesInscribirse
                         </button>
