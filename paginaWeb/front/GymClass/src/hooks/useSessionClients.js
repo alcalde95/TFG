@@ -1,4 +1,4 @@
-import { enrollClientToSessionService, isEnrolledService, sessionsClientsService, updateSessionsClientsService } from '../Services/sessionsClientsService'
+import { enrollClientToSessionService, isEnrolledService, sessionsClientsService, unenrollClientToSessionService, updateSessionsClientsService } from '../Services/sessionsClientsService'
 import { SessionClientsContext } from '../Contexts/SessionClientsContext'
 import { useContext } from 'react'
 
@@ -35,6 +35,16 @@ export const useSessionClients = () => {
         }
     }
 
+    const unenrollClientToSession = async ({ jwt, dataTime, uuidClass, clientEmail }) => {
+        try {
+            await unenrollClientToSessionService({ jwt, dataTime, uuidClass, clientEmail })
+            return true
+        } catch (e) {
+            console.log(e.message)
+            return false
+        }
+    }
+
     const isEnrolled = async ({ jwt, dataTime, uuidClass, clientEmail }) => {
         try {
             const res = await isEnrolledService({ jwt, dataTime, uuidClass, clientEmail })
@@ -52,6 +62,7 @@ export const useSessionClients = () => {
         getSessionClients,
         enrollClientToSession,
         updateSessionClients,
+        unenrollClientToSession,
         isEnrolled
     })
 }
