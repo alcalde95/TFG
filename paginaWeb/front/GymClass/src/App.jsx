@@ -21,6 +21,7 @@ import { SessionContextProvider } from "./Contexts/SessionContext"
 import { BaseClientPage } from "./Components/Clients/BaseClientPage"
 import { SearchClassClientPage } from "./Components/Clients/SearchClassClientPage"
 import { ClientClassSessions } from "./Components/Clients/ClientClassSessions"
+import { ClientClasses } from "./Components/Clients/ClientClasses"
 
 function App() {
 
@@ -82,6 +83,9 @@ function App() {
     },{
       path: "/client/:uuidClass",
       element: <ClientClassSessions />
+    },{
+      path: "/client/myClasses",
+      element: <ClientClasses />
     },
   ])
 
