@@ -35,7 +35,7 @@ export const ClientRow = ({ client }) => {
     }
 
     const handleChange = () => {
-        const validated = client.client.validated === 'N' ? 'S' : 'N'
+        const validated = client.client.validated === 'N' ? 'Y' : 'N'
         validateClient({ email: client.email, validated })
     }
 

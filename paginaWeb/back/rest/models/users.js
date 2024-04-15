@@ -44,6 +44,28 @@ export class UserModel {
     return { clients }
   }
 
+  static isValidatedClient = async ({ userEmail }) => {
+    const role = await prisma.users.findUnique({
+      where: {
+        email: userEmail
+      },
+      select: {
+        role: true
+      }
+    })
+
+    if (role.role.toLowerCase() !== 'c') {
+      throw new Error('Unauthorized')
+    }
+    const client = await prisma.clients.findUnique({
+      where: {
+        email: userEmail
+      }
+    })
+    console.log(client.validated)
+    return { validated: client.validated === 'Y' }
+  }
+
   static getAllUsers = async ({ userEmail }) => {
     // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
     const role = await prisma.users.findUnique({

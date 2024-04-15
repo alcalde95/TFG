@@ -9,6 +9,7 @@ import { ClassHeaderInfo } from "../Classes/ClassHeaderInfo"
 import { useSessions } from "../../hooks/useSessions"
 import { useSessionsFilter } from "../../hooks/useSessionsFilter"
 import { ClientWeekSessions } from "./ClientWeekSessions"
+import useUser from "../../hooks/useUser"
 
 export const ClientClassSessions = () => {
 
@@ -28,6 +29,8 @@ export const ClientClassSessions = () => {
 
     const { getSessions } = useSessions()
     const { getClass } = useClasses()
+    const { validated,isValidatedClient } = useUser()
+        
 
     const { filterSessions } = useSessionsFilter()
 
@@ -44,7 +47,7 @@ export const ClientClassSessions = () => {
     useEffect(() => {
         const { uuidClass } = params
         getClass({ uuidClass, jwt })
-
+        isValidatedClient()
         getSessions({ uuidClass, jwt })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -71,7 +74,8 @@ export const ClientClassSessions = () => {
                         thursdaySessions={filteredThursdaySessions}
                         fridaySessions={filteredFridaySessions}
                         saturdaySessions={filteredSaturdaySessions}
-                        sundaySessions={filteredSundaySessions} />
+                        sundaySessions={filteredSundaySessions} 
+                        validated = {validated}/>
                 }
             </section>
 

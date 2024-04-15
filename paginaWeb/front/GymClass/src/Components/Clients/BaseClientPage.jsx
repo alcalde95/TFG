@@ -17,6 +17,7 @@ export const BaseClientPage = () => {
             Búsqueda
           </button>
           <button className='bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500'
+            onClick={() => navigate(`${location.pathname}/myClasses`)}
           >
             Clases en las que estoy inscrito
           </button>

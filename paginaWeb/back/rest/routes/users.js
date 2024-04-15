@@ -6,6 +6,7 @@ usersRouter.get('/', UserController.getUsers)
 usersRouter.get('/all', UserController.getAllUsers)
 usersRouter.get('/instructors/', UserController.getAllInstructors)
 usersRouter.get('/clients/', UserController.getClients)
+usersRouter.get('/clients/validation', UserController.isValidatedClient)
 
 usersRouter.post('/login', UserController.login)
 usersRouter.post('/', UserController.register)

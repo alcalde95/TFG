@@ -47,6 +47,19 @@ export class UserController {
     }
   }
 
+  static isValidatedClient = async (req, res) => {
+    const { authorization } = req.headers
+    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
+    const token = authorization.split(' ')[1]
+    const userEmail = jwt.verify(token, SECRET).email
+    if (authorized({ token })) {
+      const { validated } = await UserModel.isValidatedClient({ userEmail })
+      res.json(validated)
+    } else {
+      res.status(401).send('Unauthorized')
+    }
+  }
+
   static getAllInstructors = async (req, res) => {
     const { authorization } = req.headers
     if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')

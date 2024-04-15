@@ -58,3 +58,7 @@ Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQG
 ### Get all instructors
 GET http://localhost:1234/users/instructors/
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzExNDY5NzA5NDQxLCJpYXQiOjE3MTA4NjQ5MDl9.OMlFgRBnpVnEajDpLY41LK55JJWVJqlYXGA3e-n19BU
+
+### SEE IF A CLIENT IS VALIDATED
+GET http://localhost:1234/users/clients/validation
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzEzNzk1MTA0ODkyLCJpYXQiOjE3MTMxOTAzMDR9.zJNCaBg4l2iuZGgzevMoSXs3zDtXoUBdA4Th3hoEAwU

@@ -8,7 +8,7 @@ import debounce from 'just-debounce-it'
 export const SearchClassClientPage = () => {
 
     const [loading, setLoading] = useState(true)
-
+    
     const { getClasses } = useClasses()
 
     const { classes, setClasses } = useContext(ClassesContext)
@@ -33,9 +33,9 @@ export const SearchClassClientPage = () => {
         await getClasses({ name, maxCapacity, minDuration, maxDuration })
         setLoading(false)
     }
-    
+
     const handleChange = async (e) => {
-        
+
         const name = e.target.value
         debouncedGetClasses({ name })
     }
@@ -52,7 +52,7 @@ export const SearchClassClientPage = () => {
             <Header />
             <section className=" bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2">
                 <form onSubmit={handleSubmit}>
-                    <input type='text' name='name' placeholder='introduzca el nombre de la clase a buscar' onChange={handleChange}/>
+                    <input type='text' name='name' placeholder='introduzca el nombre de la clase a buscar' onChange={handleChange} />
                     <input type='number' name='maxCapacity' placeholder='nº max cli ' />
                     <input type='number' name='minDuration' placeholder='duración mínima ' />
                     <input type='number' name='maxDuration' placeholder='duración máxima' />
@@ -61,11 +61,11 @@ export const SearchClassClientPage = () => {
 
             </section>
             <main className=" bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2">
-                
+
                 {
                     loading
                         ? <p className="text-2xl ">Cargando...</p>
-                        : <Classes classes={classes} editable={false} managed={true} />
+                        : <Classes classes={classes} editable={false} managed={true}/>
 
                 }
             </main>

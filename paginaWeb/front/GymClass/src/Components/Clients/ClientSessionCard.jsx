@@ -3,7 +3,7 @@ import { UserContext } from "../../Contexts/UserContext";
 import { useSessionClients } from "../../hooks/useSessionClients";
 import { useSessions } from "../../hooks/useSessions";
 
-export const ClientSessionCard = ({ session }) => {
+export const ClientSessionCard = ({ session, validated }) => {
     const { jwt, email } = useContext(UserContext)
 
     const options = {
@@ -16,7 +16,7 @@ export const ClientSessionCard = ({ session }) => {
 
     };
 
-    const { enrollClientToSession,unenrollClientToSession, isEnrolled } = useSessionClients()
+    const { enrollClientToSession, unenrollClientToSession, isEnrolled } = useSessionClients()
     const { getSessions } = useSessions()
 
     const [isEnrolledState, setIsEnrolledState] = useState(false)
@@ -36,7 +36,7 @@ export const ClientSessionCard = ({ session }) => {
         alert('Inscrito correctamente')
         getSessions({ uuidClass, jwt })
         setIsEnrolledState(true)
-        
+
     }
     const handleUnenrollClick = async () => {
         const dataTime = session.data_time
@@ -53,7 +53,7 @@ export const ClientSessionCard = ({ session }) => {
         alert('Desinscrito correctamente')
         getSessions({ uuidClass, jwt })
         setIsEnrolledState(false)
-        
+
     }
 
     useEffect(() => {
@@ -84,12 +84,14 @@ export const ClientSessionCard = ({ session }) => {
                 <p >{session.instructorEmail}</p>
                 {
                     !isEnrolledState
-                        ? <button className="bg-teal-500 w-auto h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+                        ? <button className="bg-teal-500 w-auto h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500 "
+                            disabled={!validated}
                             onClick={handleClick}
                         >
                             Inscribirse
                         </button>
                         : <button className="bg-red-600 w-auto h-10 border-2 border-black text-white p-1 rounded-md mr-2  hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+                            disabled={!validated}
                             onClick={handleUnenrollClick}
                         >
                             DesInscribirse

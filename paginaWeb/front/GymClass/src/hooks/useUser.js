@@ -5,6 +5,7 @@ import { loginService } from "../Services/loginService"
 import { registerService } from "../Services/registerService"
 
 import { emailValidation, passwordValidation} from "../Validations"
+import { isValidatedClientService } from "../Services/usersService"
 
 const useUser = () => {
     const { jwt, setJWT, setRole, setEmail } = useContext(UserContext)
@@ -12,6 +13,7 @@ const useUser = () => {
     const [state, setState] = useState({ loading: false, error: false })
     const [emailError, setEmailError] = useState(false)
     const [passwordError, setPasswordError] = useState(false)
+    const [validated,setValidated] = useState(false)
 
     const login = useCallback(async ({ email, password }) => {
         try {
@@ -91,15 +93,28 @@ const useUser = () => {
         setPasswordError(false)
     }
 
+    const isValidatedClient = async () => {
+        try {
+            const res = await isValidatedClientService({ jwt })
+            console.log(typeof res)
+            setValidated(res)
+            console.log(validated)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return {
         isLogged: Boolean(jwt),
         login,
         logout,
         register,
+        isValidatedClient,
+        resetErrors,
         state,
         emailError,
         passwordError,
-        resetErrors,
+        validated,
     }
 }
 export default useUser
