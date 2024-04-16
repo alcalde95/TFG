@@ -67,20 +67,20 @@ export const Class = ({ c, editable, managed }) => {
         }
     }
 
-
+    //transition-all duration-100 ease-in-out
     return (
         <>
-            <div className="flex flex-col items-center border-2 w-11/12 md:w-10/12 lg:min-h-[570px] border-teal-500 bg-gray-400 m-2 rounded-md   p-2 shadow-[2px_2px_5px_0px] shadow-gray-800 hover:cursor-pointer hover:bg-gray-700 hover:text-white transition-all duration-200 ease-in-out relative">
-                <h1 className="font-bold text-3xl m-2 max-w-60 lg:max-w-max underline active:text-black hover:text-teal-500 transition-all duration-300 ease-in-out overflow-hidden text-center"
+            <div className="flex flex-col items-center border w-11/12 md:w-10/12 lg:min-h-[570px] lg:w-auto border-gray-500 bg-transparent m-2 rounded-md p-2  transition duration-200 ease-in-out relative text-white hover:cursor-pointer hover:text-green-500 hover:border-green-500">
+                <h1 className="font-bold text-3xl m-2 max-w-60 lg:max-w-max underline active:text-black overflow-hidden text-center"
                     onClick={handleClick}>{c.name}</h1>
                 {managed
                     ? null
-                    : <button className="absolute top-1 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 hover:bg-red-600" onClick={handleDeleteClick}>
-                        <ImCross className="w-3" />
-                    </button>}
-                <img src={c.photo.length > 50 ? c.photo : "https://picsum.photos/300/300"} alt={c.description} className="aspect-square w-11/12 lg:w-96 rounded-lg  border-2"></img>
+                    : <ImCross className="absolute top-1 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 w-3 transition duration-200 ease-in-out hover:text-red-600"
+                        onClick={handleDeleteClick} />
+                }
+                <img src={c.photo.length > 50 ? c.photo : "https://picsum.photos/300/300"} alt={c.description} className="aspect-square w-11/12 lg:w-96 rounded-lg border-gray-500 border transition duration-100 ease-in-out relative text-white hover:cursor-pointe hover:border-green-500"></img>
 
-                <section className="flex flex-col w-11/12 lg:w-96 justify-center items-center text-center m-4 p-4 bg-slate-500 border-2 rounded-lg text-slate-200">
+                <section className="flex flex-col w-11/12 lg:w-96 justify-center items-center text-center m-4 p-4 bg-[#09090B] border border-gray-500 rounded-lg transition duration-100 ease-in-out relative text-white hover:cursor-pointe hover:border-green-500">
                     {jwt
                         ?
                         <p className="overflow-hidden w-11/12"
@@ -89,18 +89,17 @@ export const Class = ({ c, editable, managed }) => {
                         </p>
                         : null
                     }
-                    <div className="flex flex-col md:flex-row w-full justify-around">
+                    <div className="flex flex-col md:flex-row w-full justify-around ">
                         <p>Duración:{c.duration}&apos;</p>
                         <p>Aforo máximo:{c.max_Capacity}</p>
                     </div>
                 </section>
                 {
                     editable
-                        ? <button className="absolute top-1 right-8 bg-transparent text-white rounded-md m-0 p-0 hover:text-black"
+                        ? <IoIosOptions className="absolute top-1 right-8 bg-transparent text-white rounded-md m-0 p-0 w-4 hover:text-green-500 transition duration-200 ease-in-out"
                             onClick={() => setEditar(!editar)}
-                        >
-                            <IoIosOptions className="w-4" />
-                        </button>
+                        />
+
                         : null
                 }
                 {
