@@ -41,30 +41,30 @@ export const InstructorPage = () => {
   }
 
   return (
-    <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col relative">
+    <div className=" min-w-80 w-full min-h-screen flex flex-col gap-2 relative text-white ">
       <Header />
-      <div className="sticky top-0.5 left-7 z-50 flex flex-col sm:flex-row items-center justify-center gap-2">
+      <div className="sticky top-1  left-10 z-50 flex flex-wrap gap-2 items-center justify-center w-auto" >
         <button onClick={() => setMode("mine")}
-          className="bg-teal-500 w-44  h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500 "
+          className="backdrop-blur-lg w-auto min-w-52 h-10 text-white  p-1 rounded-md  hover:border-green-500 hover:text-green-500 ease-in-out duration-200 border border-gray-500"
         >
           Mis Clases
         </button>
         <button onClick={() => setMode("managed")}
-          className="bg-teal-500 w-44 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+          className="backdrop-blur-lg w-auto min-w-52 h-10 text-white  p-1 rounded-md  hover:border-green-500 hover:text-green-500 ease-in-out duration-200 border border-gray-500"
         >
-          Clases gestionadas  
+          Clases gestionadas
         </button>
       </div>
-      <main className="h-full bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2">
+      <main className="h-full flex flex-col place-content-start items-center m-2 p-2">
 
 
         {
           mode === "mine" ? <>
             <h1 className="text-4xl m-2 underline cursor-default">Mis Clases</h1>
-            <button onClick={() => setVer(!ver)} className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">Add</button>
+            <button onClick={() => setVer(!ver)} className="bg-[#09090B] w-auto min-w-52 h-10 text-white  p-1 rounded-md  hover:border-green-500 hover:text-green-500 ease-in-out duration-200 border border-gray-500">Add</button>
             {
               ver
-                ? <form className="w-11/12 md:w-4/6 gap-2 flex flex-col items-center bg-slate-200   p-2 rounded-lg border-teal-500 border-2 mt-2" onSubmit={handleSubmit}>
+                ? <form className="w-11/12 md:w-4/6 gap-2 flex flex-col items-center bg-[#1C1917]   p-2 rounded-lg border-gray-500 border-2 mt-2" onSubmit={handleSubmit}>
                   <InputMovinTitle name="Nombre" type="text" />
                   {
                     nameError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{nameError}</div>
@@ -82,8 +82,8 @@ export const InstructorPage = () => {
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-full file:border-0
                     file:text-sm file:font-semibold
-                    file:bg-teal-500 file:text-white
-                    hover:file:bg-teal-400 
+                    file:bg-green-500 file:text-white
+                    hover:file:bg-green-500 
                     hover:file:cursor-pointer"
                   />
                   {
@@ -100,7 +100,7 @@ export const InstructorPage = () => {
                     maxCapacityError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{maxCapacityError}</div>
                       : null
                   }
-                  <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">Crear</button>
+                  <button className="bg-[#09090B] w-auto min-w-52 h-10 text-white  p-1 rounded-md  hover:border-green-500 hover:text-green-500 ease-in-out duration-200 border border-gray-500">Crear</button>
                 </form>
 
                 : null
