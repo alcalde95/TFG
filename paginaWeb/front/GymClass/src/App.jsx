@@ -90,7 +90,7 @@ function App() {
   ])
 
   return (
-    <div className="box-content min-w-full  min-h-screen bg-slate-700 flex flex-col content-center items-center p-0 m-0 text-black font-mono">
+    <div className="box-content min-w-full  min-h-screen bg-[#09090B] flex flex-col content-center items-center p-0 m-0 text-black font-mono">
       <SessionContextProvider>
         <SessionClientsContextProvider>
           <UserContextProvider>
