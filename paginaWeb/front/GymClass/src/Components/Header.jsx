@@ -36,33 +36,37 @@ export const Header = () => {
     }, [role, isLogged])
 
     return (
-        <header className="bg-slate-300 border-4 border-teal-500 rounded-md m-2 p-1 px-2 py-2 pe-0 flex flex-col sm:flex-row sm:justify-between text-center gap-4">
-            <div>
-                <button onClick={() => navigate('/')}
-                    className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                >
-                    Inicio
-                </button>
-                <button onClick={() => navigate(-1)}
-                    className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                >
-                    Volver
-                </button>
+        <header className=" bg-[#09090B] border-b border-gray-500 p-2 flex flex-col sm:flex-row justify-center items-center text-center gap-4 text-gray-400">
+            <div className="max-w-7xl w-full flex flex-col sm:flex-row sm:justify-between">
+                <nav>
+                    <button onClick={() => navigate('/')}
+                        className="bg-[#09090B] w-20 h-10 text-gray-400  p-1 rounded-md mr-2 hover:text-white ease-in-out duration-100"
+                    >
+                        Inicio
+                    </button>
+                    <button onClick={() => navigate(-1)}
+                        className="bg-[#09090B] w-20 h-10  p-1 rounded-md mr-2 hover:text-white ease-in-out duration-200"
+                    >
+                        Volver
+                    </button>
+                </nav>
+                {
+                    isLogged
+                        ?
+                        <div >
+                            <span className="mr-2">{email}</span>
+                            <button className="bg-[#09090B] w-20 h-10  p-1 rounded-md mr-2 hover:text-white ease-in-out duration-200"
+                                onClick={logout}
+                            >
+                                Logout
+                            </button>
+                        </div>
+                        : <button><Link className="bg-[#09090B] w-20 h-10  p-1 rounded-md mr-2 hover:text-white ease-in-out duration-200"
+                            to="/login">
+                            Login
+                        </Link></button>
+                }
             </div>
-            {
-                isLogged
-                    ?
-                    <div >
-                        <span className="mr-2">{email}</span>
-                        <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                            onClick={logout}
-                        >
-                            Logout
-                        </button>
-                    </div>
-                    : <Link className="bg-teal-500  h-10 border-2 border-teal-500 text-white p-1 rounded-md m-1 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500" to="/login">Login</Link>
-            }
-
         </header>
 
 
