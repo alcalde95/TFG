@@ -33,6 +33,7 @@ export class SessionsClientsController {
       await SessionsClientsModel.enrollClientToSession({ input })
       res.status(201).send('Enrolled')
     } catch (e) {
+      if (e.message === 'Unauthorized') return res.status(401).send('Unauthorized')
       res.status(400).send('Bad request: ' + e.message)
     }
   }

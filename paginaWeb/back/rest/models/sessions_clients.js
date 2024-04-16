@@ -25,6 +25,26 @@ export class SessionsClientsModel {
     try {
       const { dataTime, uuidClass, clientEmail } = input
 
+      const nonAssisted = await prisma.sessions_Client.findMany({
+        where: {
+          client_Email: clientEmail,
+          data_time: {
+            lt: (new Date()).toISOString()
+          },
+          attend: false,
+          justified: false
+        },
+        orderBy: {
+          data_time: 'desc'
+        }
+      })
+      // preguntar a dani, pq claro, ahí entran ya temas de negocio
+      if (nonAssisted.length !== 0 && nonAssisted.length % 3 === 0) {
+        if (new Date(nonAssisted[0].data_time) >= new Date((new Date()).getTime() - 1000 * 60 * 60 * 24 * 31)) {
+          throw new Error('Sancionado por no asistir a clases')
+        }
+      }
+
       await prisma.sessions_Client.create({
         data: {
           data_time: dataTime,
