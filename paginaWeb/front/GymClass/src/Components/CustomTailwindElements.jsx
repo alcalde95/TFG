@@ -53,6 +53,15 @@ export const DefaultButton = ({ handleClick, text }) => {
         </button>
     )
 }
+export const DefaultWhiteButton = ({ handleClick, text }) => {
+    return (
+        <button onClick={handleClick}
+            className="bg-white w-auto min-w-52 h-10 text-black p-1 rounded-md  hover:bg-gray-300 ease-in-out duration-200 border border-white"
+        >
+            {text}
+        </button>
+    )
+}
 export const FullWDefaultButton = ({ handleClick, text}) => {
     return (
         <button onClick={handleClick}
