@@ -36,7 +36,7 @@ export const Header = () => {
     }, [role, isLogged])
 
     return (
-        <header className=" bg-[#09090B] border-b border-gray-500 p-2 flex flex-col sm:flex-row justify-center items-center text-center gap-4 text-gray-400">
+        <header className=" bg-[#09090B] border-b border-gray-500 p-2 flex flex-col sm:flex-row justify-center items-center text-center gap-4 text-gray-400 w-full overflow-auto">
             <div className="max-w-7xl w-full flex flex-col sm:flex-row sm:justify-between">
                 <nav>
                     <button onClick={() => navigate('/')}
