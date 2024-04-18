@@ -29,7 +29,9 @@
 - ⭕(creo)Añadir control rutas. El cliente no puede estar en la zona de instructores y viceversa
 - ⭕Mostrar clases a las que se están inscritas
 - ⭕Añadir restricciones a la hora de inscribirse. No permitir inscribirse en caso de tener más de 3 faltas recientes
-- Remodelar css -> Elementos hechos: header,landing,instructorPage,Class, login🚧(se me olvidó añadir responsive xd),register🚧
+- Remodelar css -> Elementos hechos: header,landing,instructorPage,Class, login,register,classheaderinfo
+- Mejorar css mensajes errores
+- REVISAR PUSAR CLASES Q NO GESTIONAS NI NADA SI NO SON TUYAS EN LA LANDING
 
 ### BACK-END
 
