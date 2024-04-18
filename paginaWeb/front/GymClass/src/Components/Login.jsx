@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { FullWDefaultButton, InputMovinTitle } from "./CustomTailwindElements"
+import { DefaultWhiteButton, FullWDefaultButton, InputMovinTitle } from "./CustomTailwindElements"
 import useUser from "../hooks/useUser"
 import { useContext, useEffect } from "react"
 import { UserContext } from "../Contexts/UserContext"
@@ -54,9 +54,9 @@ export const Login = () => {
     }
 
     return (
-        <div className="h-screen flex flex-col justify-center text-center items-center text-white">
+        <div className="h-screen flex flex-col w-full justify-center text-center items-center text-white">
 
-            <main className="w-[400px] h-auto flex flex-col bg-transparent text-center rounded-md p-1 border border-gray-500 ">
+            <main className="w-11/12 sm:w-4/5 md:w-[400px] h-auto flex flex-col bg-transparent text-center rounded-md p-1 border border-gray-500 ">
                 <h1 className="text-2xl underline">Login</h1>
                 {
                     state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Email o la contraseña incorrectos</div>
@@ -64,7 +64,7 @@ export const Login = () => {
                 <form className="flex flex-col w-auto m-2 gap-4" action="" method="post" onSubmit={handleSubmit}>
                     <InputMovinTitle name="Email" type="text" />
                     <InputMovinTitle name="Contraseña" type="password" />
-                    <FullWDefaultButton text={"Iniciar sesión"} />
+                    <DefaultWhiteButton text={"Iniciar sesión"} />
                 </form>
                 <nav className="w-auto m-2 h-auto mt-0" >
                     <div className="relative flex items-center pb-1">
