@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { InputMovinTitle } from "./CustomTailwindElements"
+import { DefaultWhiteButton, FullWDefaultButton, InputMovinTitle } from "./CustomTailwindElements"
 import useUser from "../hooks/useUser"
 import { useEffect } from "react"
 import { useState } from "react"
@@ -43,8 +43,8 @@ export const Register = () => {
     }
 
     return (
-        <div className="h-screen flex flex-col justify-center text-center">
-            <main className="w-auto h-auto flex flex-col bg-slate-300 text-center rounded-md ">
+        <div className="h-screen flex flex-col w-full justify-center text-center items-center text-white">
+            <main className="w-11/12 sm:w-4/5 md:w-[400px] h-auto flex flex-col bg-transparent text-center rounded-md p-1 border border-gray-500 ">
                 <h1 className="text-2xl underline">Register</h1>
                 {
                     state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Este email ya está registrado</div>
@@ -63,12 +63,16 @@ export const Register = () => {
                         repeatedPasword && <div className="bg-red-600 text-white p-2 rounded-md m-2">Las contraseñas no coinciden</div>
                     }
 
-                    <button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Registrar</button>
+                    <DefaultWhiteButton text="Registrarse" />
                 </form>
-                <nav className="flex flex-row gap-2 text-center content-center items-center">
-                    <p className="ml-2">Ya tiene cuenta?</p>
-                    <Link to="/login"><button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Iniciar Sesión</button></Link>
+                <nav className="w-auto m-2 h-auto mt-0" >
+                    <div className="relative flex items-center pb-1">
+                        <div className="flex-grow border-t border-gray-700"></div>
+                        <span className="flex-shrink mx-2 text-gray-500">O si ya tiene cuenta</span>
+                        <div className="flex-grow border-t border-gray-700"></div>
+                    </div>
 
+                    <Link to="/login"><FullWDefaultButton text={"Login"} /></Link>
                 </nav>
             </main>
 
