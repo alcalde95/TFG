@@ -39,9 +39,9 @@ export const InstructorPage = () => {
       setVer(false)
     }
   }
-
+  
   return (
-    <div className=" min-w-80 w-full min-h-screen flex flex-col gap-2 relative text-white ">
+    <div className=" min-w-80 w-full min-h-screen flex flex-col gap-2 relative text-white">
       <Header />
       <div className="sticky top-1  left-10 z-50 flex flex-wrap gap-2 items-center justify-center w-auto" >
         <button onClick={() => setMode("mine")}
