@@ -44,35 +44,34 @@ export const Register = () => {
 
     return (
         <div className="h-screen flex flex-col justify-center text-center">
-            <h1 className="bg-slate-300 border-4 border-teal-500 rounded-md m-2 p-1 text-2xl">Register</h1>
-            <div className="max-w-6xl min-w-80 h-auto bg-gradient-to-tl from-teal-500 to-green-400 p-1 rounded-lg m-2">
-                <main className="w-auto h-auto flex flex-col bg-slate-300 text-center rounded-md ">
+            <main className="w-auto h-auto flex flex-col bg-slate-300 text-center rounded-md ">
+                <h1 className="text-2xl underline">Register</h1>
+                {
+                    state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Este email ya está registrado</div>
+                }
+                <form className="flex flex-col w-auto m-2 gap-4" action="" method="post" onSubmit={handleSubmit}>
+                    <InputMovinTitle name="Email" type="text" />
                     {
-                        state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Este email ya está registrado</div>
+                        emailError && <div className="bg-red-600 text-white p-2 rounded-md m-2">{emailError}</div>
                     }
-                    <form className="flex flex-col w-auto m-2 gap-4" action="" method="post" onSubmit={handleSubmit}>
-                        <InputMovinTitle name="Email" type="text" />
-                        {
-                            emailError && <div className="bg-red-600 text-white p-2 rounded-md m-2">{emailError}</div>
-                        }
-                        <InputMovinTitle name="Contraseña" type="password" />
-                        {
-                            passwordError && <div className="bg-red-600 text-white p-2 rounded-md m-2">{passwordError}</div>
-                        }
-                        <InputMovinTitle name="Contraseña Repetida" type="password" />
-                        {
-                            repeatedPasword && <div className="bg-red-600 text-white p-2 rounded-md m-2">Las contraseñas no coinciden</div>
-                        }
+                    <InputMovinTitle name="Contraseña" type="password" />
+                    {
+                        passwordError && <div className="bg-red-600 text-white p-2 rounded-md m-2">{passwordError}</div>
+                    }
+                    <InputMovinTitle name="Contraseña Repetida" type="password" />
+                    {
+                        repeatedPasword && <div className="bg-red-600 text-white p-2 rounded-md m-2">Las contraseñas no coinciden</div>
+                    }
 
-                        <button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Registrar</button>
-                    </form>
-                    <nav className="flex flex-row gap-2 text-center content-center items-center">
-                        <p className="ml-2">Ya tiene cuenta?</p>
-                        <Link to="/login"><button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Iniciar Sesión</button></Link>
+                    <button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Registrar</button>
+                </form>
+                <nav className="flex flex-row gap-2 text-center content-center items-center">
+                    <p className="ml-2">Ya tiene cuenta?</p>
+                    <Link to="/login"><button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Iniciar Sesión</button></Link>
 
-                    </nav>
-                </main>
-            </div>
+                </nav>
+            </main>
+
 
         </div>
     )

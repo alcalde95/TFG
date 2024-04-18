@@ -64,7 +64,7 @@ export const InstructorPage = () => {
             <button onClick={() => setVer(!ver)} className="bg-[#09090B] w-auto min-w-52 h-10 text-white  p-1 rounded-md  hover:border-green-500 hover:text-green-500 ease-in-out duration-200 border border-gray-500">Add</button>
             {
               ver
-                ? <form className="w-11/12 md:w-4/6 gap-2 flex flex-col items-center bg-[#1C1917]   p-2 rounded-lg border-gray-500 border-2 mt-2" onSubmit={handleSubmit}>
+                ? <form className="w-11/12 md:w-4/6 max-w-2xl gap-2 flex flex-col items-center bg-[#1C1917]   p-2 rounded-lg border-gray-500 border mt-2" onSubmit={handleSubmit}>
                   <InputMovinTitle name="Nombre" type="text" />
                   {
                     nameError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{nameError}</div>
@@ -86,16 +86,17 @@ export const InstructorPage = () => {
                     hover:file:bg-green-500 
                     hover:file:cursor-pointer"
                   />
+
                   {
                     photoError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{photoError}</div>
                       : null
                   }
-                  <InputMovinTitle name="Duración" type="number" />
+                  <InputMovinTitle name="Duración" type="number" min={1}/>
                   {
                     durationError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{durationError}</div>
                       : null
                   }
-                  <InputMovinTitle name="Capacidad" type="text" />
+                  <InputMovinTitle name="Capacidad" type="number" min={1} />
                   {
                     maxCapacityError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{maxCapacityError}</div>
                       : null

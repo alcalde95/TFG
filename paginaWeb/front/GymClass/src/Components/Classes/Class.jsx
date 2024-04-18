@@ -6,6 +6,7 @@ import { UserContext } from "../../Contexts/UserContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useClasses } from "../../hooks/useClasses";
 import { convertFile } from "../../utils";
+import { FullWDefaultButton, InputMovinTitleWValue } from "../CustomTailwindElements";
 
 export const Class = ({ c, editable, managed }) => {
     const { jwt, email, role } = useContext(UserContext)
@@ -71,7 +72,7 @@ export const Class = ({ c, editable, managed }) => {
     return (
         <>
             <div className="flex flex-col items-center border w-11/12 md:w-10/12 lg:min-h-[570px] lg:w-auto border-gray-500 bg-transparent m-2 rounded-md p-2  transition duration-200 ease-in-out relative text-white hover:cursor-pointer hover:text-green-500 hover:border-green-500">
-                <h1 className="font-bold text-3xl m-2 max-w-60 lg:max-w-max underline active:text-black overflow-hidden text-center"
+                <h1 className="font-bold text-3xl m-2 max-w-60 lg:max-w-max underline hover:text-green-700 overflow-hidden text-center transition duration-200 ease-in-out"
                     onClick={handleClick}>{c.name}</h1>
                 {managed
                     ? null
@@ -105,64 +106,65 @@ export const Class = ({ c, editable, managed }) => {
                 {
                     editar ? <form name="editUserForm"
                         id="editUserForm"
-                        className="flex flex-col items-center w-10/12  md:w-auto lg:w-full m-2 gap-4 p-2 text-black text-center"
+                        className="flex flex-col items-center w-10/12  md:w-auto lg:w-full m-2 gap-4 p-2 text-white text-center bg-[#1C1917] border border-gray-500 rounded-lg"
                         onSubmit={handleSubmit}
                     >
-                        <input name="name"
-                            className="border-2 border-teal-500 w-10/12  md:w-full h-10 p-1 rounded-md  m-0 text-center"
+                        <InputMovinTitleWValue name="Nombre"
                             type="text"
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        ></input>
+                            handleChange={(e) => setName(e.target.value)} />
+
                         {
                             nameError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{nameError}</div>
                                 : null
                         }
-                        <input name="photo"
-                            className="border-2 border-teal-500 w-10/12  md:w-full h-10 p-1 rounded-md  m-0 text-center"
-                            type="file"
+                        <input type="file"
+                            name="photo"
+                            accept="image/*"
+                            className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-500 file:text-white hover:file:bg-green-500 hover:file:cursor-pointer"
                         />
                         {
                             photoError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{photoError}</div>
                                 : null
                         }
-                        <input name="description"
-                            className="border-2 border-teal-500 w-10/12  md:w-full h-10 p-1 rounded-md  m-0 text-center"
+                        <InputMovinTitleWValue name="Descripción"
                             type="text"
                             value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
+                            handleChange={(e) => setDescription(e.target.value)} />
+
                         {
                             descriptionError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{descriptionError}</div>
                                 : null
                         }
-                        <input name="maxCapacity"
-                            className="border-2 border-teal-500 w-10/12  md:w-full h-10 p-1 rounded-md  m-0 text-center"
+
+                        {
+                            //TODO: refactorizar esto Y VER CÓMO HACER EL TEMA DEL NUMBER :D
+                        }
+                        <InputMovinTitleWValue name="Capacidad máxima"
                             type="number"
                             min={1}
-                            value={maxCapacity}
-                            onChange={(e) => setMaxCapacity(parseInt(e.target.value))}
-                        />
+                            value={maxCapacity} 
+                            handleChange={(e) => setMaxCapacity(parseInt(e.target.value))}
+                            />
+                        
                         {
                             maxCapacityError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{maxCapacityError}</div>
                                 : null
                         }
-                        <input name="duration"
-                            className="border-2 border-teal-500 w-10/12  md:w-full h-10 p-1 rounded-md  m-0 text-center"
+
+                        <InputMovinTitleWValue name="Duración"
                             type="number"
                             min={1}
                             value={duration}
-                            onChange={(e) => setDuration(parseInt(e.target.value))}
+                            handleChange={(e) => setDuration(parseInt(e.target.value))}
                         />
                         {
                             durationError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{durationError}</div>
                                 : null
                         }
-                        <button className="w-full bg-teal-500 m-1 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                            type="submit"
-                        >
-                            Guardar
-                        </button>
+
+                        <FullWDefaultButton text="Guardar" />
+
                     </form>
                         : null
                 }

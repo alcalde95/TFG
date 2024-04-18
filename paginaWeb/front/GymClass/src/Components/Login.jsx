@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { InputMovinTitle } from "./CustomTailwindElements"
+import { FullWDefaultButton, InputMovinTitle } from "./CustomTailwindElements"
 import useUser from "../hooks/useUser"
 import { useContext, useEffect } from "react"
 import { UserContext } from "../Contexts/UserContext"
@@ -54,25 +54,29 @@ export const Login = () => {
     }
 
     return (
-        <div className="h-screen flex flex-col justify-center text-center">
-            <h1 className="bg-slate-300 border-4 border-teal-500 rounded-md m-2 p-1 text-2xl">Login</h1>
-            <div className="max-w-6xl min-w-80 h-auto bg-gradient-to-tl from-teal-500 to-green-400 p-1 rounded-lg m-2">
-                <main className="w-auto h-auto flex flex-col bg-slate-300 text-center rounded-md ">
-                    {
-                        state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Email o la contraseña incorrectos</div>
-                    }
-                    <form className="flex flex-col w-auto m-2 gap-4" action="" method="post" onSubmit={handleSubmit}>
-                        <InputMovinTitle name="Email" type="text" />
-                        <InputMovinTitle name="Contraseña" type="password" />
-                        <button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Iniciar sesión</button>
-                    </form>
-                    <nav className="flex flex-row gap-2 text-center content-center items-center">
-                        <p className="ml-2">Aún no tiene cuenta?</p>
-                        <Link to="/register"><button className="bg-teal-500 w-30 border-4 border-teal-500 text-white p-2 rounded-md m-2 hover:bg-teal-400 hover:border-white hover:border-4 shadow-[2px_2px_5px_0px] shadow-gray-500">Registro</button></Link>
+        <div className="h-screen flex flex-col justify-center text-center items-center text-white">
 
-                    </nav>
-                </main>
-            </div>
+            <main className="w-[400px] h-auto flex flex-col bg-transparent text-center rounded-md p-1 border border-gray-500 ">
+                <h1 className="text-2xl underline">Login</h1>
+                {
+                    state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Email o la contraseña incorrectos</div>
+                }
+                <form className="flex flex-col w-auto m-2 gap-4" action="" method="post" onSubmit={handleSubmit}>
+                    <InputMovinTitle name="Email" type="text" />
+                    <InputMovinTitle name="Contraseña" type="password" />
+                    <FullWDefaultButton text={"Iniciar sesión"} />
+                </form>
+                <nav className="w-auto m-2 h-auto mt-0" >
+                    <div className="relative flex items-center pb-1">
+                        <div className="flex-grow border-t border-gray-700"></div>
+                        <span className="flex-shrink mx-2 text-gray-500">O si no tiene cuenta</span>
+                        <div className="flex-grow border-t border-gray-700"></div>
+                    </div>
+
+                    <Link to="/register"><FullWDefaultButton text={"Registro"} /></Link>
+                </nav>
+            </main>
+
 
         </div>
     )
