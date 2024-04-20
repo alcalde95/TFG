@@ -93,15 +93,15 @@ export class SessionsClientsModel {
   static isEnrolled = async ({ input }) => {
     try {
       const { dataTime, uuidClass, clientEmail } = input
-
-      const isEnrolled = await prisma.sessions_Client.findUnique({
+      console.log(dataTime, uuidClass, clientEmail)
+      const isEnrolled = await prisma.sessions_Client.findMany({
         where: {
           data_time: dataTime,
           UUID_Class: uuidClass,
           client_Email: clientEmail
         }
       })
-      return isEnrolled !== null
+      return isEnrolled.length !== 0
     } catch (e) {
       throw new Error(e.message)
     }
@@ -111,7 +111,7 @@ export class SessionsClientsModel {
     try {
       const { dataTime, uuidClass, clientEmail } = input
 
-      await prisma.sessions_Client.delete({
+      await prisma.sessions_Client.deleteMany({
         where: {
           data_time: dataTime,
           UUID_Class: uuidClass,
