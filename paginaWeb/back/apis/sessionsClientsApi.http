@@ -1,6 +1,6 @@
 ###Get sessionsClients 4 a session
-GET http://localhost:1234/sessionsClients/ae787e98-eab7-4b99-8c94-450dfa229348/2024-03-27T19:47:00.000Z
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEyNTAzNDAwMzkxLCJpYXQiOjE3MTE4OTg2MDB9.gpcUvAqt39_jp0vbHBtmNcPycLl3zyzb9G4cn4PGmgA
+GET http://localhost:1234/sessionsClients/3fdd6fa5-4c7c-449f-988a-2e258a9f61e2/2024-04-21T16:50:00.000Z
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzE0MjMzMDc0OTAzLCJpYXQiOjE3MTM2MjgyNzR9.O1GM5ytDQEIqeQHbvhxqikx6FKi4aCWo4R6qv9_ei_A
 ###Enroll client to session
 POST http://localhost:1234/sessionsClients/a767b5509-4f2d-48e5-8e57-2f99092e8837/2024-04-09T05:42:00.000Z
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEzMjAxMzMzOTE5LCJpYXQiOjE3MTI1OTY1MzN9.aFt6KCLc-ksvXoHQlM9FpHHQjc_9VuVlvVDjrdg39zU
@@ -10,12 +10,12 @@ Content-Type: application/json
   "clientEmail": "client@client.client"
 }
 ### IsEnrolledClient
-POST http://localhost:1234/sessionsClients/767b5509-4f2d-48e5-8e57-2f99092e8837/2024-04-09T05:42:00.000Z/isEnrolled
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEzMjAxMzMzOTE5LCJpYXQiOjE3MTI1OTY1MzN9.aFt6KCLc-ksvXoHQlM9FpHHQjc_9VuVlvVDjrdg39zU
+POST http://localhost:1234/sessionsClients/3fdd6fa5-4c7c-449f-988a-2e258a9f61e2/2024-04-21T16:50:00.000Z/isEnrolled
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzE0MjMzMDc0OTAzLCJpYXQiOjE3MTM2MjgyNzR9.O1GM5ytDQEIqeQHbvhxqikx6FKi4aCWo4R6qv9_ei_A
 Content-Type: application/json
 
 {
-  "clientEmail": "clisdaaent@client.client"
+  "clientEmail": "client@client.client"
 }
 ###Update sessionClient
 PUT http://localhost:1234/sessionsClients/ae787e98-eab7-4b99-8c94-450dfa229348/2024-03-27T19:47:00.000Z
@@ -33,8 +33,8 @@ Content-Type: application/json
 
 
 ###Delete sessionClient
-DELETE http://localhost:1234/sessionsClients/ae787e98-eab7-4b99-8c94-450dfa229348/2024-04-01T18:47:00.000Z
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzEzMjQ1NTM4MTI2LCJpYXQiOjE3MTI2NDA3Mzh9.jTeWQ2Ose-ZY3taTEJRfMnZTF6CvCG6XFi2qByY206k
+DELETE http://localhost:1234/sessionsClients/3fdd6fa5-4c7c-449f-988a-2e258a9f61e2/2024-04-21T16:50:00.000Z
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzE0MjMzMDc0OTAzLCJpYXQiOjE3MTM2MjgyNzR9.O1GM5ytDQEIqeQHbvhxqikx6FKi4aCWo4R6qv9_ei_A
 Content-Type: application/json
 
 {
