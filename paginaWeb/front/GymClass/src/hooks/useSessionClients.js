@@ -48,7 +48,7 @@ export const useSessionClients = () => {
     const isEnrolled = async ({ jwt, dataTime, uuidClass, clientEmail }) => {
         try {
             const res = await isEnrolledService({ jwt, dataTime, uuidClass, clientEmail })
-
+            console.log("isEnrolled", res)
             return res
         } catch (e) {
             console.log(e.message)

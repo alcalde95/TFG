@@ -4,9 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useSessions } from "../hooks/useSessions";
 import { AdminUsersContext } from "../Contexts/AdminUsersContext";
 import { IoDuplicate } from "react-icons/io5";
+import { ImCross } from "react-icons/im";
+import { IoIosOptions } from "react-icons/io";
+import { DefaultWhiteButton, InputMovinTitle } from "./CustomTailwindElements";
+import { Tooltip } from "react-tooltip";
 
 export const Session = ({ session }) => {
-    const { jwt, email,role } = useContext(UserContext)
+    const { jwt, email, role } = useContext(UserContext)
     const options = {
         weekday: 'long',
         year: 'numeric',
@@ -42,8 +46,9 @@ export const Session = ({ session }) => {
         e.preventDefault()
         const form = e.target.form
         const data = new FormData(form)
-        const days = data.get("days")
-        if(parseInt(days) < 1){
+        console.log(data.get("Días"))
+        const days = data.get("Días")
+        if (parseInt(days) < 1) {
             setError(true)
             return
         }
@@ -83,41 +88,29 @@ export const Session = ({ session }) => {
     }
     return (
         <>
-            <div className="bg-slate-400 text-center w-11/12 lg:w-72 border-white border-2 rounded-lg h-auto
-                        flex flex-col items-center justify-center 
-                        hover:bg-slate-700 hover:text-white 
-                        transition duration-200 ease-in-out hover:cursor-pointer
-                        relative
-                        p-8
-                        gap-4
-                        overflow-hidden"
+            <div className="bg-[#1C1917] text-center w-11/12 lg:w-72 border-gray-500 border rounded-lg h-auto flex flex-col items-center justify-center hover:border-green-500 transition duration-200 ease-in-out hover:cursor-pointer relative p-8 gap-2 overflow-hidden"
             >
 
                 <p >{((new Date(session.data_time)).toLocaleString('es-ES', options)).charAt(0).toUpperCase() + ((new Date(session.data_time)).toLocaleString('es-ES', options)).slice(1)}</p>
                 <p >Clientes inscritos: {session._count.session_client}</p>
-                <p >{session.instructorEmail}</p>
+                <p className="text-xs">{session.instructorEmail}</p>
                 {
                     !location.pathname.includes("managed") && role?.toLowerCase() === 'i' &&
                     <section className="flex flex-col items-center">
-                        <button className="absolute top-1 right-2 bg-transparent text-white rounded-md m-0 p-0 hover:bg-red-600"
-                            onClick={handleDeleteClick}>
-                            ❌
-                        </button>
-                        <button className="absolute top-2 right-8"
+                        <ImCross className="absolute top-1 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 w-3 transition duration-200 ease-in-out hover:text-red-600"
+                            onClick={handleDeleteClick}
+                            data-tooltip-id={"delete"} />
+
+
+                        <IoDuplicate className="absolute top-1 right-8 bg-transparent text-white rounded-md m-0 p-0 w-4 hover:text-green-500 transition duration-200 ease-in-out"
                             onClick={() => setDup(!dup)}
-                        >
-                            <IoDuplicate className="hover:text-gray-400 ease-out transition-all duration-100" />
-                        </button>
+                            data-tooltip-id={"duplicate"} />
                         {
                             dup ?
-                                <form>
-                                    <input type="number" min="1" name="days" className="text-black " placeholder="nº días a adelantar" />
+                                <form className="w-full gap-2 flex flex-col items-center p-2 rounded-lg mt-2">
+                                    <InputMovinTitle name="Días" type="number" />
                                     {error && <p className="text-red-500">Error</p>}
-                                    <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                                        onClick={handleDuplicationClick}
-                                    >
-                                        Click
-                                    </button>
+                                    <DefaultWhiteButton text={"Duplicar"} handleClick={handleDuplicationClick} />
                                 </form>
                                 : null
                         }
@@ -133,31 +126,46 @@ export const Session = ({ session }) => {
 
                 {
                     !location.pathname.includes("managed") && role?.toLowerCase() === 'i' &&
-                    <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                        onClick={() => setEdit(!edit)}>
-                        🛠
-                    </button>
+                    <IoIosOptions className="absolute top-1 right-[3.2rem] bg-transparent text-white rounded-md m-0 p-0 w-4 hover:text-green-500 transition duration-200 ease-in-out"
+                        onClick={() => setEdit(!edit)}
+                        data-tooltip-id={"edit"}
+                    />
                 }
                 {
                     edit &&
-                    <form onSubmit={handleSubmit}>
+                    <form className="w-full gap-2 flex flex-col items-center p-2 rounded-lg mt-2" onSubmit={handleSubmit}>
                         <select name="Instructor"
-                            className="border-2 border-teal-500  w-11/12 h-10 p-1 rounded-md m-0 text-black"
+                            className="border border-green-500 w-full h-10 p-1 rounded-md m-0 text-center bg-transparent"
                         >
                             {
                                 instructors.map((instructor, index) => {
-                                    return <option key={index} value={instructor.email}>{instructor.email}</option>
+                                    return <option className="text-center rounded-lg border border-green-500 bg-[#09090B]" key={index} value={instructor.email}>{instructor.email}</option>
                                 })
                             }
                         </select>
-                        <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                        >
-                            Editar
-                        </button>
+                        <DefaultWhiteButton text={"Cambiar"} />
                     </form>
                 }
 
             </div>
+            <Tooltip
+                id={"delete"}
+                place="top"
+                className="h-auto max-w-xs border-none"
+                content={"Borrar"}
+            />
+            <Tooltip
+                id={"duplicate"}
+                place="top"
+                className="h-auto max-w-xs border-none"
+                content={"Duplicar"}
+            />
+            <Tooltip
+                id={"edit"}
+                place="top"
+                className="h-auto max-w-xs border-none"
+                content={"Editar"}
+            />
         </>
     )
 }

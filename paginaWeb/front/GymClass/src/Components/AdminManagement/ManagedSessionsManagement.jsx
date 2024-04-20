@@ -9,6 +9,7 @@ import { ClassesContext } from "../../Contexts/ClassesContext"
 import { useClasses } from "../../hooks/useClasses"
 import { WeekSessions } from "../WeekSessions"
 import { useSessionsFilter } from "../../hooks/useSessionsFilter"
+import { DefaultButton } from "../CustomTailwindElements"
 
 export const ManagedSessionsManagement = () => {
 
@@ -51,23 +52,15 @@ export const ManagedSessionsManagement = () => {
 
 
   return (
-    <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col">
+    <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
       <Header />
-      <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
-        {
-          classes && <ClassHeaderInfo headerClass={classes} />
+      {
+        classes && <ClassHeaderInfo headerClass={classes} />
 
-        }
-      </section>
-      <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
+      }
+      <section className="h-full flex flex-col items-center border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
         <h1 className="text-4xl m-2">Sesiones</h1>
-        <button type="submit"
-          className="bg-teal-500 w-40 h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-          onClick={() => setFiltered(!filtered)}
-        >
-          {filtered ? "Sin impartir" : "Todas"}
-        </button>
-
+        <DefaultButton handleClick={() => setFiltered(!filtered)} text={filtered ? "Sin impartir" : "Todas"} />
 
         {
           sessions && <WeekSessions mondaySessions={filteredMondaySessions}

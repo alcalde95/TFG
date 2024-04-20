@@ -9,6 +9,7 @@ import { ClassHeaderInfo } from "../Classes/ClassHeaderInfo"
 import { useSessions } from "../../hooks/useSessions"
 import { WeekSessions } from "../WeekSessions"
 import { useSessionsFilter } from "../../hooks/useSessionsFilter"
+import { DefaultButton, DefaultWhiteButton, InputMovinTitle } from "../CustomTailwindElements"
 
 export const SessionsManagement = () => {
 
@@ -32,14 +33,14 @@ export const SessionsManagement = () => {
   const { filtered, setFiltered, filterSessions } = useSessionsFilter()
 
   const params = useParams()
-  
-  const filteredMondaySessions = filterSessions({sessions:mondaySessions})
-  const filteredTuesdaySessions = filterSessions({sessions:tuesdaySessions})
-  const filteredWednesdaySessions = filterSessions({sessions:wednesdaySessions})
-  const filteredThursdaySessions = filterSessions({sessions:thursdaySessions})
-  const filteredFridaySessions = filterSessions({sessions:fridaySessions})
-  const filteredSaturdaySessions = filterSessions({sessions:saturdaySessions})
-  const filteredSundaySessions = filterSessions({sessions:sundaySessions})
+
+  const filteredMondaySessions = filterSessions({ sessions: mondaySessions })
+  const filteredTuesdaySessions = filterSessions({ sessions: tuesdaySessions })
+  const filteredWednesdaySessions = filterSessions({ sessions: wednesdaySessions })
+  const filteredThursdaySessions = filterSessions({ sessions: thursdaySessions })
+  const filteredFridaySessions = filterSessions({ sessions: fridaySessions })
+  const filteredSaturdaySessions = filterSessions({ sessions: saturdaySessions })
+  const filteredSundaySessions = filterSessions({ sessions: sundaySessions })
 
   useEffect(() => {
     const { uuidClass } = params
@@ -65,54 +66,45 @@ export const SessionsManagement = () => {
   }
 
   return (
-    <div className="w-full min-w-80 min-h-screen flex flex-col items-center">
+    <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
       <Header />
-      <br></br>
-        {
-          classes && <ClassHeaderInfo headerClass={classes} />
+      {
+        classes && <ClassHeaderInfo headerClass={classes} />
 
-        }
-      <section className="h-full flex flex-col items-center border border-gray-500 rounded-md m-2 p-2 w-full max-w-7xl text-white">
+      }
+      <section className="h-full flex flex-col items-center border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
 
         <h1 className="text-4xl m-2">Sesiones</h1>
         {
-          email === classes.instructorEmail && <button className="bg-teal-500 w-40 h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-            onClick={() => setShow(!show)}>Añadir sesión</button>
+          email === classes.instructorEmail &&
+          <DefaultButton handleClick={() => setShow(!show)} text="Añadir sesión" />
         }
         {
           show
-            ? <form className="flex flex-row flex-wrap items-center justify-around gap-4 w-11/12 lg:w-96 h-auto border-2 border-teal-500 bg-gray-400 rounded-md  m-2 p-2 shadow-[2px_2px_5px_0px] shadow-gray-800"
+            ? <form className="w-11/12 md:w-4/6 max-w-2xl gap-2 flex flex-col items-center bg-[#1C1917]   p-2 rounded-lg border-gray-500 border mt-2"
               onSubmit={handleSubmit}>
-              <input type="datetime-local"
-                name="Date"
-                className="border-2 border-teal-500 w-64  lg:w-full h-10 p-1 rounded-md m-0 text-center"
-              />
+              <InputMovinTitle name="Date" type="datetime-local" />
               {
                 dateError ? <p className="text-red-500">{dateError}</p> : null
               }
               <select name="Instructor"
-                className="border-2 border-teal-500 w-52  lg:w-full h-10 p-1 rounded-md m-0  text-center"
+                className="border border-green-500 w-full h-10 p-1 rounded-md m-0 text-center bg-transparent"
               >
                 {
                   instructors.map((instructor, index) => {
-                    return <option key={index} value={instructor.email} className="text-center rounded-lg border-2 border-teal-500">{instructor.email}</option>
+                    return <option key={index} value={instructor.email} className="text-center rounded-lg border border-green-500 bg-[#09090B]">{instructor.email}</option>
                   })
                 }
               </select>
               {
                 instructorEmailError ? <p className="text-red-500">{instructorEmailError}</p> : null
               }
-              <button type="submit" className="bg-teal-500 w-40 h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">Añadir</button>
+              <DefaultWhiteButton text={"Añadir"} />
             </form>
             : null
         }
-        <br/>
-        <button type="submit"
-          className="bg-teal-500 w-40 h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-          onClick={() => setFiltered(!filtered)}
-        >
-          {filtered ? "Sin impartir" : "Todas"}
-        </button>
+        <br />
+        <DefaultButton handleClick={() => setFiltered(!filtered)} text={filtered ? "Sin impartir" : "Todas"} />
 
         {
           sessions && <WeekSessions mondaySessions={filteredMondaySessions}

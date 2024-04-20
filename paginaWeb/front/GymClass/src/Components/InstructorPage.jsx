@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import { Header } from "./Header"
 import { UserContext } from "../Contexts/UserContext"
 import { Classes } from "./Classes/Classes"
-import { InputMovinTitle } from "./CustomTailwindElements"
+import { DefaultWhiteButton, InputMovinTitle } from "./CustomTailwindElements"
 import { ClassesContext } from "../Contexts/ClassesContext"
 import { useClasses } from "../hooks/useClasses"
 import { convertFile } from "../utils"
@@ -101,7 +101,7 @@ export const InstructorPage = () => {
                     maxCapacityError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{maxCapacityError}</div>
                       : null
                   }
-                  <button className="bg-[#09090B] w-auto min-w-52 h-10 text-white  p-1 rounded-md  hover:border-green-500 hover:text-green-500 ease-in-out duration-200 border border-gray-500">Crear</button>
+                  <DefaultWhiteButton text="Crear" />
                 </form>
 
                 : null

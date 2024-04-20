@@ -35,21 +35,16 @@ export const SessionClientsManagement = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col ">
+    <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
       <Header />
-      <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
-        {
-          classes && sessionClients && <ClassHeaderInfo headerClass={classes} />
+      {
+        classes && sessionClients && <ClassHeaderInfo headerClass={classes} />
 
-        }
-      </section >
-      <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
-        {
-          session && <SessionHeaderInfo session={session} num={sessionClients.length} />
-
-        }
-      </section >
-      <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
+      }
+      {
+        session && <SessionHeaderInfo session={session} num={sessionClients.length} />
+      }
+      <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2 w-full max-w-7xl">
 
         {
 
