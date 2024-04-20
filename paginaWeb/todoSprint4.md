@@ -7,6 +7,20 @@
 -Añadir control delete session sólo el instructor que creó la clase
 -Pensar q tiene el token y hacen peticiones de todo tipo
 
+Lógica de las Faltas:
+3 faltas en los últimos 3 meses
+ventana temporal: de x en x meses + y meses sanción ->
+3 meses en este caso
+
+
+zsh!
+pseudocódigo
+[alt text](image.png)
+
+en la documentación, hacer bn el estado del arte y contextualizar
+decir pq es más grande de lo normal o más acabado de lo normal
+
+
 ## TODO
 
 ### FRONT-END
