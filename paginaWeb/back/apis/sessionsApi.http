@@ -1,6 +1,6 @@
 ###Get all sessions for a class
-GET http://localhost:1234/sessions/ae787e98-eab7-4b99-8c94-450dfa229348
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEyNjc0NDM0OTMzLCJpYXQiOjE3MTIwNjk2MzR9.JbhA7y809V5CnCr-CqO7Wtzf0-u30zXgx5AIg-MDwGE
+GET http://localhost:1234/sessions/3fdd6fa5-4c7c-449f-988a-2e258a9f61e2
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzE0MjMzMDc0OTAzLCJpYXQiOjE3MTM2MjgyNzR9.O1GM5ytDQEIqeQHbvhxqikx6FKi4aCWo4R6qv9_ei_A
 ###Get a session for a class
 GET http://localhost:1234/sessions/ae787e98-eab7-4b99-8c94-450dfa229348/2024-03-27T19:47:00.000Z
 Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEyNjc0NDM0OTMzLCJpYXQiOjE3MTIwNjk2MzR9.JbhA7y809V5CnCr-CqO7Wtzf0-u30zXgx5AIg-MDwGE
