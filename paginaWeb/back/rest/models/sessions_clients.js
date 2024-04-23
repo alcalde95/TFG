@@ -42,9 +42,12 @@ export class SessionsClientsModel {
           data_time: 'desc'
         }
       })
-      console.log(nonAssisted)
       if (nonAssisted.length >= 3) {
         console.log(nonAssisted)
+        const sanctionedUntilDate = new Date(nonAssisted[0].data_time)
+        sanctionedUntilDate.setDate(sanctionedUntilDate.getDate() + 31)
+        console.log(sanctionedUntilDate)
+        if (sanctionedUntilDate > new Date()) throw new Error('Client is sanctioned')
       }
 
       await prisma.sessions_Client.create({
