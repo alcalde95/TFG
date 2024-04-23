@@ -1,4 +1,4 @@
-import { partialValidateSession, validateSession } from '../schemas/session.js'
+import { partialValidateSession, updateValidateSession, validateSession } from '../schemas/session.js'
 import { authorized } from '../../utilFunctions.js'
 import { SessionsModel } from '../models/sessions.js'
 import { SECRET } from '../../index.js'
@@ -74,7 +74,7 @@ export class SessionsController {
         uuidClass: body.uuidClass,
         instructorEmail: body.instructorEmail
       }
-      const validatedData = validateSession({ input })
+      const validatedData = updateValidateSession({ input })
 
       if (validatedData.error) return res.status(400).send(validatedData.error.message)
 

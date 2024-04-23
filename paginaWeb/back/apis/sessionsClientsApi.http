@@ -19,12 +19,12 @@ Content-Type: application/json
 }
 ###Update sessionClient
 PUT http://localhost:1234/sessionsClients/ae787e98-eab7-4b99-8c94-450dfa229348/2024-03-27T19:47:00.000Z
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzEyNTAzNDAwMzkxLCJpYXQiOjE3MTE4OTg2MDB9.gpcUvAqt39_jp0vbHBtmNcPycLl3zyzb9G4cn4PGmgA
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imluc3RydWN0b3JAaW5zdHJ1Y3Rvci5pbnN0cnVjdG9yIiwiZXhwIjoxNzE0NDk3NDEzNjA4LCJpYXQiOjE3MTM4OTI2MTN9._pkXVr_YNK_5lkGkLn1KfnQcVLgf9CRFFbhQqk30kDU
 Content-Type: application/json
 
 {
-  "dataTime": "2024-03-27T19:47:00.000Z",
-  "uuidClass": "ae787e98-eab7-4b99-8c94-450dfa229348",
+  "dataTime": "2024-02-21T18:51:47.000Z",
+  "uuidClass": "3fdd6fa5-4c7c-449f-988a-2e258a9f61e2",
   "clientEmail" : "client@client.client",
   "attend": true,
   "justified":true

@@ -44,7 +44,7 @@ model Class {
   session         Sessions[]
 }
 
-//TODO: REVISAR NULOS EN LA BBDD
+
 model Sessions {
   data_time       DateTime          
   UUID_Class      String
@@ -61,7 +61,7 @@ model Sessions_Client {
   client       Clients  @relation(fields: [client_Email], references: [email],onDelete: Cascade)
   data_time    DateTime 
   UUID_Class   String   
-  session      Sessions @relation(fields: [data_time, UUID_Class], references: [data_time, UUID_Class], onDelete: Cascade)
+  session      Sessions @relation(fields: [data_time, UUID_Class], references: [data_time, UUID_Class],onDelete: Cascade)
   attend       Boolean @default(false)
   justified    Boolean @default(false)
 

@@ -25,11 +25,15 @@ export class SessionsClientsModel {
     try {
       const { dataTime, uuidClass, clientEmail } = input
 
+      const lowerDateTimeWindow = new Date()
+      lowerDateTimeWindow.setDate(lowerDateTimeWindow.getDate() - 31 * 3)
+
       const nonAssisted = await prisma.sessions_Client.findMany({
         where: {
           client_Email: clientEmail,
           data_time: {
-            lt: (new Date()).toISOString()
+            lt: (new Date()).toISOString(),
+            gt: lowerDateTimeWindow.toISOString()
           },
           attend: false,
           justified: false
@@ -38,11 +42,9 @@ export class SessionsClientsModel {
           data_time: 'desc'
         }
       })
-      // preguntar a dani, pq claro, ahí entran ya temas de negocio
-      if (nonAssisted.length !== 0 && nonAssisted.length % 3 === 0) {
-        if (new Date(nonAssisted[0].data_time) >= new Date((new Date()).getTime() - 1000 * 60 * 60 * 24 * 31)) {
-          throw new Error('Sancionado por no asistir a clases')
-        }
+      console.log(nonAssisted)
+      if (nonAssisted.length >= 3) {
+        console.log(nonAssisted)
       }
 
       await prisma.sessions_Client.create({
@@ -62,19 +64,19 @@ export class SessionsClientsModel {
 
   static updateSessionClients = async ({ input, userEmail }) => {
     try {
-      const c = await prisma.sessions.findUnique({
+      const c = await prisma.sessions.findMany({
         where: {
           UUID_Class: input.uuidClass,
           data_time: input.dataTime
         }
       })
 
-      if (c.instructorEmail !== userEmail) throw new Error('Unauthorized')
+      if (c[0].instructorEmail !== userEmail) throw new Error('Unauthorized')
 
       const { dataTime, uuidClass, clientEmail, attend, justified } = input
 
       // sólo se puede cambiar el instructor
-      await prisma.sessions_Client.update({
+      await prisma.sessions_Client.updateMany({
         where: {
           data_time: dataTime,
           UUID_Class: uuidClass,

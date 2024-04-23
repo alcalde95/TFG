@@ -46,7 +46,6 @@ export const Session = ({ session }) => {
         e.preventDefault()
         const form = e.target.form
         const data = new FormData(form)
-        console.log(data.get("Días"))
         const days = data.get("Días")
         if (parseInt(days) < 1) {
             setError(true)

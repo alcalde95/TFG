@@ -35,7 +35,7 @@ export class SessionsModel {
 
       if (role.role.toLowerCase() !== 'i') throw new Error('Unauthorized')
 
-      const session = await prisma.sessions.findUnique({
+      const session = await prisma.sessions.findMany({
         where: {
           UUID_Class: classId,
           data_time: date
@@ -48,8 +48,7 @@ export class SessionsModel {
           }
         }
       })
-      console.log(session)
-      return session
+      return session[0]
     } catch (e) {
       throw new Error(e.message)
     }
@@ -87,13 +86,12 @@ export class SessionsModel {
           UUID_Class: input.uuidClass
         }
       })
-
       if (c.instructorEmail !== userEmail) throw new Error('Unauthorized')
 
       const { dataTime, uuidClass, instructorEmail } = input
 
       // sólo se puede cambiar el instructor
-      await prisma.sessions.update({
+      const res = await prisma.sessions.updateMany({
         where: {
           data_time: dataTime,
           UUID_Class: uuidClass
@@ -103,6 +101,8 @@ export class SessionsModel {
           instructorEmail
         }
       })
+
+      console.log(res)
     } catch (e) {
       throw new Error(e.message)
     }
