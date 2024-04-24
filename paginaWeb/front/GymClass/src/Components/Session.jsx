@@ -6,7 +6,7 @@ import { AdminUsersContext } from "../Contexts/AdminUsersContext";
 import { IoDuplicate } from "react-icons/io5";
 import { ImCross } from "react-icons/im";
 import { IoIosOptions } from "react-icons/io";
-import { DefaultWhiteButton, InputMovinTitle } from "./CustomTailwindElements";
+import { DefaultWhiteButton, FullWDefaultButton, InputMovinTitle } from "./CustomTailwindElements";
 import { Tooltip } from "react-tooltip";
 
 export const Session = ({ session }) => {
@@ -117,10 +117,7 @@ export const Session = ({ session }) => {
                 }
                 {
                     location.pathname.includes("managed") && role?.toLowerCase() === 'i' &&
-                    <button className="bg-teal-500 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                        onClick={handleClick}>
-                        Detalles
-                    </button>
+                    <FullWDefaultButton text={"Ver"} handleClick={handleClick} />
                 }
 
                 {

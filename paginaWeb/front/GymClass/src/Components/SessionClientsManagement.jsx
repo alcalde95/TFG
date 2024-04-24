@@ -44,7 +44,7 @@ export const SessionClientsManagement = () => {
       {
         session && <SessionHeaderInfo session={session} num={sessionClients.length} />
       }
-      <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2 w-full max-w-7xl">
+      <main className="h-full flex flex-col border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
 
         {
 
@@ -53,7 +53,7 @@ export const SessionClientsManagement = () => {
             : null
         }
 
-      </section >
+      </main >
     </div>
   )
 }

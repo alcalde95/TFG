@@ -4,12 +4,12 @@ import { SessionClient } from "./SessionClient"
 const ListOfSessionClients = ({ sessionClients }) => {
 
     return (
-        <table className="w-full h-full border-green-700 border-2 rounded-md p-2 text-center bg-gray-400 text-white shadow-[2px_2px_5px_0px] shadow-gray-500">
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Attend</th>
-                    <th>Justified</th>
+        <table className="w-auto h-full text-white m-2 text-left">
+            <thead className="p-2">
+                <tr className="h-full border-b border-gray-500 hover:bg-[#18181A] transition ease-in-out duration-200 text-[#5A5A5F] ">
+                    <th className="p-2">Email</th>
+                    <th className="p-2 text-center">Attend</th>
+                    <th className="p-2 text-center">Justified</th>
                 </tr>
             </thead>
             <tbody>

@@ -20,7 +20,6 @@ pseudocódigo
 en la documentación, hacer bn el estado del arte y contextualizar
 decir pq es más grande de lo normal o más acabado de lo normal
 
-
 ## TODO
 
 ### FRONT-END

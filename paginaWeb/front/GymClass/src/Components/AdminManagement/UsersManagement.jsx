@@ -5,6 +5,7 @@ import useUser from "../../hooks/useUser"
 import { useContext, useEffect } from "react"
 import { AdminUsersContext } from "../../Contexts/AdminUsersContext"
 import { Link } from "react-router-dom"
+import { DefaultButton } from "../CustomTailwindElements"
 
 export const UsersManagement = () => {
 
@@ -31,15 +32,12 @@ export const UsersManagement = () => {
   }
 
   return (
-    <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col">
+    <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
       <Header />
-      <main className="h-full bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2 ">
+      <main className="h-full flex flex-col border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-4xl m-2">Gestión de Usuarios</h1>
-          <button onClick={() => { resetErrors(); setView(!view) }}
-            className="bg-teal-500 m-1 w-[200px] h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">
-            Añadir usuario
-          </button>
+          <DefaultButton  handleClick={() => { resetErrors(); setView(!view) }} text="Añadir usuario" />
           {
 
             view
