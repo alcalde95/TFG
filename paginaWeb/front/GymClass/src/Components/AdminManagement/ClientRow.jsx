@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { useUserManagement } from '../../hooks/useUserManagement'
+import { FullWDefaultWhiteButton, InputMovinTitle } from '../CustomTailwindElements'
 
 export const ClientRow = ({ client }) => {
 
-    const { deleteUser, editUser,validateClient } = useUserManagement()
+    const { deleteUser, editUser, validateClient } = useUserManagement()
     const [showEdit, setShowEdit] = useState(false)
     const [userEditError, setUserEditError] = useState(false)
 
@@ -40,16 +41,14 @@ export const ClientRow = ({ client }) => {
     }
 
     return (
-        <tr key={client.id} className='border-gray-500 border-[1px] '>
+        <tr key={client.id} className='border-b border-gray-500 hover:bg-[#18181A] transition ease-in-out duration-200'>
             <td>{client.email}</td>
-            <td><input type='checkbox' checked={client.client.validated === 'N' ? false : true} onChange={handleChange}></input></td>
-            <td>
-                <button className="bg-teal-500 m-1 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                    onClick={() => deleteUser({ email: client.email, role: client.role })}>
-                    Eliminar
-                </button>
+            <td className='text-center p-2'>
+                <input type='checkbox' checked={client.client.validated === 'N' ? false : true} onChange={handleChange}></input>
+            </td>
+            <td className='text-center gap-2'>
 
-                <button className="bg-teal-500 m-1 w-20 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+                <button className="bg-[#09090B] w-28 h-auto text-white p-1 rounded-md  hover:border-green-500 hover:text-green-500 ease-in-out duration-200 border border-gray-500 mr-2"
                     onClick={() => setShowEdit(!showEdit)}
                 >
                     Editar
@@ -57,39 +56,34 @@ export const ClientRow = ({ client }) => {
                 {
                     showEdit
                         ? <form name="editUserForm"
-                            className="flex flex-col items-center w-10/12  md:w-auto lg:w-full m-2 gap-4 p-2 text-black"
+                            className="flex flex-col items-center w-10/12  md:w-full  m-2 gap-4 p-2 text-white bg-[#09090B] border border-gray-500 rounded-lg"
                             onSubmit={(e) => handleSubmit({ e, email: client.email, defaultPassword: client.password, defaultRole: 'C' })}
                         >
-                            <input name="password"
-                                className="border-2 border-teal-500 w-10/12  md:w-full h-10 p-1 rounded-md  m-0"
-                                type="text"
-                                placeholder="Contraseña"
-                                autoComplete="new-password"
-                            />
+                            <InputMovinTitle name='Contraseña' type={'password'} />
                             <select name="userType"
-                                className="border-2 border-teal-500 w-10/12 md:w-full h-10 p-1 rounded-md m-0"
+                                className="border border-green-500 w-full h-10 p-1 rounded-md m-0 text-center bg-transparent"
                             >
-                                <option value="A">
+                                <option value="A" className="text-center rounded-lg border border-green-500 bg-[#09090B]">
                                     Administrador
                                 </option>
-                                <option value="C">
+                                <option value="C" className="text-center rounded-lg border border-green-500 bg-[#09090B]">
                                     Cliente
                                 </option>
-                                <option value="I">
+                                <option value="I" className="text-center rounded-lg border border-green-500 bg-[#09090B]">
                                     Instructor
                                 </option>
                             </select>
                             {
                                 userEditError ? <p className="md:col-start-2 bg-red-600 text-white p-2 rounded-md m-2">Contraseña o rol incorrecto</p> : null
                             }
-                            <button className="w-full bg-teal-500 m-1 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
-                                type="submit"
-                            >
-                                Guardar
-                            </button>
+                            <FullWDefaultWhiteButton text={"Guardar"} />
                         </form>
                         : null
                 }
+                <button className="bg-red-600 w-28  h-auto text-white p-1 rounded-md  hover:bg-red-900 ease-in-out duration-200 border border-white"
+                    onClick={() => deleteUser({ email: client.email, role: client.role })}>
+                    Eliminar
+                </button>
 
             </td>
         </tr>
