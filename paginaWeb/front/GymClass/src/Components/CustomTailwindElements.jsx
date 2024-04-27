@@ -62,6 +62,24 @@ export const DefaultWhiteButton = ({ handleClick, text }) => {
         </button>
     )
 }
+export const FullWDefaultWhiteButton = ({ handleClick, text }) => {
+    return (
+        <button onClick={handleClick}
+            className="bg-white w-full min-w-52 h-10 text-black p-1 rounded-md  hover:bg-gray-300 ease-in-out duration-200 border border-white"
+        >
+            {text}
+        </button>
+    )
+}
+export const DefaultRedButton = ({ handleClick, text }) => {
+    return (
+        <button onClick={handleClick}
+            className="bg-red-600 w-auto min-w-52 h-10 text-white p-1 rounded-md  hover:bg-red-900 ease-in-out duration-200 border border-white"
+        >
+            {text}
+        </button>
+    )
+}
 export const FullWDefaultButton = ({ handleClick, text}) => {
     return (
         <button onClick={handleClick}
