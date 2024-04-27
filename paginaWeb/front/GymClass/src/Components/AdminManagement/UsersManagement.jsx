@@ -5,7 +5,7 @@ import useUser from "../../hooks/useUser"
 import { useContext, useEffect } from "react"
 import { AdminUsersContext } from "../../Contexts/AdminUsersContext"
 import { Link } from "react-router-dom"
-import { DefaultButton } from "../CustomTailwindElements"
+import { DefaultButton, InputMovinTitle } from "../CustomTailwindElements"
 
 export const UsersManagement = () => {
 
@@ -43,37 +43,27 @@ export const UsersManagement = () => {
             view
               ? <form name="addUserForm"
                 onSubmit={handleAddSubmit}
-                className="flex flex-col items-center md:grid md:grid-cols-3 w-80 md:w-full border-2 border-teal-500 bg-gray-400 m-2 rounded-md gap-4 p-2 shadow-[2px_2px_5px_0px] shadow-gray-800"
+                className="flex flex-col items-center md:grid md:grid-cols-3 w-auto md:w-full border border-gray-500 bg-[#1C1917] m-2 rounded-md gap-4 p-2 "
               >
-                <input name="email"
-                  className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md  m-0"
-                  type="text"
-                  placeholder="Email"
-                  autoComplete="email"
-                />
-                <input name="password"
-                  className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md  m-0"
-                  type="text"
-                  placeholder="Contraseña"
-                  autoComplete="new-password"
-                />
+               <InputMovinTitle name="Email" type="text" />
+                <InputMovinTitle name="Contraseña" type="password" />
                 <select name="userType"
-                  className="border-2 border-teal-500  md:w-full h-10 p-1 rounded-md m-0"
+                  className="border border-green-500 w-full h-10 p-1 rounded-md m-0 text-center bg-transparent"
                 >
-                  <option value="A">
+                  <option value="A" className="text-center rounded-lg border border-green-500 bg-[#09090B]">
                     Administrador
                   </option>
-                  <option value="C">
+                  <option value="C" className="text-center rounded-lg border border-green-500 bg-[#09090B]">
                     Cliente
                   </option>
-                  <option value="I">
+                  <option value="I" className="text-center rounded-lg border border-green-500 bg-[#09090B]">
                     Instructor
                   </option>
                 </select>
                 {
                   passwordError || emailError ? <p className="md:col-start-2 bg-red-600 text-white p-2 rounded-md m-2">Email o contraseña incorrectos</p> : null
                 }
-                <button className="md:col-start-2 bg-teal-500  w-full h-10 border-2 border-teal-500 text-white rounded-md hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">Añadir</button>
+                <button className="md:col-start-2 bg-white w-full min-w-52 h-10 text-black p-1 rounded-md  hover:bg-gray-300 ease-in-out duration-200 border border-white">Añadir</button>
               </form>
               : null
           }
@@ -88,7 +78,7 @@ export const UsersManagement = () => {
 
                 <h2 className="text-2xl ">Clientes</h2>
 
-                <Link to="/admin/usersManagement/clients" className="bg-teal-500 m-1 max-w-96 h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500 text-center" > Ir a la lista de clientes</Link>
+                <Link to="/admin/usersManagement/clients" className="bg-transparent m-1 max-w-96 h-10 border border-gray-500 text-white p-1 rounded-md mr-2  hover:border-green-500  text-center content-center" > Lista de clientes</Link>
                 <h2 className="text-2xl ">Instructores</h2>
                 <Users users={instructors} />
               </>
