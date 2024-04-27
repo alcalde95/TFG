@@ -20,7 +20,7 @@ export const SessionClient = ({ sessionClient }) => {
 
   return (
     <tr key={sessionClient.client_Email} className="border-b border-gray-500 hover:bg-[#18181A] transition ease-in-out duration-200">
-      <td>{sessionClient.client_Email}</td>
+      <td >{sessionClient.client_Email}</td>
       <td className="text-center p-2">
         <input type="checkbox"
           checked={sessionClient.attend}
@@ -28,7 +28,7 @@ export const SessionClient = ({ sessionClient }) => {
         />
       </td>
       <td className="text-center">
-        
+
         <input type="checkbox"
           checked={sessionClient.justified}
           onChange={() => handleChangeJustified({ sessionClient })}
