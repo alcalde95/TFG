@@ -69,32 +69,26 @@ export const ClientSessionCard = ({ session, validated }) => {
     }, [])
     return (
         <>
-            <div className="bg-slate-400 text-center w-11/12 lg:w-72 border-white border-2 rounded-lg h-auto
-                        flex flex-col items-center justify-center 
-                        hover:bg-slate-700 hover:text-white 
-                        transition duration-200 ease-in-out hover:cursor-pointer
-                        relative
-                        p-8
-                        gap-4
-                        overflow-hidden"
+            <div className="bg-[#1C1917] text-center w-11/12 lg:w-72 border-gray-500 border rounded-lg h-auto flex flex-col items-center justify-center hover:border-green-500 transition duration-200 ease-in-out hover:cursor-pointer relative p-8 gap-2 overflow-hidden"
             >
 
                 <p >{((new Date(session.data_time)).toLocaleString('es-ES', options)).charAt(0).toUpperCase() + ((new Date(session.data_time)).toLocaleString('es-ES', options)).slice(1)}</p>
                 <p >Clientes inscritos: {session._count.session_client}</p>
-                <p >{session.instructorEmail}</p>
+                <p className="text-xs">{session.instructorEmail}</p>
                 {
                     !isEnrolledState
-                        ? <button className="bg-teal-500 w-auto h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500 "
+                        ? 
+                        <button className="bg-white w-auto min-w-52 h-10 text-black p-1 rounded-md  hover:bg-gray-300 ease-in-out duration-200 border border-white"
                             disabled={!validated}
                             onClick={handleClick}
                         >
                             Inscribirse
                         </button>
-                        : <button className="bg-red-600 w-auto h-10 border-2 border-black text-white p-1 rounded-md mr-2  hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500"
+                        : <button className="bg-red-600 w-auto min-w-52 h-10 text-white p-1 rounded-md  hover:bg-red-900 ease-in-out duration-200 border border-white"
                             disabled={!validated}
                             onClick={handleUnenrollClick}
                         >
-                            DesInscribirse
+                            Desinscribirse
                         </button>
                 }
 

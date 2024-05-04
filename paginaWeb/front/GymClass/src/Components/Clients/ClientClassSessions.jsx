@@ -29,8 +29,8 @@ export const ClientClassSessions = () => {
 
     const { getSessions } = useSessions()
     const { getClass } = useClasses()
-    const { validated,isValidatedClient } = useUser()
-        
+    const { validated, isValidatedClient } = useUser()
+
 
     const { filterSessions } = useSessionsFilter()
 
@@ -54,15 +54,13 @@ export const ClientClassSessions = () => {
 
 
     return (
-        <div className="max-w-6xl min-w-80 w-full min-h-screen flex flex-col">
+        <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
             <Header />
-            <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
-                {
-                    classes && <ClassHeaderInfo headerClass={classes} />
+            {
+                classes && <ClassHeaderInfo headerClass={classes} />
 
-                }
-            </section>
-            <section className="h-full bg-slate-300 flex flex-col items-center border-4 border-teal-500 rounded-md m-2 p-2">
+            }
+            <section className="h-full flex flex-col items-center border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
 
                 <h1 className="text-4xl m-2">Sesiones</h1>
 
@@ -74,8 +72,8 @@ export const ClientClassSessions = () => {
                         thursdaySessions={filteredThursdaySessions}
                         fridaySessions={filteredFridaySessions}
                         saturdaySessions={filteredSaturdaySessions}
-                        sundaySessions={filteredSundaySessions} 
-                        validated = {validated}/>
+                        sundaySessions={filteredSundaySessions}
+                        validated={validated} />
                 }
             </section>
 

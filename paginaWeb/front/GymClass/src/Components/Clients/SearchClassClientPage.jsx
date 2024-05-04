@@ -4,11 +4,12 @@ import { Header } from '../Header'
 import { Classes } from '../Classes/Classes'
 import { useClasses } from '../../hooks/useClasses'
 import debounce from 'just-debounce-it'
+import { DefaultWhiteButton, InputMovinTitle } from '../CustomTailwindElements'
 
 export const SearchClassClientPage = () => {
 
     const [loading, setLoading] = useState(true)
-    
+
     const { getClasses } = useClasses()
 
     const { classes, setClasses } = useContext(ClassesContext)
@@ -25,10 +26,10 @@ export const SearchClassClientPage = () => {
         setLoading(true)
         let form = e.target
         let data = new FormData(form)
-        let name = data.get("name")
-        let maxCapacity = data.get("maxCapacity")
-        let minDuration = data.get("minDuration")
-        let maxDuration = data.get("maxDuration")
+        let name = data.get("Nombre")
+        let maxCapacity = data.get("Capacidad Máxima")
+        let minDuration = data.get("Duración Mínima")
+        let maxDuration = data.get("Duración Máxima")
         console.log(name, maxCapacity, minDuration, maxDuration)
         await getClasses({ name, maxCapacity, minDuration, maxDuration })
         setLoading(false)
@@ -48,24 +49,23 @@ export const SearchClassClientPage = () => {
         , [getClasses])
 
     return (
-        <div className="max-w-6xl min-w-80 w-full min-h-screen h-full flex flex-col">
+        <div className="min-w-80 w-full min-h-screen flex flex-col gap-2 relative text-white">
             <Header />
-            <section className=" bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2">
-                <form onSubmit={handleSubmit}>
-                    <input type='text' name='name' placeholder='introduzca el nombre de la clase a buscar' onChange={handleChange} />
-                    <input type='number' name='maxCapacity' placeholder='nº max cli ' />
-                    <input type='number' name='minDuration' placeholder='duración mínima ' />
-                    <input type='number' name='maxDuration' placeholder='duración máxima' />
-                    <button>Buscar</button>
+            <main className=" h-full flex flex-col place-content-start items-center m-2 p-2">
+                <form onSubmit={handleSubmit}
+                    className="w-11/12 md:w-4/6 max-w-2xl gap-2 flex flex-col items-center bg-[#1C1917]   p-2 rounded-lg border-gray-500 border mt-2" >
+                    <InputMovinTitle name="Nombre" type="text" handleChange={handleChange} />
+                    <InputMovinTitle name="Capacidad Máxima" type="number" />
+                    <InputMovinTitle name="Duración Mínima" type="number" />
+                    <InputMovinTitle name="Duración Máxima" type="number" />
+                    <DefaultWhiteButton text="Buscar" />
                 </form>
 
-            </section>
-            <main className=" bg-slate-300 flex flex-col items-center  border-4 border-teal-500 rounded-md m-2 p-2">
 
                 {
                     loading
-                        ? <p className="text-2xl ">Cargando...</p>
-                        : <Classes classes={classes} editable={false} managed={true}/>
+                        ? <p className="text-2xl mt-10">Cargando...</p>
+                        : <Classes classes={classes} editable={false} managed={true} />
 
                 }
             </main>
