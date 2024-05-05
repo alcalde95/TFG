@@ -2,6 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import { useSessionClients } from "../../hooks/useSessionClients";
 import { useSessions } from "../../hooks/useSessions";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Slide } from 'react-toastify';
 
 export const ClientSessionCard = ({ session, validated }) => {
     const { jwt, email } = useContext(UserContext)
@@ -29,11 +32,29 @@ export const ClientSessionCard = ({ session, validated }) => {
         const res = await enrollClientToSession({ jwt, dataTime, uuidClass, clientEmail })
 
         if (!res) {
-            alert('No se ha podido inscribir')
+            toast.error('Error. No ha sido posible inscribirle', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             setIsEnrolledState(false)
             return
         }
-        alert('Inscrito correctamente')
+        toast.success('Inscrito correctamente', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         getSessions({ uuidClass, jwt })
         setIsEnrolledState(true)
 
@@ -46,11 +67,29 @@ export const ClientSessionCard = ({ session, validated }) => {
         const res = await unenrollClientToSession({ jwt, dataTime, uuidClass, clientEmail })
 
         if (!res) {
-            alert('No se ha podido inscribir')
+            toast.error('Error. No ha sido posible desinscribirle', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             setIsEnrolledState(true)
             return
         }
-        alert('Desinscrito correctamente')
+        toast.success('Desinscrito correctamente', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         getSessions({ uuidClass, jwt })
         setIsEnrolledState(false)
 
@@ -69,15 +108,29 @@ export const ClientSessionCard = ({ session, validated }) => {
     }, [])
     return (
         <>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Slide}
+            />
             <div className="bg-[#1C1917] text-center w-11/12 lg:w-72 border-gray-500 border rounded-lg h-auto flex flex-col items-center justify-center hover:border-green-500 transition duration-200 ease-in-out hover:cursor-pointer relative p-8 gap-2 overflow-hidden"
             >
 
                 <p >{((new Date(session.data_time)).toLocaleString('es-ES', options)).charAt(0).toUpperCase() + ((new Date(session.data_time)).toLocaleString('es-ES', options)).slice(1)}</p>
                 <p >Clientes inscritos: {session._count.session_client}</p>
                 <p className="text-xs">{session.instructorEmail}</p>
+                {!validated && <p className="text-xs text-red-500">No estás validado</p>}
                 {
                     !isEnrolledState
-                        ? 
+                        ?
                         <button className="bg-white w-auto min-w-52 h-10 text-black p-1 rounded-md  hover:bg-gray-300 ease-in-out duration-200 border border-white"
                             disabled={!validated}
                             onClick={handleClick}
