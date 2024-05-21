@@ -8,6 +8,7 @@ import { ImCross } from "react-icons/im";
 import { IoIosOptions } from "react-icons/io";
 import { DefaultWhiteButton, FullWDefaultButton, InputMovinTitle } from "./CustomTailwindElements";
 import { Tooltip } from "react-tooltip";
+import { toast } from "react-toastify";
 
 export const Session = ({ session }) => {
     const { jwt, email, role } = useContext(UserContext)
@@ -55,9 +56,29 @@ export const Session = ({ session }) => {
         dataTime.setDate(dataTime.getDate() + parseInt(days))
         const res = await createSession({ uuidClass: session.UUID_Class, dataTime: dataTime, instructorEmail: session.instructorEmail, jwt })
         if (!res) {
+            toast.error('Error.La fecha a duplicar es inválida ', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             setError(true)
             return
         }
+        toast.success('Sesión duplicada con éxito', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         setError(false)
         getSessions({ uuidClass: session.UUID_Class, jwt })
         setDup(false)
@@ -67,6 +88,16 @@ export const Session = ({ session }) => {
         e.preventDefault()
         const res = await deleteSession({ uuidClass: session.UUID_Class, dataTime: session.data_time, jwt })
         if (res) {
+            toast.success('Sesión borrada con éxito', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             getSessions({ uuidClass: session.UUID_Class, jwt })
         }
     }
@@ -81,6 +112,16 @@ export const Session = ({ session }) => {
         }
         const res = await updateSession({ uuidClass: session.UUID_Class, dataTime: session.data_time, instructorEmail, jwt })
         if (res) {
+            toast.success('Sesión editada con éxito', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             setEdit(false)
             getSessions({ uuidClass: session.UUID_Class, jwt })
         }

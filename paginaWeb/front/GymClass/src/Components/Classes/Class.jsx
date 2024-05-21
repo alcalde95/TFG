@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useClasses } from "../../hooks/useClasses";
 import { convertFile } from "../../utils";
 import { FullWDefaultButton, InputMovinTitleWValue } from "../CustomTailwindElements";
+import { toast } from "react-toastify";
 
 export const Class = ({ c, editable, managed }) => {
     const { jwt, email, role } = useContext(UserContext)
@@ -55,6 +56,16 @@ export const Class = ({ c, editable, managed }) => {
         }
         const res = await updateClass({ name, photo, description, maxCapacity, duration, jwt, UUIDClass: c.UUID_Class, instructorEmail: email })
         if (res) {
+            toast.success('Clase editada con éxito', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             setEditar(false)
             getInstructorClasses({ jwt })
         }
@@ -64,6 +75,16 @@ export const Class = ({ c, editable, managed }) => {
         e.preventDefault()
         const res = await deleteClass({ uuidClass: c.UUID_Class, jwt })
         if (res) {
+            toast.success('Clase borrada con éxito', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             getInstructorClasses({ jwt })
         }
     }
@@ -143,10 +164,10 @@ export const Class = ({ c, editable, managed }) => {
                         <InputMovinTitleWValue name="Capacidad máxima"
                             type="number"
                             min={1}
-                            value={maxCapacity} 
+                            value={maxCapacity}
                             handleChange={(e) => setMaxCapacity(parseInt(e.target.value))}
-                            />
-                        
+                        />
+
                         {
                             maxCapacityError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{maxCapacityError}</div>
                                 : null

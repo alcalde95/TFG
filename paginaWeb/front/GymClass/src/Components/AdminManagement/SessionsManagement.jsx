@@ -10,6 +10,7 @@ import { useSessions } from "../../hooks/useSessions"
 import { WeekSessions } from "../WeekSessions"
 import { useSessionsFilter } from "../../hooks/useSessionsFilter"
 import { DefaultButton, DefaultWhiteButton, InputMovinTitle } from "../CustomTailwindElements"
+import { Slide, ToastContainer, toast } from "react-toastify"
 
 export const SessionsManagement = () => {
 
@@ -60,12 +61,36 @@ export const SessionsManagement = () => {
     const instructor = data.get("Instructor")
     const res = await createSession({ uuidClass: params.uuidClass, dataTime: date, instructorEmail: instructor, jwt })
     if (res) {
+      toast.success('Sesión creada con éxito', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
       getSessions({ uuidClass: params.uuidClass, jwt })
       setShow(false)
     }
   }
 
   return (
+    <>
+    <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
       <Header />
       {
@@ -118,6 +143,7 @@ export const SessionsManagement = () => {
       </section>
 
     </div>
+    </>
   )
 }
 
