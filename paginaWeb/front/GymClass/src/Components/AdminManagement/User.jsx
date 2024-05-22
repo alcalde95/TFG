@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useUserManagement } from "../../hooks/useUserManagement"
 import { DefaultButton, DefaultRedButton, FullWDefaultWhiteButton, InputMovinTitle } from "../CustomTailwindElements"
+import { toast } from "react-toastify"
 
 
 export const User = ({ user }) => {
@@ -23,6 +24,16 @@ export const User = ({ user }) => {
         try {
             const res = await editUser({ email, password, role })
             if (res) {
+                toast.success('Usuario editado con éxito', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
                 setUserEditError(false)
                 setShowEdit(false)
             }
@@ -32,6 +43,28 @@ export const User = ({ user }) => {
         } catch (error) {
 
             console.log(error.message)
+        }
+    }
+
+    const handleDeleteUser = () => {
+        try {
+            const res = deleteUser({ email: user.email, role: user.role })
+
+            if(res){
+                toast.success('Usuario eliminado con éxito', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                  })
+            }
+
+        } catch (e) {
+            console.log(e.mmessage)
         }
     }
 
@@ -71,7 +104,7 @@ export const User = ({ user }) => {
                         </form>
                         : null
                 }
-                <DefaultRedButton handleClick={() => deleteUser({ email: user.email, role: user.role })} text="Eliminar" />
+                <DefaultRedButton handleClick={handleDeleteUser} text="Eliminar" />
 
             </div>
         </li>

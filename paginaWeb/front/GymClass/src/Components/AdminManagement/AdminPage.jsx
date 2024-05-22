@@ -20,9 +20,3 @@ export const AdminPage = () => {
     )
 }
 
-/*
-<button onClick={() => navigate('/admin/classesManagement')}
-                        className="bg-teal-500 m-1 w-[200px] h-10 border-2 border-teal-500 text-white p-1 rounded-md mr-2 hover:bg-teal-400 hover:border-white  shadow-[2px_2px_5px_0px] shadow-gray-500">
-                        ClassesManagement
-                    </button>
-                    */

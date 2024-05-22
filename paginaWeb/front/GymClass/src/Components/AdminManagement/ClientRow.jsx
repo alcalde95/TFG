@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useUserManagement } from '../../hooks/useUserManagement'
 import { FullWDefaultWhiteButton, InputMovinTitle } from '../CustomTailwindElements'
+import { toast } from 'react-toastify'
 
 export const ClientRow = ({ client }) => {
 
@@ -23,6 +24,16 @@ export const ClientRow = ({ client }) => {
         try {
             const res = await editUser({ email, password, role })
             if (res) {
+                toast.success('Cliente actualizado con éxito', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
                 setUserEditError(false)
                 setShowEdit(false)
             }
@@ -38,6 +49,38 @@ export const ClientRow = ({ client }) => {
     const handleChange = () => {
         const validated = client.client.validated === 'N' ? 'Y' : 'N'
         validateClient({ email: client.email, validated })
+        toast.success(validated === 'Y' ? 'Cliente validado con éxito' : 'Cliente desvalidado con éxito', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        })
+    }
+
+    const handleDeleteUser = ({ email, role }) => {
+        try {
+            const res = deleteUser({ email, role })
+
+            if (res) {
+                toast.success('Usuario eliminado con éxito', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                })
+            }
+
+        } catch (e) {
+            console.log(e.mmessage)
+        }
     }
 
     return (
@@ -81,7 +124,7 @@ export const ClientRow = ({ client }) => {
                         : null
                 }
                 <button className="bg-red-600 w-28  h-auto text-white p-1 rounded-md  hover:bg-red-900 ease-in-out duration-200 border border-white"
-                    onClick={() => deleteUser({ email: client.email, role: client.role })}>
+                    onClick={() => handleDeleteUser({ email: client.email, role: client.role })}>
                     Eliminar
                 </button>
 

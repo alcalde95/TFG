@@ -70,7 +70,7 @@ export const useUserManagement = () => {
 
     const deleteUser = async ({ email, role }) => {
         try {
-            await deleteUserService({ email, jwt })
+            const res = await deleteUserService({ email, jwt })
             switch (role.toLowerCase()) {
                 case 'a':
                     setAdmins(admins.filter((admin) => admin.email !== email))
@@ -85,9 +85,11 @@ export const useUserManagement = () => {
                     break
             }
 
+            return res
 
         } catch (e) {
             console.log(e.message)
+            return false
         }
     }
 

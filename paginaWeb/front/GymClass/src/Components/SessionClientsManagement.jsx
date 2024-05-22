@@ -11,6 +11,7 @@ import { SessionClients } from "./SessionClients/SessionClients"
 import { useSessions } from "../hooks/useSessions"
 import { SessionHeaderInfo } from "./SessionHeaderInfo"
 import { SessionContext } from "../Contexts/SessionContext"
+import { Slide, ToastContainer } from "react-toastify"
 
 export const SessionClientsManagement = () => {
 
@@ -35,25 +36,40 @@ export const SessionClientsManagement = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
-      <Header />
-      {
-        classes && sessionClients && <ClassHeaderInfo headerClass={classes} />
-
-      }
-      {
-        session && <SessionHeaderInfo session={session} num={sessionClients.length} />
-      }
-      <main className="h-full flex flex-col border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
-
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
+      <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
+        <Header />
         {
+          classes && sessionClients && <ClassHeaderInfo headerClass={classes} />
 
-          sessionClients ?
-            <SessionClients sessionClients={sessionClients} />
-            : null
         }
+        {
+          session && <SessionHeaderInfo session={session} num={sessionClients.length} />
+        }
+        <main className="h-full flex flex-col border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
 
-      </main >
-    </div>
+          {
+
+            sessionClients ?
+              <SessionClients sessionClients={sessionClients} />
+              : null
+          }
+
+        </main >
+      </div>
+    </>
   )
 }
