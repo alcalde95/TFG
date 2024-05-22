@@ -8,6 +8,7 @@ import { useClasses } from "../../hooks/useClasses";
 import { convertFile } from "../../utils";
 import { FullWDefaultButton, InputMovinTitleWValue } from "../CustomTailwindElements";
 import { toast } from "react-toastify";
+import { DeleteModal } from "../DeleteModal";
 
 export const Class = ({ c, editable, managed }) => {
     const { jwt, email, role } = useContext(UserContext)
@@ -16,6 +17,7 @@ export const Class = ({ c, editable, managed }) => {
     const [description, setDescription] = useState(c.description)
     const [duration, setDuration] = useState(c.duration)
     const [maxCapacity, setMaxCapacity] = useState(c.max_Capacity)
+    const [verModal, setVerModal] = useState(false)
 
     const { updateClass, nameError, descriptionError, photoError, maxCapacityError, durationError, getInstructorClasses, deleteClass } = useClasses()
 
@@ -71,8 +73,7 @@ export const Class = ({ c, editable, managed }) => {
         }
     }
 
-    const handleDeleteClick = async (e) => {
-        e.preventDefault()
+    const handleDeleteClick = async () => {
         const res = await deleteClass({ uuidClass: c.UUID_Class, jwt })
         if (res) {
             toast.success('Clase borrada con éxito', {
@@ -92,13 +93,16 @@ export const Class = ({ c, editable, managed }) => {
     //transition-all duration-100 ease-in-out
     return (
         <>
+
+            <DeleteModal textoEntrada={'Clase'} verModal={verModal} setVerModal={setVerModal} handleDelete={handleDeleteClick} message="Está seguro de que quiere borrar la clase? Esto borrará todo lo relacionado con esta" />
+
             <div className="flex flex-col items-center border w-11/12 md:w-10/12 lg:min-h-[570px] lg:w-auto border-gray-500 bg-transparent m-2 rounded-md p-2  transition duration-200 ease-in-out relative text-white hover:cursor-pointer hover:text-green-500 hover:border-green-500">
                 <h1 className="font-bold text-3xl m-2 max-w-60 lg:max-w-max underline hover:text-green-700 overflow-hidden text-center transition duration-200 ease-in-out"
                     onClick={handleClick}>{c.name}</h1>
                 {managed
                     ? null
                     : <ImCross className="absolute top-1 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 w-3 transition duration-200 ease-in-out hover:text-red-600"
-                        onClick={handleDeleteClick} />
+                        onClick={() => setVerModal(!verModal)} />
                 }
                 <img src={c.photo.length > 50 ? c.photo : "https://picsum.photos/300/300"} alt={c.description} className="aspect-square w-11/12 lg:w-96 rounded-lg border-gray-500 border transition duration-100 ease-in-out relative text-white hover:cursor-pointe hover:border-green-500"></img>
 

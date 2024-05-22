@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useUserManagement } from '../../hooks/useUserManagement'
 import { FullWDefaultWhiteButton, InputMovinTitle } from '../CustomTailwindElements'
 import { toast } from 'react-toastify'
+import { DeleteModal } from '../DeleteModal'
 
 export const ClientRow = ({ client }) => {
 
@@ -9,6 +10,7 @@ export const ClientRow = ({ client }) => {
     const [showEdit, setShowEdit] = useState(false)
     const [userEditError, setUserEditError] = useState(false)
 
+    const [verModal, setVerModal] = useState(false)
 
     const handleSubmit = async ({ e, email, defaultPassword, defaultRole }) => {
         e.preventDefault()
@@ -124,9 +126,11 @@ export const ClientRow = ({ client }) => {
                         : null
                 }
                 <button className="bg-red-600 w-28  h-auto text-white p-1 rounded-md  hover:bg-red-900 ease-in-out duration-200 border border-white"
-                    onClick={() => handleDeleteUser({ email: client.email, role: client.role })}>
+                    onClick={() => setVerModal(!verModal)}>
                     Eliminar
                 </button>
+
+                <DeleteModal textoEntrada={'Cliente'} verModal={verModal} setVerModal={setVerModal} handleDelete={() => {handleDeleteUser({email:client.email,role:client.role})}} message="Está seguro de que quiere borrar el cliente? Esto borrará todo lo relacionado con este" />
 
             </td>
         </tr>

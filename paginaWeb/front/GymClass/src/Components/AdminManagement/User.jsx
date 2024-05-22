@@ -2,11 +2,14 @@ import { useState } from "react"
 import { useUserManagement } from "../../hooks/useUserManagement"
 import { DefaultButton, DefaultRedButton, FullWDefaultWhiteButton, InputMovinTitle } from "../CustomTailwindElements"
 import { toast } from "react-toastify"
+import { DeleteModal } from "../DeleteModal"
 
 
 export const User = ({ user }) => {
 
     const { deleteUser, editUser } = useUserManagement()
+
+    const [verModal, setVerModal] = useState(false)
     const [showEdit, setShowEdit] = useState(false)
     const [userEditError, setUserEditError] = useState(false)
 
@@ -50,7 +53,7 @@ export const User = ({ user }) => {
         try {
             const res = deleteUser({ email: user.email, role: user.role })
 
-            if(res){
+            if (res) {
                 toast.success('Usuario eliminado con éxito', {
                     position: "top-center",
                     autoClose: 5000,
@@ -60,7 +63,7 @@ export const User = ({ user }) => {
                     draggable: true,
                     progress: undefined,
                     theme: "light",
-                  })
+                })
             }
 
         } catch (e) {
@@ -104,8 +107,9 @@ export const User = ({ user }) => {
                         </form>
                         : null
                 }
-                <DefaultRedButton handleClick={handleDeleteUser} text="Eliminar" />
+                <DefaultRedButton handleClick={() => setVerModal(!verModal)} text="Eliminar" />
 
+                <DeleteModal textoEntrada={'Usuario'} verModal={verModal} setVerModal={setVerModal} handleDelete={handleDeleteUser} message="Está seguro de que quiere borrar el usuario? Esto borrará todo lo relacionado con este" />
             </div>
         </li>
     )

@@ -9,6 +9,7 @@ import { IoIosOptions } from "react-icons/io";
 import { DefaultWhiteButton, FullWDefaultButton, InputMovinTitle } from "./CustomTailwindElements";
 import { Tooltip } from "react-tooltip";
 import { toast } from "react-toastify";
+import { DeleteModal } from "./DeleteModal";
 
 export const Session = ({ session }) => {
     const { jwt, email, role } = useContext(UserContext)
@@ -29,6 +30,7 @@ export const Session = ({ session }) => {
     const { instructors } = useContext(AdminUsersContext)
     const [edit, setEdit] = useState(false)
     const [dup, setDup] = useState(false)
+    const [verModal, setVerModal] = useState(false)
 
     const { createSession, getSessions, updateSession } = useSessions()
 
@@ -84,8 +86,7 @@ export const Session = ({ session }) => {
         setDup(false)
     }
 
-    const handleDeleteClick = async (e) => {
-        e.preventDefault()
+    const handleDeleteClick = async () => {
         const res = await deleteSession({ uuidClass: session.UUID_Class, dataTime: session.data_time, jwt })
         if (res) {
             toast.success('Sesión borrada con éxito', {
@@ -128,6 +129,10 @@ export const Session = ({ session }) => {
     }
     return (
         <>
+
+            <DeleteModal textoEntrada={'Sesión'} verModal={verModal} setVerModal={setVerModal} handleDelete={handleDeleteClick} message="Está seguro de que quiere borrar la sesión? Esto borrará todo lo relacionado con esta" />
+
+
             <div className="bg-[#1C1917] text-center w-11/12 lg:w-72 border-gray-500 border rounded-lg h-auto flex flex-col items-center justify-center hover:border-green-500 transition duration-200 ease-in-out hover:cursor-pointer relative p-8 gap-2 overflow-hidden"
             >
 
@@ -138,7 +143,7 @@ export const Session = ({ session }) => {
                     !location.pathname.includes("managed") && role?.toLowerCase() === 'i' &&
                     <section className="flex flex-col items-center">
                         <ImCross className="absolute top-1 right-[1rem] bg-transparent text-white rounded-md m-0 p-0 w-3 transition duration-200 ease-in-out hover:text-red-600"
-                            onClick={handleDeleteClick}
+                            onClick={() => setVerModal(!verModal)}
                             data-tooltip-id={"delete"} />
 
 
