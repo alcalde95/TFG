@@ -19,15 +19,15 @@ POST http://localhost:1234/users/login
 Content-Type: application/json
 
 {
-    "email": "admin@admin.admin"    ,
-    "password": "admin123"
+    "email": "client@client.client"    ,
+    "password": "client123"
 }
 #### Register
 POST http://localhost:1234/users/
 Content-Type: application/json
 
 {
-    "email": "instructor@instructor.instructor",
+    "email": "instructor33@instructor.instructor",
     "password": "instructor123",
     "role": "I"
 }
@@ -52,13 +52,13 @@ Content-Type: application/json
 }
 
 ### Delete user
-DELETE http://localhost:1234/users/esUsuario@usuario.user
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzA5OTIxNjczODYwLCJpYXQiOjE3MDkzMTY4NzN9.54oI7x7D9Lm2EXGixGX0t4rCYqmbS24U20IKewfHmJk      
+DELETE http://localhost:1234/users/instructor33@instructor.instructor
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzE3MDgzNTE5MjMwLCJpYXQiOjE3MTY0Nzg3MTl9.VDXS85_LsL7c0itj_xCJbPU4cYPO04Rwf3KDvNGFpik   
 
 ### Get all instructors
 GET http://localhost:1234/users/instructors/
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzExNDY5NzA5NDQxLCJpYXQiOjE3MTA4NjQ5MDl9.OMlFgRBnpVnEajDpLY41LK55JJWVJqlYXGA3e-n19BU
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzE3MDgzMzI5MDMxLCJpYXQiOjE3MTY0Nzg1Mjl9.jJ51-IVMRJPAVnnGfjTE1uchn1CoZWAq85QGBDGp_uc
 
 ### SEE IF A CLIENT IS VALIDATED
 GET http://localhost:1234/users/clients/validation
-Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzEzNzk1MTA0ODkyLCJpYXQiOjE3MTMxOTAzMDR9.zJNCaBg4l2iuZGgzevMoSXs3zDtXoUBdA4Th3hoEAwU
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaWVudEBjbGllbnQuY2xpZW50IiwiZXhwIjoxNzE3MDgzNTE5MjMwLCJpYXQiOjE3MTY0Nzg3MTl9.VDXS85_LsL7c0itj_xCJbPU4cYPO04Rwf3KDvNGFpik
