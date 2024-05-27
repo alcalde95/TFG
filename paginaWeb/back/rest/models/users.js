@@ -62,7 +62,6 @@ export class UserModel {
         email: userEmail
       }
     })
-    console.log(client.validated)
     return { validated: client.validated === 'Y' }
   }
 

@@ -43,10 +43,8 @@ export class SessionsClientsModel {
         }
       })
       if (nonAssisted.length >= 3) {
-        console.log(nonAssisted)
         const sanctionedUntilDate = new Date(nonAssisted[0].data_time)
         sanctionedUntilDate.setDate(sanctionedUntilDate.getDate() + 31)
-        console.log(sanctionedUntilDate)
         if (sanctionedUntilDate > new Date()) throw new Error('Client is sanctioned')
       }
 
@@ -98,7 +96,6 @@ export class SessionsClientsModel {
   static isEnrolled = async ({ input }) => {
     try {
       const { dataTime, uuidClass, clientEmail } = input
-      console.log(dataTime, uuidClass, clientEmail)
       const isEnrolled = await prisma.sessions_Client.findMany({
         where: {
           data_time: dataTime,

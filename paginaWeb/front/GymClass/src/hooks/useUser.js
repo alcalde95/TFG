@@ -96,9 +96,7 @@ const useUser = () => {
     const isValidatedClient = async () => {
         try {
             const res = await isValidatedClientService({ jwt })
-            console.log(typeof res)
             setValidated(res)
-            console.log(validated)
         } catch (error) {
             console.log(error)
         }

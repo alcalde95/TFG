@@ -116,7 +116,6 @@ export const useClasses = () => {
     const deleteClass = async ({ uuidClass, jwt }) => {
         try {
             await deleteClassService({ uuidClass, jwt })
-            console.log("hola :D")
             return true
         } catch (e) {
             console.error(e.message)

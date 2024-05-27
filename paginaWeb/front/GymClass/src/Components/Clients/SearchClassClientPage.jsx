@@ -30,7 +30,6 @@ export const SearchClassClientPage = () => {
         let maxCapacity = data.get("Capacidad Máxima")
         let minDuration = data.get("Duración Mínima")
         let maxDuration = data.get("Duración Máxima")
-        console.log(name, maxCapacity, minDuration, maxDuration)
         await getClasses({ name, maxCapacity, minDuration, maxDuration })
         setLoading(false)
     }
