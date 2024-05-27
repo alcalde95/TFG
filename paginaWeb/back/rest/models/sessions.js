@@ -102,7 +102,7 @@ export class SessionsModel {
         }
       })
 
-    
+      console.log(res)
     } catch (e) {
       throw new Error(e.message)
     }
