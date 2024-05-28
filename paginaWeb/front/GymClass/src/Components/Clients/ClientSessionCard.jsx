@@ -2,9 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 import { useSessionClients } from "../../hooks/useSessionClients";
 import { useSessions } from "../../hooks/useSessions";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Slide } from 'react-toastify';
 
 export const ClientSessionCard = ({ session, validated }) => {
     const { jwt, email } = useContext(UserContext)
@@ -108,19 +107,7 @@ export const ClientSessionCard = ({ session, validated }) => {
     }, [])
     return (
         <>
-            <ToastContainer
-                position="top-center"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={true}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-                transition={Slide}
-            />
+            
             <div className="bg-[#1C1917] text-center w-11/12 lg:w-72 border-gray-500 border rounded-lg h-auto flex flex-col items-center justify-center hover:border-green-500 transition duration-200 ease-in-out hover:cursor-pointer relative p-8 gap-2 overflow-hidden"
             >
 

@@ -10,6 +10,7 @@ import { useSessions } from "../../hooks/useSessions"
 import { useSessionsFilter } from "../../hooks/useSessionsFilter"
 import { ClientWeekSessions } from "./ClientWeekSessions"
 import useUser from "../../hooks/useUser"
+import { Slide, ToastContainer } from "react-toastify"
 
 export const ClientClassSessions = () => {
 
@@ -54,11 +55,25 @@ export const ClientClassSessions = () => {
 
 
     return (
+        <>
+        <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Slide}
+            />
         <div className="w-full min-w-80 min-h-screen flex flex-col items-center gap-2">
             <Header />
             {
                 classes && <ClassHeaderInfo headerClass={classes} />
-
+                
             }
             <section className="h-full flex flex-col items-center border border-gray-500 rounded-md p-2 w-11/12 max-w-7xl text-white">
 
@@ -67,17 +82,18 @@ export const ClientClassSessions = () => {
 
                 {
                     sessions && <ClientWeekSessions mondaySessions={filteredMondaySessions}
-                        tuesdaySessions={filteredTuesdaySessions}
-                        wednesdaySessions={filteredWednesdaySessions}
-                        thursdaySessions={filteredThursdaySessions}
-                        fridaySessions={filteredFridaySessions}
-                        saturdaySessions={filteredSaturdaySessions}
-                        sundaySessions={filteredSundaySessions}
-                        validated={validated} />
+                    tuesdaySessions={filteredTuesdaySessions}
+                    wednesdaySessions={filteredWednesdaySessions}
+                    thursdaySessions={filteredThursdaySessions}
+                    fridaySessions={filteredFridaySessions}
+                    saturdaySessions={filteredSaturdaySessions}
+                    sundaySessions={filteredSundaySessions}
+                    validated={validated} />
                 }
             </section>
 
         </div>
+                </>
     )
 }
 
