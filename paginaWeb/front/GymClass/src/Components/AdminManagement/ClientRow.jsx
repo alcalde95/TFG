@@ -51,7 +51,7 @@ export const ClientRow = ({ client }) => {
     const handleChange = () => {
         const validated = client.client.validated === 'N' ? 'Y' : 'N'
         validateClient({ email: client.email, validated })
-        toast.success(validated === 'Y' ? 'Cliente validado con éxito' : 'Cliente desvalidado con éxito', {
+        toast.success(validated === 'Y' ? 'Cliente validado con éxito' : 'Cliente invalidado con éxito', {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,
