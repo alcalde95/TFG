@@ -31,7 +31,7 @@ export const InstructorPage = () => {
     const form = e.target
     const data = new FormData(form)
     const name = data.get("Nombre")
-    const description = data.get("Descripcion")
+    const description = data.get("Descripción")
     const inputPhoto = data.get("photo")
     const photo = (await convertFile(inputPhoto)).split(",")[1]
     const duration = isNaN(parseInt(data.get("Duración"))) ? 0 : parseInt(data.get("Duración"))
@@ -98,7 +98,7 @@ export const InstructorPage = () => {
                       nameError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{nameError}</div>
                         : null
                     }
-                    <InputMovinTitle name="Descripcion" type="textarea" />
+                    <InputMovinTitle name="Descripción" type="textarea" />
                     {
                       descriptionError ? <div className="bg-red-600 text-white p-2 rounded-md m-2">{descriptionError}</div>
                         : null
