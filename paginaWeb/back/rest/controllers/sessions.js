@@ -1,16 +1,14 @@
 import { partialValidateSession, updateValidateSession, validateSession } from '../schemas/session.js'
 import { authorized } from '../../utilFunctions.js'
 import { SessionsModel } from '../models/sessions.js'
-import { SECRET } from '../../index.js'
-import jwt from 'jsonwebtoken'
 export class SessionsController {
   static getSessions = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      const userEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
+      const userEmail = decoded.email
       const { classId } = req.params
       const sessions = await SessionsModel.getSessions({ classId, userEmail })
       res.json(sessions)
@@ -23,10 +21,10 @@ export class SessionsController {
   static getSession = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      const userEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
+      const userEmail = decoded.email
       const { classId } = req.params
       const { date } = req.params
       const session = await SessionsModel.getSession({ classId, date, userEmail })
@@ -40,10 +38,10 @@ export class SessionsController {
   static createSession = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      const userEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
+      const userEmail = decoded.email
       const body = req.body
       const input = {
         dataTime: new Date(body.dataTime),
@@ -64,10 +62,10 @@ export class SessionsController {
   static updateSession = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      const userEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
+      const userEmail = decoded.email
       const body = req.body
       const input = {
         dataTime: new Date(body.dataTime),
@@ -88,9 +86,10 @@ export class SessionsController {
   static deleteSession = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      const userEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
+      const userEmail = decoded.email
       const body = req.body
 
       const input = {

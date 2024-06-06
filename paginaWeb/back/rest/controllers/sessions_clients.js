@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken'
-import { SECRET } from '../../index.js'
 import { authorized } from '../../utilFunctions.js'
 import { SessionsClientsModel } from '../models/sessions_clients.js'
 import { partialValidateSessionClassesSchema, validateSessionClassesSchema } from '../schemas/session_clients.js'
@@ -8,8 +6,9 @@ export class SessionsClientsController {
   static getSessionClients = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      if (!authorized({ token })) res.status(401).send('Unauthorized')
+      const { valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
       const { UUIDClass, date } = req.params
       const { sessionsClients } = await SessionsClientsModel.getSessionClients({ UUIDClass, date })
       res.json(sessionsClients)
@@ -21,9 +20,9 @@ export class SessionsClientsController {
   static enrollClientToSession = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
       const { date, UUIDClass } = req.params
       const input = { uuidClass: UUIDClass, dataTime: new Date(date), clientEmail: req.body.clientEmail }
       const validatedData = partialValidateSessionClassesSchema({ input })
@@ -41,9 +40,9 @@ export class SessionsClientsController {
   static isEnrolled = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
       const { date, UUIDClass } = req.params
       const input = { uuidClass: UUIDClass, dataTime: new Date(date), clientEmail: req.body.clientEmail }
       const validatedData = partialValidateSessionClassesSchema({ input })
@@ -60,10 +59,10 @@ export class SessionsClientsController {
   static updateSessionClients = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      const userEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
+      const userEmail = decoded.email
       const body = req.body
       const input = { ...body, dataTime: new Date(body.dataTime) }
       const validatedData = validateSessionClassesSchema({ input })
@@ -80,9 +79,9 @@ export class SessionsClientsController {
   static unenrollClientToSession = async (req, res) => {
     try {
       const { authorization } = req.headers
-      if (!authorization) return res.status(401).send('Unauthorized')
-      const token = authorization.split(' ')[1]
-      if (!authorized({ token })) return res.status(401).send('Unauthorized')
+      const { valid } = authorized({ authorization })
+
+      if (!valid) return res.status(401).send('Unauthorized')
       const { date, UUIDClass } = req.params
       const input = { uuidClass: UUIDClass, dataTime: new Date(date), clientEmail: req.body.clientEmail }
       const validatedData = partialValidateSessionClassesSchema({ input })

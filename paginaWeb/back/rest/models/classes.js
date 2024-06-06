@@ -99,10 +99,23 @@ export class ClassesModel {
     }
   }
 
-  static create = async ({ input }) => {
-    const { name, photo, description, maxCapacity, duration, instructorEmail } = input
-    const UUIDClass = uuidv4()
+  static create = async ({ input, userEmail }) => {
     try {
+      const rol = await prisma.users.findUnique({
+        where: {
+          email: userEmail
+        },
+        select: {
+          role: true
+        }
+      })
+
+      if (!['i'].includes(rol.role.toLowerCase())) {
+        throw new Error('Unauthorized')
+      }
+      const { name, photo, description, maxCapacity, duration, instructorEmail } = input
+      const UUIDClass = uuidv4()
+
       await prisma.class.create({
         data: {
           UUID_Class: UUIDClass,
@@ -119,9 +132,19 @@ export class ClassesModel {
     }
   }
 
-  static updateClass = async ({ input }) => {
-    const { UUIDClass, name, photo, description, maxCapacity, duration, instructorEmail } = input
+  static updateClass = async ({ input, userEmail }) => {
     try {
+      const { UUIDClass, name, photo, description, maxCapacity, duration, instructorEmail } = input
+      const clase = await prisma.class.findUnique({
+        where: {
+          UUID_Class: UUIDClass
+        }
+      })
+
+      if (clase.instructorEmail !== userEmail) {
+        throw new Error('Unauthorized')
+      }
+
       await prisma.class.update({
         where: {
           UUID_Class: UUIDClass

@@ -61,11 +61,12 @@ export const classesInstructorService = async ({ jwt }) => {
     return res.json()
 }
 
-export const createClassService = async ({ name, photo, description, maxCapacity, duration, instructorEmail }) => {
+export const createClassService = async ({ jwt, name, photo, description, maxCapacity, duration, instructorEmail }) => {
     const res = await fetch(`${ENDPOINT}/classes/   `,
         {
             method: 'POST',
             headers: {
+                'Authorization': `token ${jwt}`,
                 'Content-Type': 'application/json',
             }
             ,

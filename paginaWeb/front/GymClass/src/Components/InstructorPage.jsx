@@ -36,7 +36,7 @@ export const InstructorPage = () => {
     const photo = (await convertFile(inputPhoto)).split(",")[1]
     const duration = isNaN(parseInt(data.get("Duración"))) ? 0 : parseInt(data.get("Duración"))
     const maxCapacity = isNaN(parseInt(data.get("Capacidad"))) ? 0 : parseInt(data.get("Capacidad"))
-    const res = await createClass({ name, photo, description, maxCapacity, duration, instructorEmail: email })
+    const res = await createClass({jwt, name, photo, description, maxCapacity, duration, instructorEmail: email })
     if (res) {
       toast.success('Clase creada con éxito', {
         position: "top-center",

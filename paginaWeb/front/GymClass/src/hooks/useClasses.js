@@ -61,7 +61,7 @@ export const useClasses = () => {
 
 
 
-    const createClass = async ({ name, photo, description, maxCapacity, duration, instructorEmail }) => {
+    const createClass = async ({jwt, name, photo, description, maxCapacity, duration, instructorEmail }) => {
 
         const nameValidation = classNameValidation({ name })
         const descriptionValidation = classDescriptionValidation({ description })
@@ -78,7 +78,7 @@ export const useClasses = () => {
             return false
         }
         try {
-            await createClassService({ name, photo, description, maxCapacity, duration, instructorEmail })
+            await createClassService({jwt, name, photo, description, maxCapacity, duration, instructorEmail })
             return true
         } catch (error) {
             console.log(error)

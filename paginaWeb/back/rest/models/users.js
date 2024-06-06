@@ -75,7 +75,6 @@ export class UserModel {
         role: true
       }
     })
-
     if (role.role.toLowerCase() !== 'a') {
       return 'Unauthorized'
     }
@@ -186,7 +185,20 @@ export class UserModel {
     }
   }
 
-  static updateUser = async ({ input }) => {
+  static updateUser = async ({ input, userEmail }) => {
+    const rol = await prisma.users.findUnique({
+      where: {
+        email: userEmail
+      },
+      select: {
+        role: true
+      }
+    })
+
+    if (!['a'].includes(rol.role.toLowerCase())) {
+      throw new Error('Unauthorized')
+    }
+
     const { email, password, role } = input
 
     let newPassword = password

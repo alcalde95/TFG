@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken'
-import { SECRET } from '../../index.js'
 import { authorized } from '../../utilFunctions.js'
 import { ClassesModel } from '../models/classes.js'
 import { validateClass } from '../schemas/class.js'
@@ -36,9 +34,9 @@ export class ClassesController {
   static getClassesInstructor = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      const instructorEmail = jwt.verify(token, SECRET).email
-      if (authorized({ token })) {
+      const { decoded, valid } = authorized({ authorization })
+      if (valid) {
+        const instructorEmail = decoded.email
         const classes = await ClassesModel.getClassesInstructor({ instructorEmail })
         res.json(classes)
       } else {
@@ -52,9 +50,9 @@ export class ClassesController {
   static getManagedClassesInstructor = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      const instructorEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+      const instructorEmail = decoded.email
+      if (!valid) res.status(401).send('Unauthorized')
       const classes = await ClassesModel.getManagedClassesInstructor({ instructorEmail })
       res.json(classes)
     } catch (error) {
@@ -65,9 +63,9 @@ export class ClassesController {
   static getClassesEnrolledClient = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      const clientEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+      const clientEmail = decoded.email
+      if (!valid) res.status(401).send('Unauthorized')
       const classes = await ClassesModel.getClassesEnrolledClient({ clientEmail })
       res.json(classes)
     } catch (error) {
@@ -76,13 +74,18 @@ export class ClassesController {
   }
 
   static createClass = async (req, res) => {
+    const { authorization } = req.headers
+    const { decoded, valid } = authorized({ authorization })
+
+    if (!valid) res.status(401).send('Unauthorized')
     const input = req.body
+    const userEmail = decoded.email
     const validatedData = validateClass({ input })
 
     if (validatedData.error) return res.status(400).send(validatedData.error)
 
     try {
-      await ClassesModel.create({ input })
+      await ClassesModel.create({ input, userEmail })
       res.status(201).send('Created')
     } catch (e) {
       res.status(400).send('Bad request: ' + e.message)
@@ -93,14 +96,14 @@ export class ClassesController {
     try {
       const input = req.body
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
+      const { decoded, valid } = authorized({ authorization })
 
-      if (!authorized({ token })) res.status(401).send('Unauthorized')
-
+      if (!valid) res.status(401).send('Unauthorized')
+      const userEmail = decoded.email
       const validatedData = validateClass({ input })
       if (validatedData.error) return res.status(400).send(validatedData.error)
 
-      await ClassesModel.updateClass({ input })
+      await ClassesModel.updateClass({ input, userEmail })
 
       res.send('Updated')
     } catch (error) {
@@ -111,9 +114,9 @@ export class ClassesController {
   static deleteClass = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      const instructorEmail = jwt.verify(token, SECRET).email
-      if (!authorized({ token })) res.status(401).send('Unauthorized')
+      const { decoded, valid } = authorized({ authorization })
+      if (!valid) res.status(401).send('Unauthorized')
+      const instructorEmail = decoded.email
       await ClassesModel.deleteClass({ uuidClass: req.params.class_id, instructorEmail })
       res.send('Deleted')
     } catch (error) {

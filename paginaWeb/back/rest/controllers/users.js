@@ -1,6 +1,4 @@
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import { SECRET } from '../../index.js'
 import { UserModel } from '../models/users.js'
 import { partialValidateUser, validateUser } from '../schemas/user.js'
 import { authorized } from '../../utilFunctions.js'
@@ -8,9 +6,9 @@ export class UserController {
   static getUsers = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      const userEmail = jwt.verify(token, SECRET).email
-      if (authorized({ token })) {
+      const { decoded, valid } = authorized({ authorization })
+      if (valid) {
+        const userEmail = decoded.email
         const users = await UserModel.getUsers({ userEmail })
         res.json(users)
       } else {
@@ -23,10 +21,9 @@ export class UserController {
 
   static getAllUsers = async (req, res) => {
     const { authorization } = req.headers
-    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
-    const token = authorization.split(' ')[1]
-    const userEmail = jwt.verify(token, SECRET).email
-    if (authorized({ token })) {
+    const { decoded, valid } = authorized({ authorization })
+    if (valid) {
+      const userEmail = decoded.email
       const users = await UserModel.getAllUsers({ userEmail })
       res.json(users)
     } else {
@@ -36,10 +33,9 @@ export class UserController {
 
   static getClients = async (req, res) => {
     const { authorization } = req.headers
-    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
-    const token = authorization.split(' ')[1]
-    const userEmail = jwt.verify(token, SECRET).email
-    if (authorized({ token })) {
+    const { decoded, valid } = authorized({ authorization })
+    if (valid) {
+      const userEmail = decoded.email
       const { clients } = await UserModel.getClients({ userEmail })
       res.json(clients)
     } else {
@@ -49,10 +45,9 @@ export class UserController {
 
   static isValidatedClient = async (req, res) => {
     const { authorization } = req.headers
-    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
-    const token = authorization.split(' ')[1]
-    const userEmail = jwt.verify(token, SECRET).email
-    if (authorized({ token })) {
+    const { decoded, valid } = authorized({ authorization })
+    if (valid) {
+      const userEmail = decoded.email
       const { validated } = await UserModel.isValidatedClient({ userEmail })
       res.json(validated)
     } else {
@@ -62,10 +57,9 @@ export class UserController {
 
   static getAllInstructors = async (req, res) => {
     const { authorization } = req.headers
-    if (authorization.split(' ').length < 2) return res.status(401).send('Unauthorized')
-    const token = authorization.split(' ')[1]
-    const userEmail = jwt.verify(token, SECRET).email
-    if (authorized({ token })) {
+    const { decoded, valid } = authorized({ authorization })
+    if (valid) {
+      const userEmail = decoded.email
       try {
         const instructors = await UserModel.getAllInstructors({ userEmail })
         res.json(instructors)
@@ -108,9 +102,10 @@ export class UserController {
   static updateUser = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      if (authorized({ token })) {
-        await UserModel.updateUser({ input: req.body })
+      const { decoded, valid } = authorized({ authorization })
+      if (valid) {
+        const userEmail = decoded.email
+        await UserModel.updateUser({ input: req.body, userEmail })
         res.send('Updated')
       } else {
         res.status(401).send('Unauthorized')
@@ -122,9 +117,10 @@ export class UserController {
 
   static deleteUser = async (req, res) => {
     const { authorization } = req.headers
-    const token = authorization.split(' ')[1]
-    if (authorized({ token })) {
+    const { valid } = authorized({ authorization })
+    if (valid) {
       try {
+        console.log(req.params)
         const { email } = req.params
         await UserModel.deleteUser({ email })
         res.send('Deleted')
