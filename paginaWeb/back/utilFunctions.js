@@ -1,15 +1,17 @@
 import jwt from 'jsonwebtoken'
 import { SECRET } from './index.js'
-export const authorized = ({ token }) => {
+export const authorized = ({ authorization }) => {
   try {
+    if (authorization.split(' ').length < 2) return { valid: false }
+    const token = authorization.split(' ')[1]
     const decoded = jwt.verify(token, SECRET)
 
     if (Date.now() > decoded.exp) {
       throw new Error('Token expired')
     }
-    return true
+    return { decoded, valid: true }
   } catch (error) {
-    return false
+    return { valid: false }
   }
 }
 
