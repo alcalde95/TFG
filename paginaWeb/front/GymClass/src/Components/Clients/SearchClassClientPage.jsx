@@ -4,11 +4,15 @@ import { Header } from '../Header'
 import { Classes } from '../Classes/Classes'
 import { useClasses } from '../../hooks/useClasses'
 import debounce from 'just-debounce-it'
-import { DefaultWhiteButton, InputMovinTitle } from '../CustomTailwindElements'
+import { DefaultWhiteButton, InputMovinTitleWValue } from '../CustomTailwindElements'
 
 export const SearchClassClientPage = () => {
 
     const [loading, setLoading] = useState(true)
+    const [name, setName] = useState('')
+    const [maxCapacity, setMaxCapacity] = useState('')
+    const [minDuration, setMinDuration] = useState('')
+    const [maxDuration, setMaxDuration] = useState('')
 
     const { getClasses } = useClasses()
 
@@ -35,16 +39,16 @@ export const SearchClassClientPage = () => {
     }
 
     const handleChange = async (e) => {
-
-        const name = e.target.value
-        debouncedGetClasses({ name })
+        const inputName = e.target.value
+        setName(inputName)
+        debouncedGetClasses({ name:inputName, maxCapacity, minDuration, maxDuration})
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedGetClasses = useCallback(
         debounce(({ name, maxCapacity, minDuration, maxDuration }) => {
             getClasses({ name, maxCapacity, minDuration, maxDuration })
-        }, 300)
+        }, 400)
         , [getClasses])
 
     return (
@@ -53,10 +57,10 @@ export const SearchClassClientPage = () => {
             <main className=" h-full flex flex-col place-content-start items-center m-2 p-2">
                 <form onSubmit={handleSubmit}
                     className="w-11/12 md:w-4/6 max-w-2xl gap-2 flex flex-col items-center bg-[#1C1917]   p-2 rounded-lg border-gray-500 border mt-2" >
-                    <InputMovinTitle name="Nombre" type="text" handleChange={handleChange} />
-                    <InputMovinTitle name="Capacidad Máxima" type="number" />
-                    <InputMovinTitle name="Duración Mínima" type="number" />
-                    <InputMovinTitle name="Duración Máxima" type="number" />
+                    <InputMovinTitleWValue name="Nombre" type="text" handleChange={handleChange} value={name}/>
+                    <InputMovinTitleWValue name="Capacidad Máxima" type="number" value={maxCapacity} handleChange={(e) => setMaxCapacity(e.target.value)} />
+                    <InputMovinTitleWValue name="Duración Mínima" type="number" value={minDuration} handleChange={(e) => setMinDuration(e.target.value)}/>
+                    <InputMovinTitleWValue name="Duración Máxima" type="number" value={maxDuration} handleChange={(e) => setMaxDuration(e.target.value)}/>
                     <DefaultWhiteButton text="Buscar" />
                 </form>
 
