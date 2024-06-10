@@ -55,16 +55,12 @@ export class SessionsModel {
   }
 
   static createSession = async ({ input, userEmail }) => {
-    const role = await prisma.users.findUnique({
+    const clase = await prisma.class.findUnique({
       where: {
-        email: userEmail
-      },
-      select: {
-        role: true
+        UUID_Class: input.uuidClass
       }
     })
-
-    if (role.role.toLowerCase() !== 'i') throw new Error('Unauthorized')
+    if (clase.instructorEmail !== userEmail) throw new Error('Unauthorized')
     const { dataTime, uuidClass, instructorEmail } = input
     try {
       await prisma.sessions.create({
@@ -109,16 +105,12 @@ export class SessionsModel {
   }
 
   static deleteSession = async ({ input, userEmail }) => {
-    const role = await prisma.users.findUnique({
+    const clase = await prisma.class.findUnique({
       where: {
-        email: userEmail
-      },
-      select: {
-        role: true
+        UUID_Class: input.uuidClass
       }
     })
-
-    if (role.role.toLowerCase() !== 'i') throw new Error('Unauthorized')
+    if (clase.instructorEmail !== userEmail) throw new Error('Unauthorized')
     const { dataTime, uuidClass } = input
 
     const c = await prisma.class.findUnique({
