@@ -14,7 +14,6 @@ export const Header = () => {
             navigate('/login')
             return
         }
-        //TODO: PREGUNTAR A DANI SI LOS CLIENTES Y ASÍ, UNA VEZ LOGUEADOS PUEDEN ACCEDER A LA LANDING O NO
         if (location.pathname !== '/') {
             switch (role.toLowerCase()) {
                 case 'a':
