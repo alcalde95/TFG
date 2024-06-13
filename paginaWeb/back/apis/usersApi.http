@@ -24,11 +24,12 @@ Content-Type: application/json
 }
 #### Register
 POST http://localhost:1234/users/
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGFkbWluLmFkbWluIiwiZXhwIjoxNzE4OTA3ODEyOTQ3LCJpYXQiOjE3MTgzMDMwMTJ9.Vnxu1DDl5TtlNkxaCcgrty-cB3X3F_voS2XuMFSuCD4
 Content-Type: application/json
 
 {
-    "email": "admin@admin.admin",
-    "password": "admin123",
+    "email": "pepe@pepe.pepe",
+    "password": "elPepe9999",
     "role": "A"
 }
 
