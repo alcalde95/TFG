@@ -99,6 +99,27 @@ export class UserController {
     }
   }
 
+  static createUser = async (req, res) => {
+    const { authorization } = req.headers
+    const { decoded, valid } = authorized({ authorization })
+    if (valid) {
+      const input = req.body
+      const result = validateUser({ input })
+
+      if (result.error) return res.status(400).send(result.error.message)
+      input.password = await bcrypt.hash(input.password, 10)
+      const userEmail = decoded.email
+      try {
+        await UserModel.createUser({ input, userEmail })
+        res.status(201).send('Created')
+      } catch (e) {
+        res.status(400).send('Bad request: ' + e.message)
+      }
+    } else {
+      res.status(401).send('Unauthorized')
+    }
+  }
+
   static updateUser = async (req, res) => {
     try {
       const { authorization } = req.headers
@@ -120,7 +141,6 @@ export class UserController {
     const { valid } = authorized({ authorization })
     if (valid) {
       try {
-        console.log(req.params)
         const { email } = req.params
         await UserModel.deleteUser({ email })
         res.send('Deleted')

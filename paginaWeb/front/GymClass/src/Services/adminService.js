@@ -82,3 +82,19 @@ export const updateClientService = async ({ email,validated, jwt }) => {
     )
     if (!res.ok) throw new Error('Response is NOT ok')
 }
+
+export const createUserService = async ({ email, password,role,jwt }) => {
+
+    const res = await fetch(`${ENDPOINT}/users/`,
+        {
+            method: 'POST',
+            headers: {
+                'Authorization': `token ${jwt}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password,role })
+
+        }
+    )
+    if (!res.ok) throw new Error('Response is NOT ok')
+}

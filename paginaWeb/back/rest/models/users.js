@@ -150,8 +150,40 @@ export class UserModel {
   }
 
   static register = async ({ input }) => {
+    const { email, password } = input
+    try {
+      await prisma.users.create({
+        data: {
+          email,
+          password,
+          role: 'c'
+        }
+      })
+      await prisma.clients.create({
+        data: {
+          email
+        }
+      })
+    } catch (e) {
+      throw new Error('User already exists')
+    }
+  }
+
+  static createUser = async ({ input, userEmail }) => {
     const { email, password, role } = input
     try {
+      const rol = await prisma.users.findUnique({
+        where: {
+          email: userEmail
+        },
+        select: {
+          role: true
+        }
+      })
+      if (!['a'].includes(rol.role.toLowerCase())) {
+        throw new Error('Unauthorized')
+      }
+
       await prisma.users.create({
         data: {
           email,

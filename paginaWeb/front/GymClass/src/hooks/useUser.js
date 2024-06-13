@@ -6,6 +6,7 @@ import { registerService } from "../Services/registerService"
 
 import { emailValidation, passwordValidation} from "../Validations"
 import { isValidatedClientService } from "../Services/usersService"
+import { createUserService } from "../Services/adminService"
 
 const useUser = () => {
     const { jwt, setJWT, setRole, setEmail } = useContext(UserContext)
@@ -37,7 +38,7 @@ const useUser = () => {
     }, [setJWT, setRole, setEmail])
 
 
-    const register = useCallback(async ({ email, password, role = 'C' }) => {
+    const register = useCallback(async ({ email, password, role }) => {
         try {
 
             const emailValidationResult = emailValidation({ email })
@@ -66,14 +67,20 @@ const useUser = () => {
             }
 
             setState({ loading: true, error: false })
-            await registerService({ email, password, role })
+
+            if (!role){
+                await registerService({ email, password })
+            }else{
+                await createUserService({ email, password, role, jwt})
+            }
+
             return true;
         } catch (error) {
             console.log(error.message)
             setState({ loading: false, error: true })
             return false;
         }
-    }, [])
+    }, [jwt])
 
 
     const logout = useCallback(() => {
