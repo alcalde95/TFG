@@ -138,11 +138,12 @@ export class UserController {
 
   static deleteUser = async (req, res) => {
     const { authorization } = req.headers
-    const { valid } = authorized({ authorization })
+    const { decoded, valid } = authorized({ authorization })
     if (valid) {
       try {
         const { email } = req.params
-        await UserModel.deleteUser({ email })
+        const userEmail = decoded.email
+        await UserModel.deleteUser({ userEmail, email })
         res.send('Deleted')
       } catch (e) {
         res.status(400).send(e.message)
@@ -155,9 +156,10 @@ export class UserController {
   static updateClient = async (req, res) => {
     try {
       const { authorization } = req.headers
-      const token = authorization.split(' ')[1]
-      if (authorized({ token })) {
-        await UserModel.updateClient({ input: req.body })
+      const { decoded, valid } = authorized({ authorization })
+      if (valid) {
+        const userEmail = decoded.email
+        await UserModel.updateClient({ userEmail, input: req.body })
         res.send('Updated')
       } else {
         res.status(401).send('Unauthorized')

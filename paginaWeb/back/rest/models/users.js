@@ -66,7 +66,6 @@ export class UserModel {
   }
 
   static getAllUsers = async ({ userEmail }) => {
-    // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
     const role = await prisma.users.findUnique({
       where: {
         email: userEmail
@@ -309,8 +308,19 @@ export class UserModel {
     }
   }
 
-  static updateClient = async ({ input }) => {
+  static updateClient = async ({ userEmail, input }) => {
     try {
+      const role = await prisma.users.findUnique({
+        where: {
+          email: userEmail
+        },
+        select: {
+          role: true
+        }
+      })
+      if (role.role.toLowerCase() !== 'a') {
+        throw new Error('Unauthorized')
+      }
       const { email, validated } = input
       await prisma.clients.update({
         where: {
@@ -325,8 +335,20 @@ export class UserModel {
     }
   }
 
-  static deleteUser = async ({ email }) => {
+  static deleteUser = async ({ userEmail, email }) => {
     try {
+      const role = await prisma.users.findUnique({
+        where: {
+          email: userEmail
+        },
+        select: {
+          role: true
+        }
+      })
+      if (role.role.toLowerCase() !== 'a') {
+        throw new Error('Unauthorized')
+      }
+
       await prisma.users.delete({
         where: {
           email
