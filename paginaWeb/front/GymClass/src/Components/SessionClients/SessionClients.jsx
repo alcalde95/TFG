@@ -8,8 +8,8 @@ const ListOfSessionClients = ({ sessionClients }) => {
             <thead className="p-2">
                 <tr className="h-full border-b border-gray-500 hover:bg-[#18181A] transition ease-in-out duration-200 text-[#5A5A5F] ">
                     <th className="p-2">Email</th>
-                    <th className="p-2 text-center">Attend</th>
-                    <th className="p-2 text-center">Justified</th>
+                    <th className="p-2 text-center">Asistencia</th>
+                    <th className="p-2 text-center">Justificado</th>
                 </tr>
             </thead>
             <tbody>
