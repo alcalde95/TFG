@@ -79,7 +79,7 @@ export class UserController {
 
     try {
       const resp = await UserModel.login({ input })
-      console.log(resp)
+
       res.json(resp)
     } catch (e) {
       res.status(401).send(e.message)
