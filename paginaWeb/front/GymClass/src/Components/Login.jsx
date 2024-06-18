@@ -24,7 +24,6 @@ export const Login = () => {
                     navigate('/client')
                     break;
                 case 'i':
-                    //navigate('/instructor')
                     navigate('/instructor')
                     break;
                 default:
@@ -46,18 +45,16 @@ export const Login = () => {
 
             login({ email, password })
 
-            //alert(res.role, res.jwt)
         } catch (error) {
             console.log(error)
         }
-        //TODO MEJORAR ESTO
     }
 
     return (
         <div className="h-screen flex flex-col w-full justify-center text-center items-center text-white">
 
             <main className="w-11/12 sm:w-4/5 md:w-[400px] h-auto flex flex-col bg-transparent text-center rounded-md p-1 border border-gray-500 ">
-                <h1 className="text-2xl underline">Login</h1>
+                <h1 className="text-2xl underline">Inicio de Sesión</h1>
                 {
                     state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Email o la contraseña incorrectos</div>
                 }

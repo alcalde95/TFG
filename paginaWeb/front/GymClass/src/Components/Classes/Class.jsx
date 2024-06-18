@@ -90,7 +90,6 @@ export const Class = ({ c, editable, managed }) => {
         }
     }
 
-    //transition-all duration-100 ease-in-out
     return (
         <>
 
@@ -163,7 +162,7 @@ export const Class = ({ c, editable, managed }) => {
                         }
 
                         {
-                            //TODO: refactorizar esto Y VER CÓMO HACER EL TEMA DEL NUMBER :D
+                            
                         }
                         <InputMovinTitleWValue name="Capacidad máxima"
                             type="number"

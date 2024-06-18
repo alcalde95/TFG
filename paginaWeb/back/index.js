@@ -21,37 +21,7 @@ app.use('/classes', classesRouter)
 app.use('/sessions', sessionsRouter)
 app.use('/sessionsClients', sessionsClientsRouter)
 
-/*
-app.get('/', (req, res) => {
-  res.status(200).send('hola :D')
-})
 
-app.get('/token', (req, res) => {
-  const { user } = { user: 'JaviInUse' }
-  const token = jwt.sign({
-    user,
-    exp: Date.now() + 60 * 60 * 1000
-  }, SECRET)
-  res.send({ token })
-})
-
-app.get('/private', (req, res) => {
-  try {
-    const { authorization } = req.headers
-    const token = authorization.split(' ')[1]
-    const decoded = jwt.verify(token, SECRET)
-
-    if (Date.now() > decoded.exp) {
-      throw new Error('Token expired')
-    }
-
-    res.send(decoded.user === ('JaviInUse') ? 'Welcome' : 'Unauthorized')
-  } catch (error) {
-    res.status(401).send(error.message)
-  }
-})
-*/
-// la última a la que va a llegar
 app.use((req, res) => {
   res.status(404).send('<h1>404</h1>')
 })

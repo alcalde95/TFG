@@ -72,5 +72,3 @@ export const Header = () => {
     )
 }
 
-
-//borders sin color. shadcn, verde

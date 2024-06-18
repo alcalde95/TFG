@@ -23,7 +23,6 @@ export const Register = () => {
     }, [registerState, state.error, navigate])
 
 
-    //TODO: Add a loading and error state to the form and data validation
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -45,7 +44,7 @@ export const Register = () => {
     return (
         <div className="h-screen flex flex-col w-full justify-center text-center items-center text-white">
             <main className="w-11/12 sm:w-4/5 md:w-[400px] h-auto flex flex-col bg-transparent text-center rounded-md p-1 border border-gray-500 ">
-                <h1 className="text-2xl underline">Register</h1>
+                <h1 className="text-2xl underline">Registro</h1>
                 {
                     state.error && <div className="bg-red-600 text-white p-2 rounded-md m-2">ERROR <br />Este email ya está registrado</div>
                 }

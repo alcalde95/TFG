@@ -1,7 +1,7 @@
 import { DefaultRedButton, DefaultWhiteButton } from "./CustomTailwindElements"
 
 export const DeleteModal = ({ verModal, setVerModal, handleDelete, textoEntrada,message }) => {
-    //este verModal se sacará
+    
 
     const handleDeleteClick = () => {
         handleDelete()

@@ -13,8 +13,7 @@ export const useUserManagement = () => {
     const previousData = useRef({ admins, clients, instructors })
     const firstRender = useRef(true)
 
-    //TODO: pedir x separado administradores,... y no todos juntos
-    //TODO: GESTIONAR ERRORES
+    
     const getUsers = useCallback(async () => {
 
         if (JSON.stringify(previousData.current.admins) === JSON.stringify(admins) && previousData.current.clients === clients && previousData.current.instructors === instructors && !firstRender.current) {

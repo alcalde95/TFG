@@ -98,7 +98,6 @@ export class UserModel {
   }
 
   static getAllInstructors = async ({ userEmail }) => {
-    // preguntar a dani si meto esto en una función y la llamo desde el controlador :D
     const role = await prisma.users.findUnique({
       where: {
         email: userEmail

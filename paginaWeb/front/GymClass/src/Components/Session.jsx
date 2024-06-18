@@ -44,7 +44,6 @@ export const Session = ({ session }) => {
         }
     }
 
-    // TODO: AÑADIR GESTIÓN DE ERRORES
     const handleDuplicationClick = async (e) => {
         e.preventDefault()
         const form = e.target.form

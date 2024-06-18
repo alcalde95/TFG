@@ -162,25 +162,3 @@ export const InstructorPage = () => {
 
 
 
-
-
-// const convertFile = async ({photo}) => {
-//   const preview = document.querySelector("img");
-//   const file = document.querySelector("input[type=file]").files[0];
-//   const reader = new FileReader();
-//   console.log(file)
-//   reader.addEventListener(
-//     "load",
-//     function () {
-//       console.log(reader.result)
-//       // convierte la imagen a una cadena en base64
-//       preview.src = reader.result;
-//     },
-//     false,
-//   );
-//   //srcImage
-//   if (file) {
-//     await reader.readAsDataURL(file);
-//     console.log(reader)
-//   }
-// }
