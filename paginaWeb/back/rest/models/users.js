@@ -118,7 +118,6 @@ export class UserModel {
     return instructors
   }
 
-  ç
   static login = async ({ input }) => {
     try {
       const { email, password } = input
