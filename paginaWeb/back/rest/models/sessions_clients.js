@@ -76,7 +76,7 @@ export class SessionsClientsModel {
 
       const { dataTime, uuidClass, clientEmail, attend, justified } = input
 
-      // sólo se puede cambiar el instructor
+      // solo lo puede cambiar el instructor
       await prisma.sessions_Client.updateMany({
         where: {
           data_time: dataTime,
