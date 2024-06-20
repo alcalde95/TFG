@@ -77,7 +77,7 @@ npx prisma migrate dev
 ## Creación de administrador
 
 Cuando se inicia la aplicación por primera vez, no existe ninguna información en la base de datos.
-Los administradores sólo se pueden crear desde la cuenta de un administrador y, al estar vacía la
+Los administradores solo se pueden crear desde la cuenta de un administrador y, al estar vacía la
 base de datos, esto no sería posible. La única forma sería introduciendo a mano en la base de datos
 al instructor.
 

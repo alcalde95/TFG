@@ -1,2 +1,0 @@
-poner como el arbolito de componentes. Poner x componente llama a x e y e .... Revisar UML.
-En el backend poner userController y el model. Router, controller y model
